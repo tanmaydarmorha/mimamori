@@ -1,0 +1,35 @@
+[
+  {
+    "id": "pb-fake-police-safe-account",
+    "name": "Fake police: move money to a 'safe' account",
+    "impersonates": ["police officer", "Financial Services Agency official"],
+    "contact_channel": "phone call, sometimes followed by a video call",
+    "script_phrases": ["口座が犯罪に使われている", "資産を保全する", "安全な口座に移す", "捜査の秘密", "後で戻す"],
+    "victim_instructions": ["tell no one, including family and bank staff", "give a cover story at the counter", "act today"],
+    "cover_stories": ["リフォーム代 (renovation costs)", "家族の買い物 (a family purchase)"],
+    "payment_methods": ["transfer to a designated account", "cash handover"],
+    "status": "approved"
+  },
+  {
+    "id": "pb-relative-in-trouble",
+    "name": "Relative in trouble (オレオレ)",
+    "impersonates": ["son", "grandson"],
+    "contact_channel": "phone call from a 'new number'",
+    "script_phrases": ["会社のお金をなくした", "風邪で声が変", "番号が変わった", "今日中に必要"],
+    "victim_instructions": ["tell no one, especially the spouse", "a colleague or boss will collect the cash"],
+    "cover_stories": ["家族の用事 (family business)"],
+    "payment_methods": ["cash handover to a collector", "cash sent by courier"],
+    "status": "approved"
+  },
+  {
+    "id": "pb-gold-bullion",
+    "name": "Gold bullion purchase",
+    "impersonates": ["police officer", "bank official"],
+    "contact_channel": "phone call",
+    "script_phrases": ["金を買えば資産が守られる", "金地金", "業者が受け取りに行く"],
+    "victim_instructions": ["withdraw cash and buy gold", "hand the gold to a collector"],
+    "cover_stories": ["老後の資産運用 (retirement investment)"],
+    "payment_methods": ["cash to buy gold, then gold handover"],
+    "status": "approved"
+  }
+]

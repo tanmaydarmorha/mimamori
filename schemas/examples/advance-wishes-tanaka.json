@@ -1,0 +1,45 @@
+{
+  "customer_ref": "cust-tanaka-0001",
+  "version": 2,
+  "supersedes_version": 1,
+  "status": "active",
+  "frozen_reason": null,
+  "recorded_at": "2026-05-14T10:20:00+09:00",
+  "recorded_via": "seeded",
+  "readback_confirmed": true,
+  "trusted_contacts": [
+    {
+      "contact_id": "tc-yuki",
+      "display_name": "田中 由紀",
+      "relationship": "child",
+      "phone_e164": "+819012345678",
+      "phone_verified_at": "2026-05-14T10:25:00+09:00",
+      "phone_changed_at": null,
+      "priority": 1
+    }
+  ],
+  "cooling_off": {
+    "enabled": true,
+    "applies_to": [
+      "transfer_to_new_payee",
+      "cash_withdrawal"
+    ],
+    "min_amount_jpy": 1000000,
+    "minimum_hours": 4,
+    "extend_to_next_business_day_close": true,
+    "cap_hours": 24,
+    "override": [
+      "after_contact_reached",
+      "after_manager_review_and_second_confirmation"
+    ]
+  },
+  "disclosure": {
+    "may_disclose": [
+      "transaction_paused",
+      "reason_category",
+      "customer_at_branch",
+      "police_notified"
+    ]
+  },
+  "outbound_notice_consent": true
+}

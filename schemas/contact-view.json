@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/contact-view.json",
+  "title": "Contact view (conversation service → case service)",
+  "description": "The outcome of the family call, shown to the teller. It is information, never an instruction (DA 4): the trusted contact has no authority over the customer's account.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "call_id", "nature", "verification", "reached", "recorded_at"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^case-[A-Za-z0-9-]+$"},
+    "call_id": {"type": "string"},
+    "nature": {"const": "information"},
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["caller_number_match", "case_code_match"],
+      "properties": {
+        "caller_number_match": {"type": "boolean"},
+        "case_code_match": {"type": "boolean"}
+      }
+    },
+    "reached": {"type": "boolean", "description": "True only if both verification checks passed. Enables the 'after_contact_reached' override of the cooling-off pause."},
+    "concerned": {"type": ["boolean", "null"]},
+    "coming_to_branch": {"type": ["boolean", "null"]},
+    "eta_minutes": {"type": ["integer", "null"], "minimum": 0},
+    "wants_callback_later": {"type": ["boolean", "null"]},
+    "disclosed": {
+      "description": "Which brief fields were actually spoken, for audit.",
+      "type": "array",
+      "items": {"enum": ["transaction_paused", "amount_band", "reason_category", "customer_at_branch", "police_notified"]}
+    },
+    "recorded_at": {"type": "string", "format": "date-time"}
+  }
+}

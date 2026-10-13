@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/evidence-card.json",
+  "title": "Evidence card (case-db)",
+  "description": "The case record a teller reads, challenges and overrules. Claims come in three kinds: fact (a tool field, value checked in code), quote (the customer's words, checked against the transcript in code) and inference (must rest on verified facts or quotes, shown as a hypothesis). The risk block is computed in code from verified claims, never taken from the model (spike finding 1).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "customer_ref", "card_version", "updated_at", "request", "claims", "hypotheses", "risk", "next_question", "dropped"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^case-[A-Za-z0-9-]+$"},
+    "customer_ref": {"type": "string", "description": "Internal reference. No name, age or balance on the card."},
+    "card_version": {"type": "integer", "minimum": 1, "description": "Increments on every copilot turn and investigation update."},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["channel", "kind", "amount_jpy", "payee"],
+      "properties": {
+        "channel": {"enum": ["counter", "atm", "app"]},
+        "kind": {"enum": ["transfer", "cash_withdrawal"]},
+        "amount_jpy": {"type": "integer", "minimum": 1},
+        "payee": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["name_kana", "relation"],
+          "properties": {
+            "name_kana": {"type": "string"},
+            "relation": {"enum": ["same_bank", "other_bank"], "description": "Account age and fan-in are only visible for same_bank (CR 1)."}
+          }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {"$ref": "#/$defs/fact_claim"},
+          {"$ref": "#/$defs/quote_claim"},
+          {"$ref": "#/$defs/inference_claim"}
+        ]
+      }
+    },
+    "hypotheses": {
+      "description": "Competing explanations, always including legitimate. No numbers: support is listed as claim IDs.",
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "playbook_id", "supporting_claims"],
+        "properties": {
+          "name": {"$ref": "copilot-turn.json#/$defs/hypothesis"},
+          "playbook_id": {"type": ["string", "null"], "pattern": "^pb\\.[a-z0-9_]+\\.[a-z0-9_]+$"},
+          "supporting_claims": {"type": "array", "items": {"$ref": "#/$defs/claim_id"}}
+        }
+      }
+    },
+    "risk": {
+      "description": "Computed in code by the risk rule (README). Shown to the teller as the confidence.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "pause_recommended", "rule_version", "fired"],
+      "properties": {
+        "level": {"enum": ["low", "elevated", "high"]},
+        "pause_recommended": {"type": "boolean"},
+        "rule_version": {"type": "string"},
+        "fired": {
+          "description": "Which conditions fired, with the claim IDs behind each, so the teller can see why.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["condition", "claims"],
+            "properties": {
+              "condition": {"type": "string"},
+              "claims": {"type": "array", "items": {"$ref": "#/$defs/claim_id"}}
+            }
+          }
+        },
+        "hold_line_id": {"type": ["string", "null"], "pattern": "^h\\.[a-z0-9_]+\\.[a-z0-9_]+$", "description": "Chosen by code from the bank when pause_recommended is true."}
+      }
+    },
+    "next_question": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["question_id", "ja_filled"],
+      "properties": {
+        "question_id": {"type": "string", "pattern": "^q\\.[a-z0-9_]+\\.[a-z0-9_]+$"},
+        "ja_filled": {"type": "string", "description": "Bank wording with slots filled by code."}
+      }
+    },
+    "dropped": {
+      "description": "Claims removed by verification, kept for audit and for the evaluation's failure analysis.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["claim", "reason"],
+        "properties": {
+          "claim": {"type": "object"},
+          "reason": {"enum": ["no_citation", "value_mismatch", "quote_not_found", "ungrounded_inference", "unknown_question_id"]}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "claim_id": {"type": "string", "pattern": "^(f|q|i)[0-9]+$"},
+    "tool": {"enum": ["get_baseline", "recent_transactions", "explain_payee", "check_lists", "counterpart_graph", "search_playbooks", "get_advance_wishes", "teller_notes"]},
+    "fact_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "statement_en", "source", "verified"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^f[0-9]+$"},
+        "kind": {"const": "fact"},
+        "statement_en": {"type": "string"},
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["tool", "field", "value"],
+          "properties": {
+            "tool": {"$ref": "#/$defs/tool"},
+            "field": {"type": "string", "description": "Field in the tool result. Absence is a field too, e.g. contractor_payments_count_12y = 0 (CR 27)."},
+            "value": {"description": "Must equal the tool result's value; checked in code."}
+          }
+        },
+        "verified": {"const": true, "description": "Only verified claims stay on the card; failures go to dropped."}
+      }
+    },
+    "quote_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "indicator", "source", "verified"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^q[0-9]+$"},
+        "kind": {"const": "quote"},
+        "indicator": {"$ref": "copilot-turn.json#/$defs/indicator_type"},
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["turn_id", "text"],
+          "properties": {
+            "turn_id": {"type": "string", "pattern": "^c[0-9]+$", "description": "Set by code to the turn where the text was found (quote rule)."},
+            "text": {"type": "string", "minLength": 1}
+          }
+        },
+        "turn_id_corrected": {"type": "boolean", "description": "True if the model cited a different turn and code moved it."},
+        "verified": {"const": true}
+      }
+    },
+    "inference_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "statement_en", "grounds", "shown_as"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^i[0-9]+$"},
+        "kind": {"const": "inference"},
+        "statement_en": {"type": "string"},
+        "grounds": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^(f|q)[0-9]+$"}},
+        "shown_as": {"const": "hypothesis"}
+      }
+    }
+  }
+}

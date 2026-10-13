@@ -1,0 +1,51 @@
+[
+  {
+    "intent": "what_happened",
+    "ja": "本日、{customer_reference}が当店でお手続きをされる際に、念のため一時的にお待ちいただいております。{reason_category_ja}",
+    "requires": [
+      "transaction_paused",
+      "reason_category"
+    ],
+    "fallback_ja": "本日、{customer_reference}のお手続きについてご連絡いたしました。詳しくは当店の担当者からご説明いたします。"
+  },
+  {
+    "intent": "is_she_safe",
+    "ja": "{customer_reference}は、いま当店で職員と一緒にいらっしゃいますので、ご安心ください。",
+    "requires": [
+      "customer_at_branch"
+    ],
+    "fallback_ja": "申し訳ございません、その点はお電話ではお伝えできかねます。"
+  },
+  {
+    "intent": "how_much",
+    "ja": "大きな金額のお手続きでございます。",
+    "requires": [
+      "amount_band"
+    ],
+    "fallback_ja": "金額については、お電話ではお伝えできかねます。恐れ入ります。"
+  },
+  {
+    "intent": "account_details",
+    "ja": "口座の残高や番号は、お電話ではお伝えできません。ご了承ください。",
+    "requires": [],
+    "fallback_ja": "口座の残高や番号は、お電話ではお伝えできません。ご了承ください。"
+  },
+  {
+    "intent": "what_should_i_do",
+    "ja": "もし可能でしたら、当店までお越しいただけますと、{customer_reference}も心強いと存じます。",
+    "requires": [],
+    "fallback_ja": "もし可能でしたら、当店までお越しいただけますと幸いです。"
+  },
+  {
+    "intent": "coming_to_branch",
+    "ja": "ありがとうございます。担当者に伝え、お待ちしております。",
+    "requires": [],
+    "fallback_ja": "ありがとうございます。担当者に伝え、お待ちしております。"
+  },
+  {
+    "intent": "other",
+    "ja": "申し訳ございません、その点については担当者から改めてご説明いたします。",
+    "requires": [],
+    "fallback_ja": "申し訳ございません、その点については担当者から改めてご説明いたします。"
+  }
+]

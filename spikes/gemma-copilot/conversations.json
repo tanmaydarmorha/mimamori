@@ -1,0 +1,113 @@
+[
+  {
+    "id": "A",
+    "label": "Tanaka: fake police, renovation cover story",
+    "expected": "scam",
+    "expected_playbook": "pb-fake-police-safe-account",
+    "request": "Counter transfer of ¥3,000,000 to カ）ミライケンセツ (same-bank account)",
+    "facts": {
+      "get_baseline.customer_tenure_years": 12,
+      "get_baseline.median_monthly_withdrawal_jpy": 50000,
+      "get_baseline.contractor_payments_count_12y": 0,
+      "get_baseline.renovation_loan_enquiries_count": 0,
+      "get_baseline.largest_payment_12m_jpy": 400000,
+      "counterpart_graph.account_age_days": 4,
+      "counterpart_graph.distinct_payers_7d": 7,
+      "explain_payee.payee_type": "construction company (name only; account opened 4 days ago)"
+    },
+    "turns": [
+      {"teller": "本日はお振込みですね。差し支えなければ、ご用途をお伺いしてもよろしいですか。",
+       "customer": "ええ、あの、リフォーム代なんです。家の、お風呂のね。"},
+      {"teller": "そうでしたか。工事の業者さんとは、どちらでお知り合いになったんですか。",
+       "customer": "えっと…それは、知り合いの紹介で。今日中に払わないといけないって言われてて。"},
+      {"teller": "今日中に、ですか。お見積書などはお持ちでしょうか。",
+       "customer": "見積もり…いや、それは後で送るって。とにかく急いでるのよ。"},
+      {"teller": "承知しました。最近、ご家族以外の方からお電話などはありましたか。",
+       "customer": "…警察の人から電話があってね。誰にも言うなって言われてるの。あなたにも言っちゃいけないのよ、本当は。"},
+      {"teller": "警察の方は、何とおっしゃっていましたか。",
+       "customer": "私の口座が犯罪に使われてるから、お金を安全な口座に移さないといけないって。終わったら戻してくれるって。"},
+      {"teller": "娘さんには、このことはお話しされましたか。",
+       "customer": "娘には言わないでって。心配かけたくないし…警察の人もそう言ってたから。"}
+    ]
+  },
+  {
+    "id": "B",
+    "label": "Suzuki: car for a grandchild (legitimate, uses the word 内緒)",
+    "expected": "legitimate",
+    "expected_playbook": null,
+    "request": "Counter transfer of ¥2,500,000 to トヨタモビリティ〇〇 (car dealer, other bank)",
+    "facts": {
+      "get_baseline.customer_tenure_years": 30,
+      "get_baseline.median_monthly_withdrawal_jpy": 80000,
+      "get_baseline.largest_payment_12m_jpy": 600000,
+      "counterpart_graph.account_age_days": null,
+      "counterpart_graph.distinct_payers_7d": null,
+      "explain_payee.payee_type": "registered car dealership (other bank; account age not visible)"
+    },
+    "turns": [
+      {"teller": "本日はお振込みですね。ご用途をお伺いしてもよろしいですか。",
+       "customer": "孫がね、就職したもんで、車を買ってやろうと思って。"},
+      {"teller": "それはおめでとうございます。販売店の方とはお会いになりましたか。",
+       "customer": "この前、孫と一緒に店に行って話してきたんですよ。これが注文書。"},
+      {"teller": "ありがとうございます。お孫さんは今日はご一緒ではないんですね。",
+       "customer": "今日も来たがってたんだけど、仕事でね。なんなら電話してみましょうか。"},
+      {"teller": "最近、知らない番号からのお電話などはありませんでしたか。",
+       "customer": "いや、そんなの来てないよ。車のことは孫には内緒にしてたけど、もう本人も知ってるしね。"},
+      {"teller": "かしこまりました。振込先をご一緒に確認させてください。",
+       "customer": "振込先は販売店の名前で合ってると思うけど、確認してもらえる？"}
+    ]
+  },
+  {
+    "id": "C",
+    "label": "Watanabe: genuine renovation balance payment",
+    "expected": "legitimate",
+    "expected_playbook": null,
+    "request": "Counter transfer of ¥1,800,000 to カ）ワタナベリフォーム工房 (same-bank account)",
+    "facts": {
+      "get_baseline.customer_tenure_years": 22,
+      "get_baseline.median_monthly_withdrawal_jpy": 60000,
+      "get_baseline.contractor_payments_count_12y": 1,
+      "get_baseline.last_payment_to_this_payee": "¥200,000 deposit, 34 days ago",
+      "counterpart_graph.account_age_days": 3285,
+      "counterpart_graph.distinct_payers_7d": 3,
+      "explain_payee.payee_type": "renovation company (account 9 years old)"
+    },
+    "turns": [
+      {"teller": "本日はお振込みですね。ご用途をお伺いしてもよろしいですか。",
+       "customer": "リフォーム代の残りです。先月、手付金を払ったところの。"},
+      {"teller": "そうでしたか。業者さんとはどのように決められたんですか。",
+       "customer": "息子と一緒に業者さんと会ってね、見積もりもここにありますよ。"},
+      {"teller": "ありがとうございます。工事の方はいかがですか。",
+       "customer": "工事はもう終わったの。手すりも付けてもらって、だいぶ楽になったわ。"},
+      {"teller": "お支払いの期限などは決まっていますか。",
+       "customer": "急いではないんだけど、月末までに払う約束だから。"}
+    ]
+  },
+  {
+    "id": "D",
+    "label": "Kobayashi: son in trouble, cash handover",
+    "expected": "scam",
+    "expected_playbook": "pb-relative-in-trouble",
+    "request": "Counter cash withdrawal of ¥2,000,000",
+    "facts": {
+      "get_baseline.customer_tenure_years": 40,
+      "get_baseline.median_monthly_withdrawal_jpy": 70000,
+      "get_baseline.largest_cash_withdrawal_12m_jpy": 150000,
+      "counterpart_graph.account_age_days": null,
+      "counterpart_graph.distinct_payers_7d": null,
+      "explain_payee.payee_type": "none (cash withdrawal)"
+    },
+    "turns": [
+      {"teller": "いらっしゃいませ。本日はどのようなご用件でしょうか。",
+       "customer": "現金で200万、下ろしたいんですけど。"},
+      {"teller": "かしこまりました。差し支えなければ、ご用途をお伺いできますか。",
+       "customer": "息子がね、会社のお金をなくしちゃって、今日中に返さないとクビになるって。"},
+      {"teller": "それはご心配ですね。息子さんとはお電話でお話しされたんですか。",
+       "customer": "声？ちょっと風邪ひいてて声が変だったけど、息子ですよ。番号も変わったって言ってたし。"},
+      {"teller": "お金はどのようにお渡しされる予定ですか。",
+       "customer": "会社の上司の人が取りに来てくれるっていうから、駅で渡すことになってて。"},
+      {"teller": "奥様はこのことをご存じですか。",
+       "customer": "嫁には言うなって言われたの。恥ずかしいからって。"}
+    ]
+  }
+]

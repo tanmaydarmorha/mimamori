@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/copilot-turn.json",
+  "title": "Counter copilot output for one customer turn (model output)",
+  "description": "What the copilot model returns per customer turn. The model extracts indicators, checks the cover story, names its leading hypothesis and picks a question from the approved bank. It does not produce confidence numbers, the pause recommendation or any free-text wording for the teller: code computes those (spike finding 1) and approved wording comes from the bank (spike finding 3).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["indicators", "cover_story", "leading_hypothesis", "next_question_id", "rationale_en"],
+  "properties": {
+    "indicators": {
+      "description": "Every indicator found so far. Quotes are verified in code (see README, quote rule).",
+      "type": "array",
+      "items": {"$ref": "#/$defs/indicator"}
+    },
+    "cover_story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stated_reason", "consistent_with_history", "matches_playbook"],
+      "properties": {
+        "stated_reason": {"type": ["string", "null"], "description": "The customer's stated purpose, in English. Null until stated."},
+        "consistent_with_history": {"enum": ["yes", "no", "unknown"]},
+        "matches_playbook": {"type": ["string", "null"], "pattern": "^pb\\.[a-z0-9_]+\\.[a-z0-9_]+$"}
+      }
+    },
+    "leading_hypothesis": {"$ref": "#/$defs/hypothesis"},
+    "next_question_id": {
+      "description": "ID of one question from the approved question bank given in the prompt. Code checks it exists and fills its slots.",
+      "type": "string",
+      "pattern": "^q\\.[a-z0-9_]+\\.[a-z0-9_]+$"
+    },
+    "rationale_en": {"type": "string", "minLength": 1, "maxLength": 400}
+  },
+  "$defs": {
+    "indicator_type": {
+      "enum": [
+        "impersonated_official",
+        "impersonated_relative",
+        "secrecy_instruction",
+        "urgency",
+        "cash_or_card_handover",
+        "cover_story",
+        "safe_account_transfer",
+        "changed_contact_number",
+        "third_party_pressure"
+      ]
+    },
+    "hypothesis": {"enum": ["legitimate", "fake_police", "relative_in_trouble", "gold_bullion", "other_scam"]},
+    "indicator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "turn_id", "quote"],
+      "properties": {
+        "type": {"$ref": "#/$defs/indicator_type"},
+        "turn_id": {"type": "string", "pattern": "^c[0-9]+$"},
+        "quote": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

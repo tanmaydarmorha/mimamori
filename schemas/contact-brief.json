@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/contact-brief.json",
+  "title": "Contact brief (case service → conversation service)",
+  "description": "Built in code from the evidence card and the customer's disclosure policy. It is the only case data the conversation service and Gemini ever receive. A field is present only if the policy allows it. There are no fields for the balance, account numbers, the counterpart or other customers (DA 6), so the schema itself enforces the boundary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["case_id", "call_id", "built_at", "built_by", "case_code", "branch", "contact", "customer_reference_ja", "disclosable"],
+  "properties": {
+    "case_id": {"type": "string", "pattern": "^case-[A-Za-z0-9-]+$"},
+    "call_id": {"type": "string"},
+    "built_at": {"type": "string", "format": "date-time"},
+    "built_by": {"const": "code"},
+    "case_code": {"type": "string", "pattern": "^[0-9]{4,6}$", "description": "Quoted by the contact on the callback. With the caller number it blocks strangers; it does not prove identity on its own (CR 24)."},
+    "branch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name_ja", "published_phone_e164"],
+      "properties": {
+        "name_ja": {"type": "string"},
+        "published_phone_e164": {"type": "string", "pattern": "^\\+[1-9][0-9]{7,14}$"}
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contact_id", "relationship", "locked_phone_e164"],
+      "properties": {
+        "contact_id": {"type": "string"},
+        "relationship": {"$ref": "advance-wishes.json#/properties/trusted_contacts/items/properties/relationship"},
+        "locked_phone_e164": {"type": "string", "pattern": "^\\+[1-9][0-9]{7,14}$"}
+      }
+    },
+    "customer_reference_ja": {"type": "string", "description": "How to refer to the customer on the call, e.g. お母様."},
+    "disclosable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "transaction_paused": {"type": "boolean"},
+        "amount_band": {"enum": ["under_1m", "1m_to_5m", "over_5m"]},
+        "reason_category": {"enum": ["call_from_someone_claiming_authority", "unfamiliar_payee", "unusual_amount"]},
+        "customer_at_branch": {"type": "boolean"},
+        "police_notified": {"type": "boolean"}
+      }
+    }
+  }
+}

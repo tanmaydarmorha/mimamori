@@ -1,0 +1,300 @@
+[
+  {
+    "id": "pb.fake_police.safe_account",
+    "version": 1,
+    "status": "approved",
+    "approved_by": "seed (team), pending analyst review",
+    "approved_at": "2026-10-13T00:00:00+09:00",
+    "regions": [
+      "JP"
+    ],
+    "first_seen": null,
+    "sources": [
+      {
+        "publisher": "警察庁組織犯罪対策部 (特殊詐欺の手口と対策)",
+        "url": "https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/teguchi-taisaku.pdf",
+        "published_at": "2023-04-13"
+      }
+    ],
+    "hypothesis": "fake_police",
+    "name": "Fake police: move money to a 'safe' account",
+    "impersonates": [
+      "police officer",
+      "Financial Services Agency official",
+      "prosecutor"
+    ],
+    "contact_channels": [
+      "phone",
+      "video_call",
+      "letter"
+    ],
+    "script_phrases": [
+      "口座が犯罪に使われている",
+      "資産を保全する",
+      "安全な口座に移す",
+      "捜査の秘密",
+      "後で戻す"
+    ],
+    "victim_instructions": [
+      "secrecy_from_family",
+      "secrecy_from_bank",
+      "give_cover_story",
+      "act_today",
+      "transfer_to_designated_account",
+      "hand_over_cash"
+    ],
+    "cover_stories": [
+      {
+        "ja": "リフォーム代",
+        "en": "renovation costs"
+      },
+      {
+        "ja": "家族の買い物",
+        "en": "a family purchase"
+      }
+    ],
+    "payment_methods": [
+      "transfer",
+      "cash_handover"
+    ],
+    "targets": "account holders reached by phone; no age rule",
+    "question_bank": {
+      "questions": [
+        {
+          "id": "q.fake_police.what_said",
+          "ja": "お電話の相手の方は、どのようなお話をされていましたか。",
+          "en": "What did the caller tell you?",
+          "purpose": "check_instructions",
+          "separates": [
+            "legitimate",
+            "fake_police"
+          ],
+          "slots": [],
+          "source": "team wording"
+        },
+        {
+          "id": "q.fake_police.returned",
+          "ja": "そのお金は、後で戻ってくると言われていますか。",
+          "en": "Were you told the money would be returned later?",
+          "purpose": "check_instructions",
+          "separates": [
+            "legitimate",
+            "fake_police"
+          ],
+          "slots": [],
+          "source": "team wording, from playbook script phrase 後で戻す"
+        },
+        {
+          "id": "q.fake_police.letters",
+          "ja": "警察や役所の名前で、書類や封筒が届いたりしていませんか。",
+          "en": "Have you received documents or envelopes in the name of the police or a government office?",
+          "purpose": "check_contact",
+          "separates": [
+            "legitimate",
+            "fake_police"
+          ],
+          "slots": [],
+          "source": "R1 [8e]"
+        }
+      ],
+      "hold_lines": [
+        {
+          "id": "h.fake_police.real_police",
+          "ja": "警察や金融庁が、お電話でお金の移動や、誰にも言わないことをお願いすることはございません。念のため、こちらから警察に確認させていただけますか。",
+          "en": "The police and the FSA never ask by phone for money to be moved or for secrecy. May we check with the police for you?",
+          "for_hypotheses": [
+            "fake_police"
+          ],
+          "source": "team wording, consistent with R1 [6]"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pb.relative_in_trouble.callback_collector",
+    "version": 1,
+    "status": "approved",
+    "approved_by": "seed (team), pending analyst review",
+    "approved_at": "2026-10-13T00:00:00+09:00",
+    "regions": [
+      "JP"
+    ],
+    "first_seen": null,
+    "sources": [
+      {
+        "publisher": "警察庁組織犯罪対策部 (特殊詐欺の手口と対策)",
+        "url": "https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/teguchi-taisaku.pdf",
+        "published_at": "2023-04-13"
+      }
+    ],
+    "hypothesis": "relative_in_trouble",
+    "name": "Relative in trouble (オレオレ)",
+    "impersonates": [
+      "son",
+      "grandson"
+    ],
+    "contact_channels": [
+      "phone"
+    ],
+    "script_phrases": [
+      "会社のお金をなくした",
+      "風邪で声が変",
+      "番号が変わった",
+      "今日中に必要"
+    ],
+    "victim_instructions": [
+      "secrecy_from_family",
+      "act_today",
+      "hand_over_cash"
+    ],
+    "cover_stories": [
+      {
+        "ja": "家族の用事",
+        "en": "family business"
+      }
+    ],
+    "payment_methods": [
+      "cash_handover",
+      "courier"
+    ],
+    "targets": "parents and grandparents reached by phone; no age rule",
+    "question_bank": {
+      "questions": [
+        {
+          "id": "q.relative_in_trouble.call_known_number",
+          "ja": "念のため、以前からご存じの番号で、ご家族ご本人に直接お電話して確認してみませんか。",
+          "en": "Shall we call your family member directly on the number you've always had for them?",
+          "purpose": "check_contact",
+          "separates": [
+            "legitimate",
+            "relative_in_trouble"
+          ],
+          "slots": [],
+          "source": "R1 [8c]"
+        },
+        {
+          "id": "q.relative_in_trouble.handover",
+          "ja": "お金は、どなたに、どこでお渡しする予定ですか。",
+          "en": "Who will you hand the money to, and where?",
+          "purpose": "check_handover",
+          "separates": [
+            "legitimate",
+            "relative_in_trouble"
+          ],
+          "slots": [],
+          "source": "team wording"
+        },
+        {
+          "id": "q.relative_in_trouble.voice",
+          "ja": "お電話の声は、いつもと同じでしたか。",
+          "en": "Did the voice on the phone sound the same as usual?",
+          "purpose": "check_contact",
+          "separates": [
+            "legitimate",
+            "relative_in_trouble"
+          ],
+          "slots": [],
+          "source": "team wording, from playbook script phrase 風邪で声が変"
+        }
+      ],
+      "hold_lines": [
+        {
+          "id": "h.relative_in_trouble.verify",
+          "ja": "ご家族のためにも、まずは以前からの番号でご本人に確認してからにしませんか。それまで少しの間お待ちください。",
+          "en": "For your family's sake, let's first confirm with them on their usual number. Please wait a little until then.",
+          "for_hypotheses": [
+            "relative_in_trouble"
+          ],
+          "source": "team wording, R1 [8c]"
+        }
+      ]
+    }
+  },
+  {
+    "id": "pb.gold_bullion.phone_instructed",
+    "version": 1,
+    "status": "approved",
+    "approved_by": "seed (team), pending analyst review",
+    "approved_at": "2026-10-13T00:00:00+09:00",
+    "regions": [
+      "JP"
+    ],
+    "first_seen": null,
+    "sources": [
+      {
+        "publisher": "警察庁組織犯罪対策部 (特殊詐欺の手口と対策)",
+        "url": "https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/teguchi-taisaku.pdf",
+        "published_at": "2023-04-13"
+      }
+    ],
+    "hypothesis": "gold_bullion",
+    "name": "Gold bullion purchase",
+    "impersonates": [
+      "police officer",
+      "bank official"
+    ],
+    "contact_channels": [
+      "phone"
+    ],
+    "script_phrases": [
+      "金を買えば資産が守られる",
+      "金地金",
+      "業者が受け取りに行く"
+    ],
+    "victim_instructions": [
+      "buy_gold",
+      "hand_over_cash",
+      "secrecy_from_family"
+    ],
+    "cover_stories": [
+      {
+        "ja": "老後の資産運用",
+        "en": "retirement investment"
+      }
+    ],
+    "payment_methods": [
+      "gold",
+      "cash_handover"
+    ],
+    "targets": "savers reached by phone; no age rule",
+    "question_bank": {
+      "questions": [
+        {
+          "id": "q.gold_bullion.who_suggested",
+          "ja": "金を買うように、どなたかから勧められましたか。",
+          "en": "Did someone suggest that you buy gold?",
+          "purpose": "check_instructions",
+          "separates": [
+            "legitimate",
+            "gold_bullion"
+          ],
+          "slots": [],
+          "source": "team wording"
+        },
+        {
+          "id": "q.gold_bullion.handover",
+          "ja": "購入した金は、どなたかにお渡しする予定ですか。",
+          "en": "Do you plan to hand the gold to anyone?",
+          "purpose": "check_handover",
+          "separates": [
+            "legitimate",
+            "gold_bullion"
+          ],
+          "slots": [],
+          "source": "team wording"
+        }
+      ],
+      "hold_lines": [
+        {
+          "id": "h.gold_bullion.protect",
+          "ja": "金の購入や受け渡しを電話で指示されるのは、注意が必要な場合がございます。念のため、少しの間お待ちいただけますでしょうか。",
+          "en": "Being told by phone to buy or hand over gold can be a warning sign. May I ask you to wait a little, just in case?",
+          "for_hypotheses": [
+            "gold_bullion"
+          ],
+          "source": "team wording"
+        }
+      ]
+    }
+  }
+]

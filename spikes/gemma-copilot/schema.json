@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Counter copilot turn output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["indicators", "cover_story", "hypotheses", "recommend_pause", "next_question", "hold_firm_line", "rationale_en"],
+  "properties": {
+    "indicators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "turn_id", "quote"],
+        "properties": {
+          "type": {"enum": ["impersonated_official", "impersonated_relative", "secrecy_instruction", "urgency", "cash_or_card_handover", "cover_story", "safe_account_transfer", "changed_contact_number", "third_party_pressure"]},
+          "turn_id": {"type": "string", "pattern": "^c[0-9]+$"},
+          "quote": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "cover_story": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stated_reason", "consistent_with_history", "matches_playbook"],
+      "properties": {
+        "stated_reason": {"type": ["string", "null"]},
+        "consistent_with_history": {"enum": ["yes", "no", "unknown"]},
+        "matches_playbook": {"type": ["string", "null"]}
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "likelihood"],
+        "properties": {
+          "name": {"enum": ["legitimate", "fake_police", "relative_in_trouble", "gold_bullion", "other_scam"]},
+          "likelihood": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "recommend_pause": {"type": "boolean"},
+    "next_question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ja", "en"],
+      "properties": {"ja": {"type": "string", "minLength": 1}, "en": {"type": "string", "minLength": 1}}
+    },
+    "hold_firm_line": {
+      "anyOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ja", "en"],
+          "properties": {"ja": {"type": "string", "minLength": 1}, "en": {"type": "string", "minLength": 1}}
+        }
+      ]
+    },
+    "rationale_en": {"type": "string", "minLength": 1}
+  }
+}

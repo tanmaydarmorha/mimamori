@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/call-turn.json",
+  "title": "Callback turn (Gemini output) and reply templates",
+  "description": "Per turn on the verified callback, Gemini classifies what the contact asked and may write one short connecting phrase. Code then picks the template for that intent, fills it from the brief, runs the rule check and sends it to TTS (CR 5). Facts can only come from templates.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intent", "connecting_phrase_ja", "signals"],
+  "properties": {
+    "intent": {"$ref": "#/$defs/intent"},
+    "connecting_phrase_ja": {
+      "type": ["string", "null"],
+      "maxLength": 30,
+      "description": "Optional empathetic lead-in (e.g. ご心配をおかけして申し訳ございません). Rule-checked: no digits, kanji numerals or amounts."
+    },
+    "signals": {
+      "description": "What the contact said about themselves, for contact_view. Information, not instructions.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concerned": {"type": "boolean"},
+        "coming_to_branch": {"type": "boolean"},
+        "eta_minutes": {"type": "integer", "minimum": 0, "maximum": 600},
+        "wants_callback_later": {"type": "boolean"}
+      }
+    }
+  },
+  "$defs": {
+    "intent": {"enum": ["what_happened", "is_she_safe", "how_much", "what_should_i_do", "account_details", "coming_to_branch", "other"]},
+    "template": {
+      "description": "Approved reply wording for one intent. If a required field is missing from brief.disclosable, code uses the fallback (a polite 'I can't share that').",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent", "ja", "requires", "fallback_ja"],
+      "properties": {
+        "intent": {"$ref": "#/$defs/intent"},
+        "ja": {"type": "string"},
+        "requires": {"type": "array", "items": {"enum": ["transaction_paused", "amount_band", "reason_category", "customer_at_branch", "police_notified"]}},
+        "fallback_ja": {"type": "string"}
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/question-bank.json",
+  "title": "Approved counter wording: questions and hold-firm lines",
+  "description": "Everything the teller console shows as words to say comes from here, so the model can't invent facts in front of the customer (spike finding 3). General items live in the general bank; scam-specific items live in each playbook and are approved with it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bank_id", "version", "status", "questions", "hold_lines"],
+  "properties": {
+    "bank_id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+    "version": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["pending", "approved", "retired"]},
+    "approved_by": {"type": ["string", "null"]},
+    "approved_at": {"type": ["string", "null"], "format": "date-time"},
+    "questions": {"type": "array", "items": {"$ref": "#/$defs/question"}},
+    "hold_lines": {"type": "array", "items": {"$ref": "#/$defs/hold_line"}}
+  },
+  "$defs": {
+    "slot": {
+      "description": "Placeholders filled by code from verified case data, never by the model.",
+      "enum": ["payee_name", "branch_name"]
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "ja", "en", "purpose", "separates", "slots", "source"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^q\\.[a-z0-9_]+\\.[a-z0-9_]+$"},
+        "ja": {"type": "string", "minLength": 1, "description": "Polite Japanese. Slots written as {payee_name}."},
+        "en": {"type": "string", "minLength": 1},
+        "purpose": {"enum": ["ask_purpose", "verify_purpose", "check_contact", "check_instructions", "check_handover", "offer_alternative", "confirm_details"]},
+        "separates": {
+          "description": "Hypotheses this question helps tell apart. Shown to the model to guide its choice.",
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "copilot-turn.json#/$defs/hypothesis"}
+        },
+        "slots": {"type": "array", "items": {"$ref": "#/$defs/slot"}, "uniqueItems": true},
+        "source": {"type": "string", "description": "Where the wording or principle comes from, e.g. 'R1 [3][4]' or 'team wording'."}
+      }
+    },
+    "hold_line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "ja", "en", "for_hypotheses", "source"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^h\\.[a-z0-9_]+\\.[a-z0-9_]+$"},
+        "ja": {"type": "string", "minLength": 1},
+        "en": {"type": "string", "minLength": 1},
+        "for_hypotheses": {"type": "array", "minItems": 1, "items": {"$ref": "copilot-turn.json#/$defs/hypothesis"}},
+        "source": {"type": "string"}
+      }
+    }
+  }
+}

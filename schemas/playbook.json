@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/playbook.json",
+  "title": "Scam playbook (intel-db)",
+  "description": "Structured fields only (CR 11): learning-loop proposals may change these fields and nothing else, and no free text from customer cases enters intel-db. Written as pending by the intelligence job from untrusted public alerts; only approved playbooks reach the copilot.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "version", "status", "name", "impersonates", "contact_channels", "script_phrases", "victim_instructions", "cover_stories", "payment_methods", "sources", "question_bank"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^pb\\.[a-z0-9_]+\\.[a-z0-9_]+$"},
+    "version": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["pending", "approved", "rejected", "retired"]},
+    "hypothesis": {"$ref": "copilot-turn.json#/$defs/hypothesis", "description": "Which copilot hypothesis this playbook supports."},
+    "name": {"type": "string"},
+    "impersonates": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "contact_channels": {"type": "array", "items": {"enum": ["phone", "video_call", "sms", "messaging_app", "email", "letter", "in_person"]}},
+    "script_phrases": {"type": "array", "items": {"type": "string"}},
+    "victim_instructions": {
+      "type": "array",
+      "items": {"enum": ["secrecy_from_family", "secrecy_from_bank", "give_cover_story", "act_today", "hand_over_cash", "hand_over_card", "transfer_to_designated_account", "buy_gold", "stay_on_phone"]}
+    },
+    "cover_stories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ja", "en"],
+        "properties": {"ja": {"type": "string"}, "en": {"type": "string"}}
+      }
+    },
+    "payment_methods": {"type": "array", "items": {"enum": ["transfer", "cash_handover", "card_handover", "gold", "e_money", "crypto", "courier"]}},
+    "targets": {"type": "string", "description": "Who is targeted. Never an age rule."},
+    "regions": {"type": "array", "items": {"type": "string"}},
+    "first_seen": {"type": ["string", "null"], "format": "date"},
+    "sources": {
+      "description": "Public alerts this playbook was built from. published_at drives the evaluation date split (CR 16, CR 28): a playbook used in evaluation must have every source published before T.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["publisher", "url", "published_at"],
+        "properties": {
+          "publisher": {"type": "string"},
+          "url": {"type": "string"},
+          "published_at": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    "question_bank": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["questions", "hold_lines"],
+      "properties": {
+        "questions": {"type": "array", "items": {"$ref": "question-bank.json#/$defs/question"}},
+        "hold_lines": {"type": "array", "items": {"$ref": "question-bank.json#/$defs/hold_line"}}
+      }
+    },
+    "approved_by": {"type": ["string", "null"]},
+    "approved_at": {"type": ["string", "null"], "format": "date-time"}
+  }
+}

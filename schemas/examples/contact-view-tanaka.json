@@ -1,0 +1,20 @@
+{
+  "case_id": "case-2026-1013-0007",
+  "call_id": "call-0007-1",
+  "nature": "information",
+  "verification": {
+    "caller_number_match": true,
+    "case_code_match": true
+  },
+  "reached": true,
+  "concerned": true,
+  "coming_to_branch": true,
+  "eta_minutes": 30,
+  "wants_callback_later": false,
+  "disclosed": [
+    "transaction_paused",
+    "reason_category",
+    "customer_at_branch"
+  ],
+  "recorded_at": "2026-10-13T12:04:30+09:00"
+}

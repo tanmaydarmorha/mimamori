@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.mimamori.local/advance-wishes.json",
+  "title": "Advance wishes (case-db, versioned consent)",
+  "description": "What the customer chose while well: who to tell, when a cooling-off pause applies, and what may be disclosed. Versioned; a new version supersedes the old one. Changes made while a case is open are frozen for review (DA 12).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["customer_ref", "version", "status", "recorded_at", "recorded_via", "readback_confirmed", "trusted_contacts", "cooling_off", "disclosure", "outbound_notice_consent"],
+  "properties": {
+    "customer_ref": {"type": "string"},
+    "version": {"type": "integer", "minimum": 1},
+    "supersedes_version": {"type": ["integer", "null"]},
+    "status": {"enum": ["active", "superseded", "frozen_pending_review"]},
+    "frozen_reason": {"type": ["string", "null"], "description": "Set when a change was attempted during an open case; the previous contact is notified."},
+    "recorded_at": {"type": "string", "format": "date-time"},
+    "recorded_via": {"enum": ["counter_chat", "voice_onboarding", "paper_form", "seeded"]},
+    "readback_confirmed": {"const": true, "description": "The policy was read back in plain Japanese and the customer confirmed it."},
+    "trusted_contacts": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["contact_id", "display_name", "relationship", "phone_e164", "phone_verified_at", "priority"],
+        "properties": {
+          "contact_id": {"type": "string"},
+          "display_name": {"type": "string"},
+          "relationship": {"enum": ["child", "spouse", "sibling", "grandchild", "other_relative", "friend", "professional"]},
+          "phone_e164": {"type": "string", "pattern": "^\\+[1-9][0-9]{7,14}$"},
+          "phone_verified_at": {"type": "string", "format": "date-time", "description": "Verified at registration (e.g. SMS code). Locked while a case is open."},
+          "phone_changed_at": {"type": ["string", "null"], "format": "date-time", "description": "A recent change is a 'contact suspected' trigger."},
+          "priority": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "cooling_off": {
+      "description": "A pre-agreed delay, not a prohibition (R5, 2026-10-12). Applied by the teller. Needs legal review.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled", "applies_to", "min_amount_jpy", "minimum_hours", "extend_to_next_business_day_close", "cap_hours", "override"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "applies_to": {"type": "array", "minItems": 1, "items": {"enum": ["transfer_to_new_payee", "any_transfer", "cash_withdrawal"]}},
+        "min_amount_jpy": {"type": "integer", "minimum": 0},
+        "minimum_hours": {"type": "integer", "minimum": 1, "maximum": 24, "description": "Fixed minimum so a late-afternoon visit isn't a 30-minute pause (CR 25)."},
+        "extend_to_next_business_day_close": {"type": "boolean", "description": "Pause ends at the later of minimum_hours and next business day close..."},
+        "cap_hours": {"type": "integer", "minimum": 1, "maximum": 24, "description": "...but never later than this."},
+        "override": {
+          "description": "How the customer can end the pause early (R5).",
+          "type": "array",
+          "minItems": 1,
+          "items": {"enum": ["after_contact_reached", "after_manager_review_and_second_confirmation"]}
+        }
+      }
+    },
+    "disclosure": {
+      "description": "What the trusted contact may be told. The balance and account numbers are not options, so they can never be disclosed.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["may_disclose"],
+      "properties": {
+        "may_disclose": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["transaction_paused", "amount_band", "reason_category", "customer_at_branch", "police_notified"]}
+        }
+      }
+    },
+    "outbound_notice_consent": {
+      "type": "boolean",
+      "description": "Consent to the outbound notice ('Branch X calling about your mother, please call back'), which is itself a small disclosure (CR 15)."
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "bank_id": "general",
+  "version": 1,
+  "status": "approved",
+  "approved_by": "seed (team), pending fluent-speaker review",
+  "approved_at": "2026-10-13T00:00:00+09:00",
+  "questions": [
+    {"id": "q.general.purpose", "ja": "差し支えなければ、今回のお金のご用途をお伺いしてもよろしいでしょうか。", "en": "If you don't mind, may I ask what the money is for?", "purpose": "ask_purpose", "separates": ["legitimate", "fake_police", "relative_in_trouble", "gold_bullion"], "slots": [], "source": "R1 [3][4]: ask what it's for, not 'are you being scammed?'"},
+    {"id": "q.general.who_asked", "ja": "今回のお手続きは、どなたかに頼まれたり、勧められたりしたものでしょうか。", "en": "Did someone ask you or suggest that you do this?", "purpose": "check_instructions", "separates": ["legitimate", "fake_police", "relative_in_trouble", "gold_bullion"], "slots": [], "source": "R1 draft baseline step 2 (team wording)"},
+    {"id": "q.general.on_phone", "ja": "いま、お電話やLINEなどで、どなたかとお話しされている途中でしょうか。", "en": "Are you in the middle of a call or chat with anyone right now?", "purpose": "check_contact", "separates": ["legitimate", "fake_police", "relative_in_trouble"], "slots": [], "source": "R1 draft baseline step 2 (team wording)"},
+    {"id": "q.general.documents", "ja": "請求書や契約書、お見積書など、お支払いの内容がわかる書類はお持ちでしょうか。", "en": "Do you have an invoice, contract or quote for this payment?", "purpose": "verify_purpose", "separates": ["legitimate", "fake_police", "gold_bullion"], "slots": [], "source": "R1 [8d]: ask for purchase documents"},
+    {"id": "q.general.payee_relation", "ja": "お振込み先の{payee_name}様とは、以前からお取引がございますか。", "en": "Have you dealt with {payee_name} before?", "purpose": "verify_purpose", "separates": ["legitimate", "fake_police"], "slots": ["payee_name"], "source": "team wording"},
+    {"id": "q.general.deadline", "ja": "お支払いの期限は、どなたから、いつまでと言われていますか。", "en": "Who told you the payment deadline, and when is it?", "purpose": "check_instructions", "separates": ["legitimate", "fake_police", "relative_in_trouble"], "slots": [], "source": "team wording"},
+    {"id": "q.general.recent_calls", "ja": "最近、ご家族以外の方や、知らない番号からお電話はありませんでしたか。", "en": "Have you had calls recently from anyone outside the family or from unknown numbers?", "purpose": "check_contact", "separates": ["legitimate", "fake_police", "relative_in_trouble", "gold_bullion"], "slots": [], "source": "team wording"},
+    {"id": "q.general.family_aware", "ja": "今回のお取引について、ご家族の方はご存じでしょうか。", "en": "Does your family know about this transaction?", "purpose": "check_contact", "separates": ["legitimate", "fake_police", "relative_in_trouble"], "slots": [], "source": "team wording"},
+    {"id": "q.general.confirm_payee", "ja": "振込先のお名前を、お手元の書類と一緒に確認させていただけますか。", "en": "May I check the payee's name together with your documents?", "purpose": "confirm_details", "separates": ["legitimate", "fake_police"], "slots": [], "source": "team wording"},
+    {"id": "q.general.alternative", "ja": "よろしければ、現金ではなくお振込みや預金小切手でのお支払いもご案内できますが、いかがでしょうか。", "en": "If you like, we can arrange a transfer or a bank cheque instead of cash.", "purpose": "offer_alternative", "separates": ["legitimate", "relative_in_trouble", "gold_bullion"], "slots": [], "source": "R1 [2] Akita steps 3–4"}
+  ],
+  "hold_lines": [
+    {"id": "h.general.protect", "ja": "お客様の大切なご資産をお守りするため、念のため、本日のお手続きを少しの間お待ちいただけますでしょうか。", "en": "To protect your savings, may I ask you to wait a little before we complete this today?", "for_hypotheses": ["fake_police", "relative_in_trouble", "gold_bullion", "other_scam"], "source": "team wording; a delay, not a refusal (R5)"}
+  ]
+}
