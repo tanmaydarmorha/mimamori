@@ -87,6 +87,8 @@ jobs:
           ENVS="${ENVS},MIMAMORI_SERVICE=${NAME},MIMAMORI_SPEECH=typed,MIMAMORI_TTS=cloud,MIMAMORI_DEMO_NOW=2026-10-13T11:42:00+09:00"
           ENVS="${ENVS},MIMAMORI_COPILOT_BACKEND=gemini,MIMAMORI_GENERAL_BACKEND=gemini,GEMINI_MODEL=gemini-2.5-flash"
           ENVS="${ENVS},MIMAMORI_GEMINI_THINKING_BUDGET=0,MIMAMORI_MODEL_TIMEOUT_S=60"
+          # A score that opens a case writes to Firestore across the network: about 0.6 s here (0.5 s locally).
+          ENVS="${ENVS},SCORING_TIMEOUT_S=2"
           ENVS="${ENVS},CORE_BANK_URL=$(url core-bank-mock),SCORING_URL=$(url scoring)"
           ENVS="${ENVS},CASE_SVC_URL=$(url case-svc),CONVERSATION_SVC_URL=$(url conversation-svc)"
           COMMON=(--image "$IMAGE" --region "$REGION" --project "$PROJECT" --set-env-vars "$ENVS"

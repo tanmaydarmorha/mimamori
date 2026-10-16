@@ -7,7 +7,8 @@ CI then deploys on every push to `main`; `_build-deploy.yml` holds every Cloud R
 
 ```bash
 PROJECT=<project> GITHUB_REPO=<owner/name> infra/setup.sh
-MIMAMORI_ENV=cloud MIMAMORI_PROJECT_ID=<project> python seed/load.py     # seed (re-run to reset the demo)
+MIMAMORI_ENV=cloud MIMAMORI_PROJECT_ID=<project> python seed/load.py     # first seed
+scripts/cloud-reset.sh       # before each full demo run: clears run data from case-db, reseeds, restarts backends
 ```
 
 ## Project and region
@@ -52,7 +53,7 @@ through the default VPC (Direct VPC egress, `all-traffic`), so calls to `*.run.a
 most one instance each, because SSE fan-out, call state and the bank mock live in memory, and scale to
 zero when idle (no cost when unused; in-memory state resets, Firestore data stays). `scripts/demo.sh --url` wakes
 them first; before a live demo, open the console a minute early (a cold scoring service would be skipped,
-because core-bank-mock waits only 0.5 s for it). Production: IAP on web-ui and ID-token auth.
+because core-bank-mock waits only `SCORING_TIMEOUT_S` for it: 0.5 s locally, 2 s in the cloud). Production: IAP on web-ui and ID-token auth.
 
 ## Vertex AI
 A Gemma endpoint with constrained decoding (the case service sends a JSON schema). Fixed GPU floor:

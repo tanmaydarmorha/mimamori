@@ -35,7 +35,7 @@ if ((all)) && [[ -z "$url" ]] && ! ((fresh)); then
 fi
 
 if ((fresh)); then
-  [[ -z "$url" ]] || { printf -- '--fresh resets the local stack, so it cannot be used with --url\n' >&2; exit 2; }
+  [[ -z "$url" ]] || { printf -- '--fresh resets the local stack. For the deployed one run scripts/cloud-reset.sh first (it wipes case-db).\n' >&2; exit 2; }
   scripts/dev.sh down --wipe
   scripts/dev.sh up
 fi
@@ -44,9 +44,11 @@ fi
 # scoring and then proceeds without it, so a cold scoring service would skip the risk check.
 if [[ -n "$url" ]]; then
   printf 'waking the cloud services...\n'
+  h=(-H 'X-Mimamori-Role: teller' -H 'X-Mimamori-User: teller-01')
   for svc in core scoring case conversation; do
-    curl -s -o /dev/null -m 60 -H 'X-Mimamori-Role: teller' -H 'X-Mimamori-User: teller-01' "$url/api/$svc/openapi.json" || true
+    curl -s -o /dev/null -m 60 "${h[@]}" "$url/api/$svc/openapi.json" || true
   done
+  curl -s -o /dev/null -m 120 -X POST "${h[@]}" "$url/api/scoring/v1/baselines/refresh" || true  # baselines + Firestore clients
 fi
 
 cd demo
