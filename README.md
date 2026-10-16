@@ -20,7 +20,7 @@ transfer. Japan's National Police Agency counted **¥100.5 billion in losses in 
 **¥72.9 billion in January–August 2026 alone, 27% more than a year earlier**
 ([NPA, 2026-10-02](https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/261002/01.html)). In the
 first half of 2026, **65.6% of cases were paid by bank transfer**, 98.2% started with a phone call, and
-the most common victims were in their 70s
+the most common victims by number of cases were in their 70s
 ([NPA, 2026-07-31](https://www.npa.go.jp/bureau/safetylife/sos47/assets/img/new-topics/detail/260731/01/01.pdf)).
 
 Banks are asked to speak to every customer making a large transfer. But the NPA itself notes that

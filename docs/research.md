@@ -385,7 +385,8 @@ When done, add a short **Summary** at the top of Findings: one line per item wit
 
 **Key passages**
 - [1] 「被害が急増している「ニセ警察詐欺」を独立した手口として位置付けました。」 — "The fast-rising ニセ警察詐欺 has been made an independent method." Also 「ニセ警察詐欺の検挙件数及び検挙人員は、令和８年から統計を開始している」 — arrest stats begin in 2026 (so no clean 2025 series; 2025 cases sit inside other categories).
-- [1] H1 2026: ニセ警察 **4,466件 / 507.9億円**; 既遂1件当たり **1,163.9万円**; victims' 70s most common; by delivery: 振込型 2,930件 (**65.6%**), 現金手交型 695件 (**15.6%**), 暗号資産送信型 620件 (**13.9%**); initial contact by phone 98.2%.
+- [1] H1 2026: ニセ警察 **4,466件 / 507.9億円**; 既遂1件当たり **1,163.9万円**; victims' most common age group (件数 and 被害額): **70s — 869件 (19.5%, computed from 4,466) / 151.6億円**, p.14 [quote 「70代が869件（+295件、+51.4％）・151.6億円（+44.7億円、+41.8％）と最も多く」 — "the 70s had the most, at 869 cases and ¥15.16bn"; read via page fetch, raw PDF not downloadable here]; by delivery: 振込型 2,930件 (**65.6%**), 現金手交型 695件 (**15.6%**), 暗号資産送信型 620件 (**13.9%**); initial contact by phone 98.2%.
+- [1b] 2025 full year (hurikomesagi_toukei2025.pdf) contrast: ニセ警察 11,014件 / 1,005.0億円 (p.2). By **件数** the 30s lead: 「ニセ警察詐欺の認知件数は、30代が2,239件と最も多く」 — "the 30s had the most cases, at 2,239" (p.5). By **被害額** the 70s lead: 「被害額は、70代が274.6億円と最も多く」 — "by amount lost, the 70s were highest at ¥27.46bn" (p.5). [read via page fetch, raw PDF not downloadable here] So the 70s lead by yen in both periods, and by cases only in H1 2026.
 - [2] To end-Aug 2026: **6,346件 / 728.6億円** (件数 −4.1%, 被害額 +27.0% y/y). (NPA page doesn't define the category or give delivery breakdown.)
 - NPA's earlier public alert page 「ニセ警察詐欺に注意！」 carries the path `/new-topics/241218/` (i.e. **Dec 2024**) **[URL date only; page not opened]** — the *term* predates the 2026 statistical category.
 
