@@ -85,3 +85,19 @@ without touching code.
 
 `scripts/demo.sh hero --record` saves `hero-teller-….webm` and `hero-phone-….webm`. The videos have no
 sound and are not edited. Use `--speed slow` for a calmer recording.
+
+### Footage for the submission video
+
+The submission must be in English, so the video uses English-only scenarios: `genuine-en`,
+`impostor-en` and `hero-en-full` (the English hero through the freeze and outreach; it freezes the
+payee, so it runs last). `scripts/demo.sh video` runs them with `split` and `small`.
+
+```bash
+scripts/cloud-reset.sh                                   # clean deployed stack (wipes case-db run data)
+scripts/demo.sh video --record --clean --url https://<web-ui URL>
+```
+
+`--clean` records the teller at 1920×1080 and the phone at 480×960 without the caption bar, and writes
+`<scenario>-timeline-….json` with the start time of every step and its caption, for lining up the edit.
+The recording windows may be larger than your screen; the video still captures the whole page. Don't
+click in them while they run.

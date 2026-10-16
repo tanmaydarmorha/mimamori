@@ -9,6 +9,14 @@ const WINDOWS = {
   teller: { x: 0, y: 0, width: 1280, height: 800 },
   phone: { x: 1290, y: 0, width: 480, height: 800 },
 };
+// --clean: footage for an edited video. Full-HD teller, taller phone, no caption bar (the edit adds its own);
+// the cursor stays, and the captions go to a timeline file instead.
+const CLEAN_WINDOWS = {
+  teller: { x: 0, y: 0, width: 1920, height: 1080 },
+  phone: { x: 1930, y: 0, width: 480, height: 960 },
+};
+const CLEAN_CSS = `#__demo_caption { display: none !important; } body { padding-bottom: 0 !important; }
+  @media (max-width: 600px) { .phone { height: 100dvh !important; } }`;
 const CHROME_UI = 90; // browser toolbar height on top of the page, so the page really is 800 high
 const WAIT_MS = 90_000;
 const THINKING = "The copilot is reading the conversation…";
@@ -147,7 +155,7 @@ async function until(fn, ms, label) {
 
 // ---- the scenario runner -------------------------------------------------------------------------
 
-export async function runScenario(sc, { url, speed, record, outDir }) {
+export async function runScenario(sc, { url, speed, record, outDir, clean = false }) {
   const f = SPEEDS[speed];
   const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
   const run = { f };
@@ -156,7 +164,7 @@ export async function runScenario(sc, { url, speed, record, outDir }) {
 
   const wins = {};
   for (const name of sc.windows ?? ["teller"]) {
-    const g = WINDOWS[name];
+    const g = (clean ? CLEAN_WINDOWS : WINDOWS)[name];
     const browser = await chromium.launch({
       channel: "chrome",
       headless: false,
@@ -173,6 +181,11 @@ export async function runScenario(sc, { url, speed, record, outDir }) {
     });
     // The cursor and caption bar exist from the first paint; the runner also re-injects after each goto.
     await context.addInitScript(`addEventListener("DOMContentLoaded", ${installOverlay.toString()})`);
+    if (clean) {
+      await context.addInitScript((css) => addEventListener("DOMContentLoaded", () => {
+        const s = document.createElement("style"); s.textContent = css; document.documentElement.appendChild(s);
+      }), CLEAN_CSS);
+    }
     const page = await context.newPage();
     page.on("pageerror", (e) => console.error(`  [${name}] page error: ${e.message}`));
     page.on("crash", () => console.error(`  [${name}] the page crashed`));
@@ -185,12 +198,14 @@ export async function runScenario(sc, { url, speed, record, outDir }) {
 
   const result = { videos: [] };
   const t0 = Date.now();
+  const timeline = []; // step starts, in seconds from the windows opening (≈ the start of each video)
   try {
     for (const [i, step] of sc.steps.entries()) {
       const label = `${i + 1} "${(typeof step.caption === "string" ? step.caption : Object.values(step.caption ?? {})[0] ?? step.name ?? "").slice(0, 48)}"`;
       current = label;
       const tStep = Date.now();
       const caps = typeof step.caption === "string" ? { [step.win ?? "teller"]: step.caption } : (step.caption ?? {});
+      timeline.push({ step: i + 1, at: +((tStep - t0) / 1000).toFixed(2), captions: Object.fromEntries(Object.entries(caps).map(([w, t]) => [w, subst(t, vars)])) });
       for (const [w, text] of Object.entries(caps)) if (wins[w]) await wins[w].setCaption(subst(text, vars));
       for (const act of step.do ?? []) await doAction(act, wins, vars, url, f, sc);
       const hold = step.hold ?? 2500;
@@ -208,6 +223,11 @@ export async function runScenario(sc, { url, speed, record, outDir }) {
     }
   }
   await closeAll(wins, record, rawDir, outDir, sc.id, stamp, result);
+  if (record) {
+    const file = path.join(outDir, `${sc.id}-timeline-${stamp}.json`);
+    fs.writeFileSync(file, JSON.stringify({ scenario: sc.id, speed, clean, steps: timeline }, null, 2));
+    result.videos.push(file);
+  }
   return result;
 }
 
