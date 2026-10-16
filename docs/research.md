@@ -257,7 +257,7 @@ When done, add a short **Summary** at the top of Findings: one line per item wit
 | R3 | **confirmed** | Furikome Sagi Relief Act **Art. 3(1)**: a bank "shall appropriately take" suspension measures when it suspects an account is a crime-use account. Police info is one factor, **not required**. Art. 4–11 give the DIC notice → extinguishment → distribution process. Covers *transfer-induced* fraud only. |
 | R4 | **confirmed** (basis), **arguable** (our exact handover) | APPI **Art. 27(1)(i)/(ii)** confirmed as you numbered them. PPC Q&A says a CCP **Art. 197(2)** inquiry = "based on laws" (i). A *teller-initiated* handover with no inquiry fits (ii) only weakly; **(iv)** is a better fit and wasn't in the brief. |
 | R1 | **likely** | No published checklist with concrete teller *questions* found. Found: the NPA national request, prefectural "5-step" practice, the "ask what it's for, not 'are you being scammed?'" rule, Osaka's binding report duty. No national amount/age threshold is published. |
-| R2 | **unresolved** | NPA made ニセ警察詐欺 its own category in **2026** (confirmed). Only **~15** post-2026-04-01 cases with usable narrative found, **not 20**. Counter-stopped cases with full dialogue are rare. T=2026-04-01 not yet shown feasible; see recommendation. |
+| R2 | **unresolved** | NPA made ニセ警察詐欺 its own category in **2026** (confirmed). **Correction 2026-10-17: its statistics start in Jan 2025** (NPA confirmed 2025 figures: 11,014 cases / ¥100.50bn). Only **~15** post-2026-04-01 cases with usable narrative found, **not 20**. Counter-stopped cases with full dialogue are rare. T=2026-04-01 not yet shown feasible; see recommendation. |
 | R5 | **unresolved** (lean *arguable* for opt-in pause, *unlikely* for "no counter override") | Every precedent found leaves an escape at the counter. A pause the customer cannot cancel at the counter has no precedent found. Needs legal review. |
 
 ---
@@ -369,6 +369,8 @@ When done, add a short **Summary** at the top of Findings: one line per item wit
 
 ### R2 · Date T and the post-T held-out case set
 **Status:** unresolved (category question **confirmed**; the 20-case target is **not shown to be met**)
+> **Correction 2026-10-17:** the statistics start in **January 2025**, not 2026: 「ニセ警察詐欺は令和7年1月から統計を開始」 (NPA, 令和７年 確定値, 2026-06-05, https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/260605/01.html): 2025 = 11,014件 / 1,005.0億円. The rest of this answer is unchanged.
+
 **Answer (2–4 sentences):** The NPA treats ニセ警察詐欺 as its own method **from 令和8年 (2026)**, with statistics starting then. I found about **15 post-2026-04-01 cases with narrative detail adequate for adaptation** (9 victim-side weekly reports from Toyama Police, 5 monthly counter cases from Okayama Police — only 1 of them fake-police — and 1 news report) plus ~6 thinner commendation reports. Cases *stopped at a bank counter* with the actual dialogue are the scarce part; most sources describe completed victimisations. **I could not confirm 20 from one pass, so the proposed T is not yet demonstrably feasible.**
 
 **Sources**
