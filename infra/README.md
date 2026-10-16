@@ -1,8 +1,14 @@
-# Infra (not created)
+# Infra
 
-No GCP project, Artifact Registry or Workload Identity Federation exists yet, and `gcloud` isn't
-installed on the build machine. **Nothing here creates cloud resources.** This is the list of what a
-deploy needs, taken from `docs/architecture/c4-containers.md`.
+What a deploy needs, taken from `docs/architecture/c4-containers.md`. **`infra/setup.sh`** creates it
+(APIs, Artifact Registry, network, the three databases, service accounts and grants, the GitHub
+deployer via Workload Identity Federation; safe to re-run) and prints the GitHub repository variables.
+CI then deploys on every push to `main`; `_build-deploy.yml` holds every Cloud Run setting.
+
+```bash
+PROJECT=<project> GITHUB_REPO=<owner/name> infra/setup.sh
+MIMAMORI_ENV=cloud MIMAMORI_PROJECT_ID=<project> python seed/load.py     # seed (re-run to reset the demo)
+```
 
 ## Project and region
 - A GCP project in the bank's organisation. Prototype region `asia-south1` (`MIMAMORI_REGION`);
@@ -38,10 +44,13 @@ the table above). Images: `<region>-docker.pkg.dev/<project>/<repo>/<name>:<sha>
 `VERTEX_GEMMA_ENDPOINT_ID`, `GEMINI_MODEL`. `web-ui` sits behind IAP (roles `teller`, `analyst`
 mapped to `X-Mimamori-Role`). Scheduler triggers `watchlist-loader` and `intel-job`.
 
-## web-ui to private services
-nginx cannot attach Cloud Run ID tokens when proxying to `--no-allow-unauthenticated` services.
-Decide before deploying: put the services behind the same IAP / an internal load balancer, or add a
-token-injecting sidecar to `web-ui`. Not solved in the prototype (local compose has no auth).
+## web-ui to private services (prototype)
+nginx and the service clients send plain HTTP (no ID tokens). So the backends use **internal ingress
+with no invoker check**: only traffic from the project's VPC reaches them, and every service egresses
+through the default VPC (Direct VPC egress, `all-traffic`), so calls to `*.run.app` count as internal.
+`web-ui` is public (synthetic data; the role switcher stands in for IAP), max 2 instances. Backends run
+exactly one always-on instance each, because SSE fan-out, call state and the bank mock live in memory
+(about $7/day; set `--min-instances 0` between sessions). Production: IAP on web-ui and ID-token auth.
 
 ## Vertex AI
 A Gemma endpoint with constrained decoding (the case service sends a JSON schema). Fixed GPU floor:
