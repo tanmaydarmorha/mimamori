@@ -1,0 +1,50 @@
+# Rendered by the nginx image's envsubst at start-up (only variables set in the environment are
+# replaced; nginx's own $variables are left alone). Service URLs have no trailing slash.
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      '';
+}
+
+server {
+    listen ${PORT};
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location = /healthz {
+        default_type application/json;
+        add_header Cache-Control no-store;
+        return 200 '{"status":"ok","service":"web-ui","version":"0.1.0"}';
+    }
+
+    # Runtime config for the SPA (no rebuild per environment).
+    location = /config.json {
+        default_type application/json;
+        add_header Cache-Control no-store;
+        return 200 '{"env":"${MIMAMORI_ENV}","speech":"${MIMAMORI_SPEECH}"}';
+    }
+
+    # Who IAP says the caller is. Empty locally, so the SPA shows its role switcher.
+    location = /whoami {
+        default_type application/json;
+        add_header Cache-Control no-store;
+        return 200 '{"role":"$http_x_mimamori_role","user":"$http_x_mimamori_user"}';
+    }
+
+    # The browser only talks to this server; /api/<svc>/x -> ${...}/x. Works for plain HTTP,
+    # SSE (buffering off) and WebSocket (Upgrade passed through).
+    location /api/core/         { proxy_pass ${CORE_BANK_URL}/;            include /etc/nginx/mimamori-proxy.conf; }
+    location /api/scoring/      { proxy_pass ${SCORING_URL}/;              include /etc/nginx/mimamori-proxy.conf; }
+    location /api/case/         { proxy_pass ${CASE_SVC_URL}/;             include /etc/nginx/mimamori-proxy.conf; }
+    location /api/conversation/ { proxy_pass ${CONVERSATION_SVC_URL}/;     include /etc/nginx/mimamori-proxy.conf; }
+
+    location /assets/ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        try_files $uri =404;
+    }
+
+    location / {
+        add_header Cache-Control no-cache;
+        try_files $uri /index.html;
+    }
+}

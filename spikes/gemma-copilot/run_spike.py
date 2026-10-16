@@ -1,4 +1,4 @@
-"""Gemma counter-copilot capability spike (Step 0 of docs/plans/review-response-plan.md).
+"""Gemma counter-copilot capability spike (Step 0 of the review-response plan; see docs/decisions.md).
 
 Runs every customer turn in conversations.json through a local Ollama model, validates the JSON
 output against schema.json, checks quotes against the transcript, and writes raw results.

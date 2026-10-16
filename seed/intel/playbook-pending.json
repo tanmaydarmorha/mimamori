@@ -1,0 +1,60 @@
+[
+  {
+    "id": "pb.other_scam.fee_sms",
+    "version": 1,
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null,
+    "regions": ["JP"],
+    "first_seen": null,
+    "sources": [
+      {
+        "publisher": "synthetic seed for the analyst-console demo (stands in for a public consumer-centre alert)",
+        "url": "https://example.invalid/alerts/fee-sms",
+        "published_at": "2025-11-20"
+      }
+    ],
+    "hypothesis": "other_scam",
+    "name": "Unpaid-fee message: pay through a designated account",
+    "impersonates": ["parcel delivery company", "utility company"],
+    "contact_channels": ["sms", "messaging_app"],
+    "script_phrases": ["未納料金", "本日中にお支払いください", "ご案内の口座へお振込みください"],
+    "victim_instructions": ["act_today", "transfer_to_designated_account"],
+    "cover_stories": [
+      {"ja": "未納の手数料の支払い", "en": "paying an outstanding fee"}
+    ],
+    "payment_methods": ["transfer", "e_money"],
+    "targets": "anyone who receives the message; no age rule",
+    "question_bank": {
+      "questions": [
+        {
+          "id": "q.other_scam.how_notified",
+          "ja": "このお支払いは、どのような方法でお知らせがありましたか。",
+          "en": "How were you told about this payment?",
+          "purpose": "check_instructions",
+          "separates": ["legitimate", "other_scam"],
+          "slots": [],
+          "source": "team wording"
+        },
+        {
+          "id": "q.other_scam.official_contact",
+          "ja": "請求元の公式の連絡先に、ご自身でご確認されましたか。",
+          "en": "Have you checked with the company through its official contact details?",
+          "purpose": "verify_purpose",
+          "separates": ["legitimate", "other_scam"],
+          "slots": [],
+          "source": "team wording"
+        }
+      ],
+      "hold_lines": [
+        {
+          "id": "h.other_scam.verify",
+          "ja": "ご案内の口座へのお支払いは、念のため請求元に直接ご確認いただいてからでも遅くはございません。少しの間お待ちいただけますでしょうか。",
+          "en": "It is not too late to confirm directly with the company before paying. May I ask you to wait a little, just in case?",
+          "for_hypotheses": ["other_scam"],
+          "source": "team wording"
+        }
+      ]
+    }
+  }
+]

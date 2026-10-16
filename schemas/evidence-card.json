@@ -86,7 +86,8 @@
       "required": ["question_id", "ja_filled"],
       "properties": {
         "question_id": {"type": "string", "pattern": "^q\\.[a-z0-9_]+\\.[a-z0-9_]+$"},
-        "ja_filled": {"type": "string", "description": "Bank wording with slots filled by code."}
+        "ja_filled": {"type": "string", "description": "Bank wording with slots filled by code."},
+        "en_filled": {"type": "string", "description": "English wording of the same approved question, slots filled by code. Shown first in an English case."}
       }
     },
     "dropped": {

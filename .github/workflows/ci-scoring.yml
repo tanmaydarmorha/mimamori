@@ -1,0 +1,19 @@
+name: ci-scoring
+on:
+  push:
+    branches: [main]
+    paths: [services/scoring/**, libs/mimamori-common/**, .github/workflows/ci-scoring.yml, .github/workflows/_build-deploy.yml]
+  pull_request:
+    paths: [services/scoring/**, libs/mimamori-common/**, .github/workflows/ci-scoring.yml, .github/workflows/_build-deploy.yml]
+  workflow_dispatch:
+concurrency:
+  group: ci-scoring-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    uses: ./.github/workflows/_build-deploy.yml
+    with:
+      name: scoring
+      path: services/scoring
+      kind: service
+    secrets: inherit

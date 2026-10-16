@@ -1,0 +1,429 @@
+[
+{
+"customer_ref":"cust-tanaka-0001",
+"display_name_ja":"田中 圭子",
+"display_name_kana":"タナカ ケイコ",
+"tenure_years":12,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-co-0001",
+"display_name_ja":"株式会社サクラ工務店",
+"display_name_kana":"カ）サクラコウムテン",
+"tenure_years":10,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-co-0002",
+"display_name_ja":"株式会社ミドリモータース",
+"display_name_kana":"カ）ミドリモータース",
+"tenure_years":14,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-co-0003",
+"display_name_ja":"有限会社ヤマト食品",
+"display_name_kana":"ユ）ヤマトショクヒン",
+"tenure_years":17,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0001",
+"display_name_ja":"前田 真理",
+"display_name_kana":"マエダ マリ",
+"tenure_years":21,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0002",
+"display_name_ja":"木村 拓也",
+"display_name_kana":"キムラ タクヤ",
+"tenure_years":17,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0003",
+"display_name_ja":"斎藤 明美",
+"display_name_kana":"サイトウ アケミ",
+"tenure_years":15,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0004",
+"display_name_ja":"斎藤 実",
+"display_name_kana":"サイトウ ミノル",
+"tenure_years":14,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0005",
+"display_name_ja":"岡田 茂",
+"display_name_kana":"オカダ シゲル",
+"tenure_years":5,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0006",
+"display_name_ja":"山口 博",
+"display_name_kana":"ヤマグチ ヒロシ",
+"tenure_years":16,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0007",
+"display_name_ja":"松本 茂",
+"display_name_kana":"マツモト シゲル",
+"tenure_years":7,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0008",
+"display_name_ja":"井上 茂",
+"display_name_kana":"イノウエ シゲル",
+"tenure_years":8,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0009",
+"display_name_ja":"松本 博",
+"display_name_kana":"マツモト ヒロシ",
+"tenure_years":20,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0010",
+"display_name_ja":"林 和子",
+"display_name_kana":"ハヤシ カズコ",
+"tenure_years":18,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0011",
+"display_name_ja":"渡辺 真理",
+"display_name_kana":"ワタナベ マリ",
+"tenure_years":6,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0012",
+"display_name_ja":"木村 明美",
+"display_name_kana":"キムラ アケミ",
+"tenure_years":21,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0013",
+"display_name_ja":"中村 美代子",
+"display_name_kana":"ナカムラ ミヨコ",
+"tenure_years":18,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0014",
+"display_name_ja":"加藤 明美",
+"display_name_kana":"カトウ アケミ",
+"tenure_years":22,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0015",
+"display_name_ja":"山口 久美子",
+"display_name_kana":"ヤマグチ クミコ",
+"tenure_years":16,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0016",
+"display_name_ja":"阿部 健一",
+"display_name_kana":"アベ ケンイチ",
+"tenure_years":6,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0017",
+"display_name_ja":"岡田 勇",
+"display_name_kana":"オカダ イサム",
+"tenure_years":8,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0018",
+"display_name_ja":"林 勇",
+"display_name_kana":"ハヤシ イサム",
+"tenure_years":20,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0019",
+"display_name_ja":"木村 洋子",
+"display_name_kana":"キムラ ヨウコ",
+"tenure_years":11,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0020",
+"display_name_ja":"渡辺 久美子",
+"display_name_kana":"ワタナベ クミコ",
+"tenure_years":7,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0021",
+"display_name_ja":"佐々木 拓也",
+"display_name_kana":"ササキ タクヤ",
+"tenure_years":7,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0022",
+"display_name_ja":"高橋 久美子",
+"display_name_kana":"タカハシ クミコ",
+"tenure_years":12,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0023",
+"display_name_ja":"松本 真理",
+"display_name_kana":"マツモト マリ",
+"tenure_years":5,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0024",
+"display_name_ja":"山田 実",
+"display_name_kana":"ヤマダ ミノル",
+"tenure_years":4,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0025",
+"display_name_ja":"阿部 和子",
+"display_name_kana":"アベ カズコ",
+"tenure_years":11,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0026",
+"display_name_ja":"岡田 美代子",
+"display_name_kana":"オカダ ミヨコ",
+"tenure_years":16,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0027",
+"display_name_ja":"加藤 博",
+"display_name_kana":"カトウ ヒロシ",
+"tenure_years":13,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0028",
+"display_name_ja":"阿部 博",
+"display_name_kana":"アベ ヒロシ",
+"tenure_years":14,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0029",
+"display_name_ja":"藤田 健一",
+"display_name_kana":"フジタ ケンイチ",
+"tenure_years":4,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0030",
+"display_name_ja":"佐々木 美代子",
+"display_name_kana":"ササキ ミヨコ",
+"tenure_years":9,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0031",
+"display_name_ja":"山口 洋子",
+"display_name_kana":"ヤマグチ ヨウコ",
+"tenure_years":15,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0032",
+"display_name_ja":"前田 大輔",
+"display_name_kana":"マエダ ダイスケ",
+"tenure_years":13,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0033",
+"display_name_ja":"阿部 洋子",
+"display_name_kana":"アベ ヨウコ",
+"tenure_years":21,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0034",
+"display_name_ja":"小林 真理",
+"display_name_kana":"コバヤシ マリ",
+"tenure_years":14,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0035",
+"display_name_ja":"岡田 拓也",
+"display_name_kana":"オカダ タクヤ",
+"tenure_years":10,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0036",
+"display_name_ja":"山口 清",
+"display_name_kana":"ヤマグチ キヨシ",
+"tenure_years":9,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0037",
+"display_name_ja":"加藤 清",
+"display_name_kana":"カトウ キヨシ",
+"tenure_years":11,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0038",
+"display_name_ja":"佐々木 幸子",
+"display_name_kana":"ササキ サチコ",
+"tenure_years":19,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0039",
+"display_name_ja":"伊藤 由美",
+"display_name_kana":"イトウ ユミ",
+"tenure_years":9,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0040",
+"display_name_ja":"小林 博",
+"display_name_kana":"コバヤシ ヒロシ",
+"tenure_years":13,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0041",
+"display_name_ja":"清水 隆",
+"display_name_kana":"シミズ タカシ",
+"tenure_years":16,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0042",
+"display_name_ja":"吉田 勇",
+"display_name_kana":"ヨシダ イサム",
+"tenure_years":14,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0043",
+"display_name_ja":"伊藤 実",
+"display_name_kana":"イトウ ミノル",
+"tenure_years":20,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0044",
+"display_name_ja":"山口 健一",
+"display_name_kana":"ヤマグチ ケンイチ",
+"tenure_years":20,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0045",
+"display_name_ja":"池田 実",
+"display_name_kana":"イケダ ミノル",
+"tenure_years":19,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0046",
+"display_name_ja":"林 久美子",
+"display_name_kana":"ハヤシ クミコ",
+"tenure_years":16,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0047",
+"display_name_ja":"阿部 勇",
+"display_name_kana":"アベ イサム",
+"tenure_years":22,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0048",
+"display_name_ja":"山本 勇",
+"display_name_kana":"ヤマモト イサム",
+"tenure_years":20,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0049",
+"display_name_ja":"阿部 実",
+"display_name_kana":"アベ ミノル",
+"tenure_years":5,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0050",
+"display_name_ja":"岡田 大輔",
+"display_name_kana":"オカダ ダイスケ",
+"tenure_years":6,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0051",
+"display_name_ja":"中村 節子",
+"display_name_kana":"ナカムラ セツコ",
+"tenure_years":19,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0052",
+"display_name_ja":"山口 隆",
+"display_name_kana":"ヤマグチ タカシ",
+"tenure_years":20,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0053",
+"display_name_ja":"藤田 久美子",
+"display_name_kana":"フジタ クミコ",
+"tenure_years":16,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0054",
+"display_name_ja":"前田 和子",
+"display_name_kana":"マエダ カズコ",
+"tenure_years":6,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0055",
+"display_name_ja":"加藤 真理",
+"display_name_kana":"カトウ マリ",
+"tenure_years":4,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-0056",
+"display_name_ja":"林 明美",
+"display_name_kana":"ハヤシ アケミ",
+"tenure_years":21,
+"branch_name_ja":"サンプル銀行 駅前支店"
+},
+{
+"customer_ref":"cust-mule-0001",
+"display_name_ja":"株式会社ミライ建設",
+"display_name_kana":"カ）ミライケンセツ",
+"tenure_years":0,
+"branch_name_ja":"サンプル銀行 駅前支店"
+}
+]

@@ -1,0 +1,19 @@
+name: ci-sim-job
+on:
+  push:
+    branches: [main]
+    paths: [jobs/sim-job/**, libs/mimamori-common/**, schemas/**, seed/**, .github/workflows/ci-sim-job.yml, .github/workflows/_build-deploy.yml]
+  pull_request:
+    paths: [jobs/sim-job/**, libs/mimamori-common/**, schemas/**, seed/**, .github/workflows/ci-sim-job.yml, .github/workflows/_build-deploy.yml]
+  workflow_dispatch:
+concurrency:
+  group: ci-sim-job-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    uses: ./.github/workflows/_build-deploy.yml
+    with:
+      name: sim-job
+      path: jobs/sim-job
+      kind: job
+    secrets: inherit

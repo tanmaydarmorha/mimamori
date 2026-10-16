@@ -16,7 +16,7 @@ pause the transaction. The bank may then:
 - freeze the scammer's receiving ("mule") account if it's held at the same bank
 
 The design decisions are in [`decisions.md`](decisions.md). The deck edits that depend on this
-research are in [`deck-changes.md`](deck-changes.md). You don't need to read the architecture docs.
+research are in `deck-changes.md` (kept outside this repo, in `ctrl+risk/mimamori-notes/`). You don't need to read the architecture docs.
 
 ## Rules for this research
 

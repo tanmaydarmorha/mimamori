@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "watchlist-loader"
+version = "0.1.0"
+description = "Scheduled job: DICJ / FSA watchlists into ref-db as dated snapshots"
+requires-python = ">=3.12"
+dependencies = ["mimamori-common"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+watchlist_loader = ["fixtures/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

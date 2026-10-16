@@ -1,0 +1,20 @@
+name: ci-web-ui
+# The Dockerfile copies only services/web-ui/, so libs/mimamori-common/** is deliberately not in paths.
+on:
+  push:
+    branches: [main]
+    paths: [services/web-ui/**, .github/workflows/ci-web-ui.yml, .github/workflows/_build-deploy.yml]
+  pull_request:
+    paths: [services/web-ui/**, .github/workflows/ci-web-ui.yml, .github/workflows/_build-deploy.yml]
+  workflow_dispatch:
+concurrency:
+  group: ci-web-ui-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    uses: ./.github/workflows/_build-deploy.yml
+    with:
+      name: web-ui
+      path: services/web-ui
+      kind: service
+    secrets: inherit

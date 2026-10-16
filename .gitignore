@@ -4,3 +4,13 @@ __pycache__/
 .venv/
 node_modules/
 .env
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+.claude/worktrees/
+.dev-mode
+
+# demo recordings and failure screenshots
+demo/out/

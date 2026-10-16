@@ -1,0 +1,81 @@
+# Reusable workflow called by every ci-<name>.yml.
+# Test -> docker build (repo root as context) -> push + deploy to Cloud Run (only when GCP is configured).
+name: _build-deploy
+on:
+  workflow_call:
+    inputs:
+      name: {type: string, required: true}
+      path: {type: string, required: true}
+      kind: {type: string, required: true, description: "service | job"}
+
+env:
+  REGION: ${{ vars.MIMAMORI_REGION || 'asia-south1' }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect project type
+        id: detect
+        run: |
+          if [ -f "${{ inputs.path }}/package.json" ]; then echo "type=node" >> "$GITHUB_OUTPUT"; else echo "type=python" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/setup-python@v5
+        if: steps.detect.outputs.type == 'python'
+        with: {python-version: "3.12"}
+      - name: Python tests
+        if: steps.detect.outputs.type == 'python'
+        run: |
+          python -m pip install -e "libs/mimamori-common[web,dev]" -e "${{ inputs.path }}[dev]"
+          python -m pytest "${{ inputs.path }}/tests"
+      - uses: actions/setup-node@v4
+        if: steps.detect.outputs.type == 'node'
+        with: {node-version: "24"}
+      - name: Node tests and build
+        if: steps.detect.outputs.type == 'node'
+        working-directory: ${{ inputs.path }}
+        run: |
+          npm ci
+          npm test --if-present
+          npm run build
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: docker build (context = repo root)
+        run: docker build -f "${{ inputs.path }}/Dockerfile" -t "mimamori-${{ inputs.name }}:${{ github.sha }}" .
+
+  # Deploy runs only on main and only once the GCP project exists (infra/README.md): set the repository
+  # variables GCP_PROJECT_ID, GCP_WORKLOAD_IDENTITY_PROVIDER, GCP_SERVICE_ACCOUNT, GCP_ARTIFACT_REPO.
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && vars.GCP_WORKLOAD_IDENTITY_PROVIDER != ''
+    runs-on: ubuntu-latest
+    permissions: {contents: read, id-token: write}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - name: Build and push image
+        run: |
+          IMAGE="${REGION}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/${{ vars.GCP_ARTIFACT_REPO }}/${{ inputs.name }}:${{ github.sha }}"
+          gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
+          docker build -f "${{ inputs.path }}/Dockerfile" -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+      - name: Deploy
+        run: |
+          if [ "${{ inputs.kind }}" = "job" ]; then
+            gcloud run jobs deploy "${{ inputs.name }}" --image "$IMAGE" --region "$REGION" --project "${{ vars.GCP_PROJECT_ID }}" \
+              --set-env-vars "MIMAMORI_ENV=cloud,MIMAMORI_REGION=${REGION},MIMAMORI_SERVICE=${{ inputs.name }}"
+          else
+            gcloud run deploy "${{ inputs.name }}" --image "$IMAGE" --region "$REGION" --project "${{ vars.GCP_PROJECT_ID }}" \
+              --no-allow-unauthenticated \
+              --set-env-vars "MIMAMORI_ENV=cloud,MIMAMORI_REGION=${REGION},MIMAMORI_SERVICE=${{ inputs.name }}"
+          fi

@@ -1,0 +1,47 @@
+# Opt-in override: same local stack, but model calls go to Vertex AI in your GCP project.
+# Stores stay on the Firestore emulator and speech stays typed; all data is still synthetic.
+#
+#   gcloud auth application-default login          # once; the containers reuse these credentials
+#   MIMAMORI_GCP_PROJECT=<project> docker compose -f docker-compose.yml -f docker-compose.gemini.yml up --build
+#
+# Defaults: conversation service and jobs on Gemini; the copilot on Gemini too (the documented
+# fallback), because local Gemma takes 1-2 min per turn. To keep the copilot on local Gemma, set
+# MIMAMORI_COPILOT_BACKEND=ollama.
+#
+# The project ID also names the emulator's data, so every service that uses Firestore gets the same
+# value, including seed. The credentials file is mounted read-only and never copied into an image.
+
+x-gemini-env: &gemini-env
+  GOOGLE_CLOUD_PROJECT: ${MIMAMORI_GCP_PROJECT:?set MIMAMORI_GCP_PROJECT to your GCP project ID}
+  MIMAMORI_PROJECT_ID: ${MIMAMORI_GCP_PROJECT:?set MIMAMORI_GCP_PROJECT to your GCP project ID}
+  MIMAMORI_COPILOT_BACKEND: ${MIMAMORI_COPILOT_BACKEND:-gemini}
+  MIMAMORI_GENERAL_BACKEND: gemini
+  GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash}
+  MIMAMORI_GEMINI_THINKING_BUDGET: ${MIMAMORI_GEMINI_THINKING_BUDGET:-0}  # 0 = thinking off; -1 = model's default
+  MIMAMORI_MODEL_TIMEOUT_S: ${MIMAMORI_MODEL_TIMEOUT_S:-60}
+  GOOGLE_APPLICATION_CREDENTIALS: /gcp/adc.json
+
+x-adc: &adc
+  - ${HOME}/.config/gcloud/application_default_credentials.json:/gcp/adc.json:ro
+
+services:
+  seed:
+    environment: *gemini-env
+  core-bank-mock:
+    environment: *gemini-env
+  scoring:
+    environment: *gemini-env
+  case-svc:
+    environment: *gemini-env
+    volumes: *adc
+  conversation-svc:
+    environment: *gemini-env
+    volumes: *adc
+  watchlist-loader:
+    environment: *gemini-env
+  intel-job:
+    environment: *gemini-env
+    volumes: *adc
+  sim-job:
+    environment: *gemini-env
+    volumes: *adc

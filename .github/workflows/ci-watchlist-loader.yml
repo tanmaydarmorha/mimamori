@@ -1,0 +1,19 @@
+name: ci-watchlist-loader
+on:
+  push:
+    branches: [main]
+    paths: [jobs/watchlist-loader/**, libs/mimamori-common/**, .github/workflows/ci-watchlist-loader.yml, .github/workflows/_build-deploy.yml]
+  pull_request:
+    paths: [jobs/watchlist-loader/**, libs/mimamori-common/**, .github/workflows/ci-watchlist-loader.yml, .github/workflows/_build-deploy.yml]
+  workflow_dispatch:
+concurrency:
+  group: ci-watchlist-loader-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    uses: ./.github/workflows/_build-deploy.yml
+    with:
+      name: watchlist-loader
+      path: jobs/watchlist-loader
+      kind: job
+    secrets: inherit

@@ -1,51 +1,65 @@
 [
   {
     "intent": "what_happened",
-    "ja": "本日、{customer_reference}が当店でお手続きをされる際に、念のため一時的にお待ちいただいております。{reason_category_ja}",
+    "ja": "本日、{customer_reference}が当店でお手続きをされる際に、一時的にお待ちいただいております。{reason_category_ja}",
+    "en": "We asked {customer_reference} to wait a short while today. {reason_category_en}",
     "requires": [
       "transaction_paused",
       "reason_category"
     ],
-    "fallback_ja": "本日、{customer_reference}のお手続きについてご連絡いたしました。詳しくは当店の担当者からご説明いたします。"
+    "fallback_ja": "本日、{customer_reference}のお手続きについてご連絡いたしました。詳しくは当店の担当者からご説明いたします。",
+    "fallback_en": "We contacted you about {customer_reference}'s transaction today. Our staff will explain the details."
   },
   {
     "intent": "is_she_safe",
     "ja": "{customer_reference}は、いま当店で職員と一緒にいらっしゃいますので、ご安心ください。",
+    "en": "Right now, {customer_reference} is here with our staff, so please be assured.",
     "requires": [
       "customer_at_branch"
     ],
-    "fallback_ja": "申し訳ございません、その点はお電話ではお伝えできかねます。"
+    "fallback_ja": "申し訳ございません、その点はお電話ではお伝えできかねます。",
+    "fallback_en": "I'm sorry, I'm unable to share that over the phone."
   },
   {
     "intent": "how_much",
     "ja": "大きな金額のお手続きでございます。",
+    "en": "This is a transaction involving a large amount.",
     "requires": [
       "amount_band"
     ],
-    "fallback_ja": "金額については、お電話ではお伝えできかねます。恐れ入ります。"
+    "fallback_ja": "金額については、お電話ではお伝えできかねます。恐れ入ります。",
+    "fallback_en": "I'm sorry, I'm unable to share the amount over the phone."
   },
   {
     "intent": "account_details",
     "ja": "口座の残高や番号は、お電話ではお伝えできません。ご了承ください。",
+    "en": "I'm sorry, I'm unable to share account balances or numbers over the phone. Thank you for your understanding.",
     "requires": [],
-    "fallback_ja": "口座の残高や番号は、お電話ではお伝えできません。ご了承ください。"
+    "fallback_ja": "口座の残高や番号は、お電話ではお伝えできません。ご了承ください。",
+    "fallback_en": "I'm sorry, I'm unable to share account balances or numbers over the phone. Thank you for your understanding."
   },
   {
     "intent": "what_should_i_do",
     "ja": "もし可能でしたら、当店までお越しいただけますと、{customer_reference}も心強いと存じます。",
+    "en": "If you are able to, it would be reassuring for {customer_reference} if you could come to our branch.",
     "requires": [],
-    "fallback_ja": "もし可能でしたら、当店までお越しいただけますと幸いです。"
+    "fallback_ja": "もし可能でしたら、当店までお越しいただけますと幸いです。",
+    "fallback_en": "If you are able to, we would be grateful if you could come to our branch."
   },
   {
     "intent": "coming_to_branch",
     "ja": "ありがとうございます。担当者に伝え、お待ちしております。",
+    "en": "Thank you. I will let our staff know, and we look forward to seeing you.",
     "requires": [],
-    "fallback_ja": "ありがとうございます。担当者に伝え、お待ちしております。"
+    "fallback_ja": "ありがとうございます。担当者に伝え、お待ちしております。",
+    "fallback_en": "Thank you. I will let our staff know, and we look forward to seeing you."
   },
   {
     "intent": "other",
     "ja": "申し訳ございません、その点については担当者から改めてご説明いたします。",
+    "en": "I'm sorry, our staff will follow up with you on that point.",
     "requires": [],
-    "fallback_ja": "申し訳ございません、その点については担当者から改めてご説明いたします。"
+    "fallback_ja": "申し訳ございません、その点については担当者から改めてご説明いたします。",
+    "fallback_en": "I'm sorry, our staff will follow up with you on that point."
   }
 ]

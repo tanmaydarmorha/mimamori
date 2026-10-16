@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mimamori-common"
+version = "0.1.0"
+description = "Shared models, rules, config, stores, model and speech clients for Mimamori"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.7,<3", "httpx>=0.27"]
+
+[project.optional-dependencies]
+# Cloud implementations (selected by config). Not needed for local runs or tests.
+cloud = [
+  "google-auth>=2.29",
+  "google-cloud-firestore>=2.16",
+  "google-cloud-speech>=2.26",
+  "google-cloud-texttospeech>=2.16",
+]
+web = ["fastapi>=0.110", "uvicorn>=0.29"]
+dev = ["pytest>=8", "jsonschema>=4.21", "fastapi>=0.110", "datamodel-code-generator>=0.25", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-m 'not ollama'"
+markers = ["ollama: needs a local Ollama with gemma4:12b (manual check, skipped by default)"]

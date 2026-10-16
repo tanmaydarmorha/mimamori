@@ -1,6 +1,6 @@
 # Gemma counter-copilot spike: results
 
-Step 0 of `docs/plans/review-response-plan.md`. Run on 2026-10-12.
+Step 0 of the review-response plan (see `docs/decisions.md`, Gemma spike). Run on 2026-10-12.
 
 **Verdict: pass on criteria 1–3. Per the plan, the copilot stays on Gemma.** Latency (criterion 4)
 was not tested here and still needs checking on the deployed endpoint.

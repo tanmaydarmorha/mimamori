@@ -1,0 +1,25 @@
+{
+  "id": "small",
+  "story": "No friction for small payments, even to a suspicious account: ¥300 goes straight through.",
+  "windows": ["teller"],
+  "steps": [
+    {
+      "caption": "A customer asks for a small transfer: ¥300 to an account the bank has some doubts about.",
+      "do": [{ "a": "goto", "path": "/teller" }, { "a": "wait", "target": "[data-testid=case-list]" }]
+    },
+    {
+      "caption": "The teller keys it in at the counter.",
+      "do": [{ "a": "openTransfer" }],
+      "hold": 1200
+    },
+    {
+      "caption": "That account is only a few days old and many people have paid it this week. But ¥300 is too small to matter.",
+      "do": [{ "a": "transfer", "amount": 300, "expect": "accepted" }]
+    },
+    {
+      "caption": "Accepted at once. No alert, no case, no questions for the customer. Small payments are never held up.",
+      "do": [{ "a": "wait", "target": "[data-testid=transfer-result]", "text": "Nothing unusual. The transfer was accepted." }],
+      "hold": 4000
+    }
+  ]
+}

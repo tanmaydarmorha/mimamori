@@ -1,0 +1,95 @@
+# Local stack: everything runs with no GCP. Stores = Firestore emulator, model = Ollama on the host
+# (ollama serve; ollama pull gemma4:12b), speech = typed input / text-only output.
+#
+#   docker compose up --build            # all deployables
+#   docker compose up firestore seed     # just the emulator + seed data
+#
+# Each deployable's `build:` is the repo root with its own Dockerfile. Entries for services that are
+# not built yet fail to build until their branch is merged.
+
+x-common-env: &common-env
+  MIMAMORI_ENV: local
+  MIMAMORI_REGION: ${MIMAMORI_REGION:-asia-south1}
+  MIMAMORI_STORE: firestore
+  FIRESTORE_EMULATOR_HOST: firestore:8086
+  GOOGLE_CLOUD_PROJECT: mimamori-local
+  MIMAMORI_PROJECT_ID: mimamori-local
+  MIMAMORI_COPILOT_BACKEND: ollama
+  MIMAMORI_GENERAL_BACKEND: ollama
+  OLLAMA_URL: http://host.docker.internal:11434
+  MIMAMORI_SPEECH: typed
+  MIMAMORI_MODEL_TIMEOUT_S: "400"   # one local Ollama serves the copilot and the investigation agent; turns queue
+  MIMAMORI_DEMO_NOW: ${MIMAMORI_DEMO_NOW:-2026-10-13T11:42:00+09:00}
+  CORE_BANK_URL: http://core-bank-mock:8081
+  SCORING_URL: http://scoring:8082
+  CASE_SVC_URL: http://case-svc:8083
+  CONVERSATION_SVC_URL: http://conversation-svc:8084
+
+services:
+  firestore:
+    image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
+    command: gcloud emulators firestore start --host-port=0.0.0.0:8086 --project=mimamori-local
+    ports: ["8086:8086"]
+
+  seed:
+    build: {context: ., dockerfile: seed/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: seed}
+    depends_on: [firestore]
+    restart: "no"
+
+  core-bank-mock:
+    build: {context: ., dockerfile: services/core-bank-mock/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: core-bank-mock, PORT: "8081"}
+    ports: ["8081:8081"]
+
+  scoring:
+    build: {context: ., dockerfile: services/scoring/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: scoring, PORT: "8082"}
+    ports: ["8082:8082"]
+    depends_on: [firestore, seed]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+
+  case-svc:
+    build: {context: ., dockerfile: services/case-svc/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: case-svc, PORT: "8083"}
+    ports: ["8083:8083"]
+    depends_on: [firestore, seed]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+
+  conversation-svc:
+    build: {context: ., dockerfile: services/conversation-svc/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: conversation-svc, PORT: "8084"}
+    ports: ["8084:8084"]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+
+  web-ui:
+    build: {context: ., dockerfile: services/web-ui/Dockerfile}
+    environment:
+      PORT: "8080"
+      CORE_BANK_URL: http://core-bank-mock:8081
+      SCORING_URL: http://scoring:8082
+      CASE_SVC_URL: http://case-svc:8083
+      CONVERSATION_SVC_URL: http://conversation-svc:8084
+    ports: ["8080:8080"]
+    depends_on: [core-bank-mock, scoring, case-svc, conversation-svc]
+    restart: on-failure
+
+  # Jobs: run on demand, e.g. `docker compose run --rm watchlist-loader`.
+  watchlist-loader:
+    build: {context: ., dockerfile: jobs/watchlist-loader/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: watchlist-loader}
+    profiles: [jobs]
+    depends_on: [firestore]
+
+  intel-job:
+    build: {context: ., dockerfile: jobs/intel-job/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: intel-job}
+    profiles: [jobs]
+    depends_on: [firestore]
+    extra_hosts: ["host.docker.internal:host-gateway"]
+
+  sim-job:
+    build: {context: ., dockerfile: jobs/sim-job/Dockerfile}
+    environment: {<<: *common-env, MIMAMORI_SERVICE: sim-job}
+    profiles: [jobs]
+    extra_hosts: ["host.docker.internal:host-gateway"]

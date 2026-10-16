@@ -1,0 +1,364 @@
+{
+ "A": {
+  "label": "Tanaka: fake police, renovation cover story (English)",
+  "expected": "scam",
+  "customer_turns": [
+   "Um, it's for my home renovation. The bathroom.",
+   "Well, someone I know recommended them, and I was told I have to pay today.",
+   "The quote? Oh, they'll send that later. Anyway, I'm in a hurry.",
+   "The police called me and told me not to tell anyone. Really, I shouldn't be saying this.",
+   "They said my account is being used in a crime, so I have to move my money to a safe account. They'll give it back when it's over.",
+   "Please don't tell my daughter. I don't want her to worry. The police said that too."
+  ],
+  "outputs": [
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "it's for my home renovation"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Home renovation (bathroom)",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's stated reason (renovation) matches a known cover story in the fake_police playbook. The transaction is significantly higher than her historical average, and the payee account was opened only 4 days ago."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "it's for my home renovation"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "I was told I have to pay today"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Home renovation (bathroom)",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's stated purpose (renovation) matches a known scam playbook, and the transaction amount (3M JPY) is significantly higher than her usual activity. The urgency ('must pay today') and the fact that the payee account was opened only 4 days ago are high-risk indicators."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "it's for my home renovation"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "I was told I have to pay today"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Home renovation (bathroom)",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.what_said",
+    "rationale_en": "The customer's claim of 'renovation costs' matches a known cover story in the fake_police playbook. The urgency and lack of documentation (c3) combined with the large amount relative to her history suggest a scam."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "it's for my home renovation"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "I was told I have to pay today"
+     },
+     {
+      "type": "impersonated_official",
+      "turn_id": "c4",
+      "quote": "The police called me"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c4",
+      "quote": "told me not to tell anyone"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Home renovation (bathroom)",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.what_said",
+    "rationale_en": "The customer explicitly mentions a call from 'police' and instructions to keep it secret, which aligns with the fake_police playbook. The urgency and lack of documentation for the renovation cover story further support this hypothesis."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "it's for my home renovation"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "I was told I have to pay today"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c4",
+      "quote": "told me not to tell anyone"
+     },
+     {
+      "type": "impersonated_official",
+      "turn_id": "c4",
+      "quote": "The police called me"
+     },
+     {
+      "type": "safe_account_transfer",
+      "turn_id": "c5",
+      "quote": "my account is being used in a crime, so I have to move my money to a safe account"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Home renovation (bathroom)",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.returned",
+    "rationale_en": "The customer's story matches the 'fake_police' playbook perfectly, including the specific cover story of renovation costs and the instruction to move money to a 'safe' account because her current one is being used for crime."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "it's for my home renovation"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "I was told I have to pay today"
+     },
+     {
+      "type": "impersonated_official",
+      "turn_id": "c4",
+      "quote": "The police called me"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c4",
+      "quote": "told me not to tell anyone"
+     },
+     {
+      "type": "safe_account_transfer",
+      "turn_id": "c5",
+      "quote": "my account is being used in a crime, so I have to move my money to a safe account"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Home renovation (bathroom)",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.returned",
+    "rationale_en": "The customer's story matches the 'fake_police' playbook perfectly, including the specific cover story of renovation costs and the instruction to keep it secret from family while moving money to a 'safe' account."
+   }
+  ],
+  "patched": []
+ },
+ "B": {
+  "label": "Suzuki: car for a grandchild (legitimate, uses the word 内緒) (English)",
+  "expected": "legitimate",
+  "customer_turns": [
+   "My grandson just started working, so I thought I'd buy him a car.",
+   "I went to the dealership with him the other day and we talked it over. This is the order form.",
+   "He wanted to come today too, but he's at work. Shall I call him?",
+   "No, nobody like that has called. I'd been keeping the car a secret from my grandson, but he knows now.",
+   "I think the payee is the dealer's name, but could you check?"
+  ],
+  "outputs": [
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "I thought I'd buy him a car"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "relative_in_trouble",
+    "next_question_id": "q.general.who_asked",
+    "rationale_en": "The customer's stated purpose involves a relative (grandchild), but the transaction amount of ¥2,500,000 significantly exceeds her historical average and maximum payment. The question q.general.who_asked helps determine if she was prompted by someone else."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "I thought I'd buy him a car"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": null
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild (c2). The transaction amount of 2.5M JPY is significantly higher than her usual withdrawal average, but the cover story currently aligns with a legitimate purchase."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "I thought I'd buy him a car"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild and has an order form (c2). The transaction amount is significantly higher than her usual activity, but the current evidence points toward a legitimate purchase for a vehicle."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "I thought I'd buy him a car"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": null
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild (c2). The transaction amount of 2.5M JPY is significantly higher than her usual withdrawal average, but she has a consistent history with the bank."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "I thought I'd buy him a car"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": null
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild (c2). The transaction amount of 2.5M JPY is significantly higher than her usual withdrawal average, but the current evidence points toward a legitimate purchase until the relationship with the payee is confirmed."
+   }
+  ],
+  "patched": []
+ },
+ "C": {
+  "label": "Watanabe: genuine renovation balance payment (English)",
+  "expected": "legitimate",
+  "customer_turns": [
+   "It's the rest of the renovation payment. I paid the deposit last month.",
+   "My son and I met the contractor, and I have the quote right here.",
+   "The work is already finished. They put in handrails and it's much easier now.",
+   "I'm not in a hurry, but I promised to pay by the end of the month."
+  ],
+  "outputs": [
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "It's the rest of the renovation payment"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Remaining renovation costs",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's stated reason matches the 'renovation costs' cover story in the fake_police playbook, but she has a history of paying this specific payee (リフォーム工房). I need to confirm if the relationship with the payee is established."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "It's the rest of the renovation payment"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Remaining renovation costs",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims the payment is for renovation costs and mentions having a quote/estimate. The payee is a known renovation company, but the amount (¥1.8M) is significantly higher than her usual monthly withdrawals (¥60k)."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "It's the rest of the renovation payment"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Remaining renovation costs",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's story of renovation costs matches the payee name and history (previous payment to same payee). The presence of a physical estimate/quote suggests a legitimate transaction."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "It's the rest of the renovation payment"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Remaining renovation costs",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's story of paying for renovations is consistent with the payee name and previous transaction history. The amount is significantly higher than her usual withdrawals, but she has a documented relationship with this specific contractor."
+   }
+  ],
+  "patched": []
+ }
+}

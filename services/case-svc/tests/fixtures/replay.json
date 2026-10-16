@@ -1,0 +1,554 @@
+{
+ "A": {
+  "label": "Tanaka: fake police, renovation cover story [simulated STT noise]",
+  "expected": "scam",
+  "customer_turns": [
+   "ええあのリフォーム台なんです いえのお風呂のね",
+   "えっとそれは知り合いの紹介で今日中に払わないといけないって言われてて",
+   "見積もりいやそれは後で送るってとにかく急いでるのよ",
+   "警察の人から電話があってね だれにもいうなって言われてるの ほんとは",
+   "私の高座が犯罪に使われてるから お金を安全な高座に移さないといけないって 終わったらもどしてくれるって",
+   "むすめには言わないでって 心配かけたくないし 警察の人もそういってたから"
+  ],
+  "outputs": [
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "ええあのリフォーム台なんです いえのお風呂のね"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "リフォーム代（お風呂）",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's stated reason (renovation) matches a known cover story in the fake_police playbook. The transaction is significantly higher than her historical average, and the payee account was opened only 4 days ago."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "ええあのリフォーム台なんです いえのお風呂のね"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に払わないといけないって言われてて"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "リフォーム代（お風呂の工事）",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's stated purpose (renovation) matches a known scam playbook, and the transaction amount (3M JPY) is significantly higher than her usual activity. The urgency ('must pay today') and the fact that the payee account was opened only 4 days ago are high-risk indicators."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "ええあのリフォーム台なんです いえのお風呂のね"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に払わないといけないって言われてて"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "リフォーム代（お風呂の工事）",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.what_said",
+    "rationale_en": "The customer's claim of 'renovation costs' matches a known cover story in the fake_police playbook. The urgency and lack of documentation (c3) combined with the large amount relative to her history suggest a scam."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "ええあのリフォーム台なんです いえのお風呂のね"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に払わないといけないって言われてて"
+     },
+     {
+      "type": "impersonated_official",
+      "turn_id": "c4",
+      "quote": "警察の人から電話があってね"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c4",
+      "quote": "だれにもいうなって言われてるの ほんとは"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "リフォーム代（お風呂）",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.what_said",
+    "rationale_en": "The customer explicitly mentions a call from 'police' and instructions to keep it secret, which aligns with the fake_police playbook. The urgency and lack of documentation for the renovation cover story further support this hypothesis."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "ええあのリフォーム台なんです いえのお風呂のね"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に払わないといけないって言われてて"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c4",
+      "quote": "だれにもいうなって言われてるの ほんとは"
+     },
+     {
+      "type": "impersonated_official",
+      "turn_id": "c4",
+      "quote": "警察の人から電話があってね"
+     },
+     {
+      "type": "safe_account_transfer",
+      "turn_id": "c5",
+      "quote": "私の高座が犯罪に使われてるから お金を安全な高座に移さないといけないって 終わったらもどしてくれるって"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "リフォーム代（お風呂の工事）",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.returned",
+    "rationale_en": "The customer's story matches the 'fake_police' playbook perfectly, including the specific cover story of renovation costs and the instruction to move money to a 'safe' account because her current one is being used for crime."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "ええあのリフォーム台なんです いえのお風呂のね"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に払わないといけないって言われてて"
+     },
+     {
+      "type": "impersonated_official",
+      "turn_id": "c4",
+      "quote": "警察の人から電話があってね"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c4",
+      "quote": "だれにもいうなって言われてるの ほんとは"
+     },
+     {
+      "type": "safe_account_transfer",
+      "turn_id": "c5",
+      "quote": "私の高座が犯罪に使われてるから お金を安全な高座に移さないといけないって 終わったらもどしてくれるって"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "リフォーム代（お風呂の工事）",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "fake_police",
+    "next_question_id": "q.fake_police.returned",
+    "rationale_en": "The customer's story matches the 'fake_police' playbook perfectly, including the specific cover story of renovation costs and the instruction to keep it secret from family while moving money to a 'safe' account."
+   }
+  ],
+  "patched": []
+ },
+ "B": {
+  "label": "Suzuki: car for a grandchild (legitimate, uses the word 内緒) [simulated STT noise]",
+  "expected": "legitimate",
+  "customer_turns": [
+   "孫がね しゅうしょくしたもんで車を買ってやろうと思って",
+   "この前孫と一緒に店に行って話してきたんですよ これが注文所",
+   "今日も来たがってたんだけど仕事でね なんなら電話してみましょうか",
+   "いやそんなの来てないよ 車のことは孫にはないしょにしてたけど もう本人も知ってるしね",
+   "振込先は販売店の名前であってると思うけど 確認してもらえる"
+  ],
+  "outputs": [
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "孫がね しゅうしょくしたもんで車を買ってやろうと思って"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "relative_in_trouble",
+    "next_question_id": "q.general.who_asked",
+    "rationale_en": "The customer's stated purpose involves a relative (grandchild), but the transaction amount of ¥2,500,000 significantly exceeds her historical average and maximum payment. The question q.general.who_asked helps determine if she was prompted by someone else."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "孫がね しゅうしょくしたもんで車を買ってやろうと思って"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": null
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild (c2). The transaction amount of 2.5M JPY is significantly higher than her usual withdrawal average, but the cover story currently aligns with a legitimate purchase."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "孫がね しゅうしょくしたもんで車を買ってやろうと思って"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild and has an order form (c2). The transaction amount is significantly higher than her usual activity, but the current evidence points toward a legitimate purchase for a vehicle."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "孫がね しゅうしょくしたもんで車を買ってやろうと思って"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": null
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild (c2). The transaction amount of 2.5M JPY is significantly higher than her usual withdrawal average, but she has a consistent history with the bank."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "孫がね しゅうしょくしたもんで車を買ってやろうと思って"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "Buying a car for a grandchild who just started working.",
+     "consistent_with_history": "no",
+     "matches_playbook": null
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims to have visited the dealership with her grandchild (c2). The transaction amount of 2.5M JPY is significantly higher than her usual withdrawal average, but the current evidence points toward a legitimate purchase until the relationship with the payee is confirmed."
+   }
+  ],
+  "patched": []
+ },
+ "C": {
+  "label": "Watanabe: genuine renovation balance payment [simulated STT noise]",
+  "expected": "legitimate",
+  "customer_turns": [
+   "リフォーム代の残りです 先月てつけ金を払ったところの",
+   "息子と一緒に業者さんと会ってね 見積もりもここにありますよ",
+   "工事はもう終わったの 手すりもつけてもらって だいぶ楽になったわ",
+   "急いではないんだけど 月末までに払う約束だから"
+  ],
+  "outputs": [
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "リフォーム代の残りです 先月てつけ金を払ったところの"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "remaining renovation costs (リフォーム代)",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's stated reason matches the 'renovation costs' cover story in the fake_police playbook, but she has a history of paying this specific payee (リフォーム工房). I need to confirm if the relationship with the payee is established."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "リフォーム代の残りです 先月てつけ金を払ったところの"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "remaining renovation costs",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer claims the payment is for renovation costs and mentions having a quote/estimate. The payee is a known renovation company, but the amount (¥1.8M) is significantly higher than her usual monthly withdrawals (¥60k)."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "リフォーム代の残りです 先月てつけ金を払ったところの"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "remaining renovation costs",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's story of renovation costs matches the payee name and history (previous payment to same payee). The presence of a physical estimate/quote suggests a legitimate transaction."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "リフォーム代の残りです 先月てつけ金を払ったところの"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "remaining renovation costs",
+     "consistent_with_history": "yes",
+     "matches_playbook": "pb.fake_police.safe_account"
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.payee_relation",
+    "rationale_en": "The customer's story of paying for renovations is consistent with the payee name and previous transaction history. The amount is significantly higher than her usual withdrawals, but she has a documented relationship with this specific contractor."
+   }
+  ],
+  "patched": []
+ },
+ "D": {
+  "label": "Kobayashi: son in trouble, cash handover [simulated STT noise]",
+  "expected": "scam",
+  "customer_turns": [
+   "現金で2百万 おろしたいんですけど",
+   "息子がね 会社のお金なくしちゃって 今日中に返さないと首になるって",
+   "声 ちょっと風邪ひいてて声が変だったけど息子ですよ 番号も変わったって言ってたし",
+   "会社のじょうしの人が取りに来てくれるっていうから 駅で渡すことになってて",
+   "嫁には言うなって言われたの 恥ずかしいからって"
+  ],
+  "outputs": [
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c1",
+      "quote": "現金で2百万 おろしたいんですけど"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "cash withdrawal of 2,000,000 yen",
+     "consistent_with_history": "no",
+     "matches_playbook": null
+    },
+    "leading_hypothesis": "legitimate",
+    "next_question_id": "q.general.purpose",
+    "rationale_en": "The customer's request for 2,000,000 yen significantly exceeds her historical average of 70,000 yen and previous maximum of 150,000 yen. The purpose needs to be established first."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c2",
+      "quote": "息子がね 会社のお金なくしちゃって 今日中に返さないと首になるって"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に返さないと首になるって"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "息子が会社のお金なくしちゃって 今日中に返さないと首になる",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "relative_in_trouble",
+    "next_question_id": "q.relative_in_trouble.handover",
+    "rationale_en": "The customer's story about a son losing money and the urgency of 'today' aligns with the 'relative_in_trouble' playbook. The withdrawal amount (2M) is significantly higher than her usual history."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c2",
+      "quote": "息子がね 会社のお金なくしちゃって 今日中に返さないと首になるって"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に返さないと首になるって"
+     },
+     {
+      "type": "changed_contact_number",
+      "turn_id": "c3",
+      "quote": "番号も変わったって言ってたし"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "son lost company money and needs it back today or he will be fired",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "relative_in_trouble",
+    "next_question_id": "q.relative_in_trouble.handover",
+    "rationale_en": "The customer's story matches the 'relative_in_trouble' playbook (son lost money, urgency, changed number). The withdrawal amount of 2M is significantly higher than her usual 70k average."
+   },
+   {
+    "indicators": [
+     {
+      "type": "cover_story",
+      "turn_id": "c2",
+      "quote": "息子がね 会社のお金なくしちゃって 今日中に返さないと首になるって"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に返さないと首になるって"
+     },
+     {
+      "type": "impersonated_relative",
+      "turn_id": "c3",
+      "quote": "声 ちょっと風邪ひいてて声が変だったけど息子ですよ 番号も変わったって言ってたし"
+     },
+     {
+      "type": "changed_contact_number",
+      "turn_id": "c3",
+      "quote": "番号も変わったって言ってたし"
+     },
+     {
+      "type": "cash_or_card_handover",
+      "turn_id": "c4",
+      "quote": "会社のじょうしの人が取りに来てくれるっていうから 駅で渡すことになってて"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "son lost company money and needs it back today to keep his job",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "relative_in_trouble",
+    "next_question_id": "q.relative_in_trouble.call_known_number",
+    "rationale_en": "The customer's story matches the 'relative_in_trouble' playbook (son lost money, urgency, changed number). The high withdrawal amount also deviates significantly from her historical average."
+   },
+   {
+    "indicators": [
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に返さないと首になるって"
+     },
+     {
+      "type": "changed_contact_number",
+      "turn_id": "c3",
+      "quote": "番号も変わったって言ってたし"
+     },
+     {
+      "type": "cash_or_card_handover",
+      "turn_id": "c4",
+      "quote": "会社のじょうしの人が取りに来てくれるっていうから 駅で渡すことになってて"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c5",
+      "quote": "嫁には言うなって言われたの 恥ずかしいからって"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "息子が会社のお金なくしちゃって 今日中に返さないと首になるって",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "relative_in_trouble",
+    "next_question_id": "q.relative_in_trouble.call_known_number",
+    "rationale_en": "The customer's story matches the 'relative_in_trouble' playbook, including urgency, a changed phone number, and secrecy instructions. The withdrawal amount (2M) is significantly higher than her historical average."
+   }
+  ],
+  "patched": [
+   "c5"
+  ],
+  "raw_invalid": {
+   "c5": {
+    "indicators": [
+     {
+      "type": "relative_in_trouble",
+      "turn_id": "c2",
+      "quote": "息子がね 会社のお金なくしちゃって 今日中に返さないと首になるって"
+     },
+     {
+      "type": "urgency",
+      "turn_id": "c2",
+      "quote": "今日中に返さないと首になるって"
+     },
+     {
+      "type": "changed_contact_number",
+      "turn_id": "c3",
+      "quote": "番号も変わったって言ってたし"
+     },
+     {
+      "type": "cash_or_card_handover",
+      "turn_id": "c4",
+      "quote": "会社のじょうしの人が取りに来てくれるっていうから 駅で渡すことになってて"
+     },
+     {
+      "type": "secrecy_instruction",
+      "turn_id": "c5",
+      "quote": "嫁には言うなって言われたの 恥ずかしいからって"
+     }
+    ],
+    "cover_story": {
+     "stated_reason": "息子が会社のお金なくしちゃって 今日中に返さないと首になるって",
+     "consistent_with_history": "no",
+     "matches_playbook": "pb.relative_in_trouble.callback_collector"
+    },
+    "leading_hypothesis": "relative_in_trouble",
+    "next_question_id": "q.relative_in_trouble.call_known_number",
+    "rationale_en": "The customer's story matches the 'relative_in_trouble' playbook, including urgency, a changed phone number, and secrecy instructions. The withdrawal amount (2M) is significantly higher than her historical average."
+   }
+  }
+ }
+}

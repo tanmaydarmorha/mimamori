@@ -1,0 +1,288 @@
+{
+  "id": "hero-en",
+  "story": "The same flow in English: add a language pack to scale to any country (about 2 min).",
+  "windows": [
+    "teller",
+    "phone"
+  ],
+  "steps": [
+    {
+      "caption": "Tanaka-san, 80, is at the counter. She wants to send ¥3,000,000 to a company called カ）ミライケンセツ.",
+      "do": [
+        {
+          "a": "goto",
+          "path": "/teller"
+        },
+        {
+          "a": "goto",
+          "path": "/phone",
+          "win": "phone"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=case-list]"
+        }
+      ]
+    },
+    {
+      "caption": "The teller keys in the transfer. Before any money moves, the bank's rules check where it is going.",
+      "do": [
+        {
+          "a": "openTransfer"
+        }
+      ],
+      "hold": 1500
+    },
+    {
+      "caption": "She presses Submit. Before any money moves, the bank's rules check where it is going.",
+      "do": [
+        {
+          "a": "transfer",
+          "expect": "case"
+        }
+      ],
+      "hold": 0
+    },
+    {
+      "caption": "The payee account is 4 days old, and 7 different people have paid it this week. That is enough to raise an alert.",
+      "do": [
+        {
+          "a": "caseFromUrl"
+        }
+      ]
+    },
+    {
+      "caption": "Elevated. The money is held for now and the teller sees the reasons. This is a reason to ask a question, not an accusation.",
+      "do": [
+        {
+          "a": "wait",
+          "target": "[data-testid=risk-banner][data-level=elevated]",
+          "thinking": true
+        }
+      ],
+      "hold": 4000
+    },
+    {
+      "caption": "Same case, but the customer speaks English. The teller sets the conversation language to English before the first turn: a language pack, not a rebuild.",
+      "do": [
+        {
+          "a": "scroll",
+          "target": "[data-testid=language-select]"
+        },
+        {
+          "a": "select",
+          "target": "[data-testid=language-select] select",
+          "value": "en"
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": "The copilot suggests an approved question. The teller taps Say this and asks it.",
+      "do": [
+        {
+          "a": "click",
+          "target": "button:Say this"
+        },
+        {
+          "a": "click",
+          "target": "[data-testid=turn-panel] button[type=submit]"
+        }
+      ],
+      "hold": 1500
+    },
+    {
+      "caption": "The customer says it's for a renovation. The copilot quotes her words.",
+      "do": [
+        {
+          "a": "turn",
+          "who": "customer",
+          "text": "It's for my home renovation."
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=why] .quote",
+          "text": "renovation",
+          "thinking": true
+        },
+        {
+          "a": "scroll",
+          "target": "[data-testid=why]"
+        }
+      ]
+    },
+    {
+      "caption": "Then she mentions a call from the police and being told to tell no one. That is a classic scam pattern.",
+      "do": [
+        {
+          "a": "turn",
+          "who": "customer",
+          "text": "The police called me and told me not to tell anyone, not even my family."
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=risk-banner][data-level=high]",
+          "thinking": true
+        }
+      ]
+    },
+    {
+      "caption": "High: pause recommended. The bank's own wording to read to her is on the band. Both of her phrases are quoted word for word.",
+      "do": [
+        {
+          "a": "scroll",
+          "target": "[data-testid=hold-line]"
+        }
+      ],
+      "hold": 5000
+    },
+    {
+      "caption": "The teller decides — a person, not the software. She chooses the basis for the pause and writes down why.",
+      "do": [
+        {
+          "a": "select",
+          "target": "select[aria-label=Basis]",
+          "value": "advance_wishes"
+        },
+        {
+          "a": "type",
+          "target": "textarea[aria-label=Rationale]",
+          "text": "Police impersonation and secrecy; customer's advance wishes ask for a wait."
+        }
+      ],
+      "hold": 1200
+    },
+    {
+      "caption": "Place pause. The transfer is held, and the band now says paused.",
+      "do": [
+        {
+          "a": "click",
+          "target": "button:Place pause"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=risk-banner] .band-state",
+          "text": "/paused/i"
+        }
+      ]
+    },
+    {
+      "caption": "The bank messages her daughter, who is named in her advance wishes. The message holds a number and a code. Nothing about the money.",
+      "do": [
+        {
+          "a": "click",
+          "target": "[data-testid=family-call] summary"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=family-call]",
+          "text": "Notice sent"
+        }
+      ]
+    },
+    {
+      "caption": {
+        "phone": "On her daughter's phone: a message from the bank with a number to call back and a code."
+      },
+      "do": [
+        {
+          "a": "phoneNotice",
+          "win": "phone",
+          "consoleCode": true
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": {
+        "phone": "She calls the bank's published number, presses 1, and keys in the code."
+      },
+      "do": [
+        {
+          "a": "phoneDial",
+          "win": "phone",
+          "code": "${code}"
+        }
+      ],
+      "hold": 1000
+    },
+    {
+      "caption": {
+        "phone": "The caller's number and the code both match, so the automated assistant picks up and says the call is recorded."
+      },
+      "do": [
+        {
+          "a": "wait",
+          "win": "phone",
+          "target": "[data-testid=phone-chat] .bubble-agent"
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": {
+        "phone": "She asks what happened. The assistant answers in English, in approved wording only."
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "What happened?"
+        }
+      ]
+    },
+    {
+      "caption": {
+        "phone": "Is her mother safe?"
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "Is my mother safe?"
+        }
+      ]
+    },
+    {
+      "caption": {
+        "phone": "She asks how much. The assistant politely refuses: amounts are never given over the phone."
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "How much is the transfer?"
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": {
+        "phone": "She is coming to the branch right away."
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "I'm coming to the branch right away."
+        },
+        {
+          "a": "wait",
+          "win": "phone",
+          "target": "[data-testid=phone-ended]"
+        }
+      ]
+    },
+    {
+      "caption": "Back at the counter: Called, coming to the branch. The same rules ran in English. A new country adds a language pack, its playbooks and its legal basis; the rule that decides High has no language.",
+      "do": [
+        {
+          "a": "wait",
+          "target": "[data-testid=family-call] .state",
+          "text": "coming to the branch"
+        }
+      ],
+      "hold": 5000
+    }
+  ]
+}

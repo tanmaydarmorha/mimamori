@@ -89,6 +89,13 @@ def main():
     for t in templates:
         if re.search(r"[0-9０-９]|[一二三四五六七八九十百千万億]円", t["ja"] + t["fallback_ja"]):
             errors.append(f"call template {t['intent']} contains an amount")
+        if re.search(r"[0-9]|\b(?:one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|billion|lakh|crore)\b|[¥$₹€]|\b(?:yen|rupees?|dollars?)\b", t["en"] + t["fallback_en"], re.I):
+            errors.append(f"call template {t['intent']} contains an amount (en)")
+        slots = [set(re.findall(r"\{([a-z_]+)\}", t[k])) for k in ("ja", "en")]
+        fslots = [set(re.findall(r"\{([a-z_]+)\}", t[k])) for k in ("fallback_ja", "fallback_en")]
+        ren = lambda xs: {x.replace("_ja", "").replace("_en", "") for x in xs}
+        if ren(slots[0]) != ren(slots[1]) or ren(fslots[0]) != ren(fslots[1]):
+            errors.append(f"call template {t['intent']}: ja/en slots differ")
 
     brief = load(EXAMPLES / "contact-brief-tanaka.json")
     wishes = load(EXAMPLES / "advance-wishes-tanaka.json")

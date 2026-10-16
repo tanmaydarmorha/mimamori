@@ -1,0 +1,19 @@
+name: ci-case-svc
+on:
+  push:
+    branches: [main]
+    paths: [services/case-svc/**, libs/mimamori-common/**, schemas/**, seed/**, .github/workflows/ci-case-svc.yml, .github/workflows/_build-deploy.yml]
+  pull_request:
+    paths: [services/case-svc/**, libs/mimamori-common/**, schemas/**, seed/**, .github/workflows/ci-case-svc.yml, .github/workflows/_build-deploy.yml]
+  workflow_dispatch:
+concurrency:
+  group: ci-case-svc-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  ci:
+    uses: ./.github/workflows/_build-deploy.yml
+    with:
+      name: case-svc
+      path: services/case-svc
+      kind: service
+    secrets: inherit

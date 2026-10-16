@@ -1,0 +1,350 @@
+{
+  "id": "hero",
+  "story": "Tanaka, fake police, Japanese: alert, copilot, pause, family call, freeze, outreach (about 3 min).",
+  "windows": [
+    "teller",
+    "phone"
+  ],
+  "steps": [
+    {
+      "caption": "Tanaka-san, 80, is at the counter. She wants to send ¥3,000,000 to a company called カ）ミライケンセツ.",
+      "do": [
+        {
+          "a": "goto",
+          "path": "/teller"
+        },
+        {
+          "a": "goto",
+          "path": "/phone",
+          "win": "phone"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=case-list]"
+        }
+      ]
+    },
+    {
+      "caption": "The teller keys in the transfer. Before any money moves, the bank's rules check where it is going.",
+      "do": [
+        {
+          "a": "openTransfer"
+        }
+      ],
+      "hold": 1500
+    },
+    {
+      "caption": "She presses Submit. Before any money moves, the bank's rules check where it is going.",
+      "do": [
+        {
+          "a": "transfer",
+          "expect": "case"
+        }
+      ],
+      "hold": 0
+    },
+    {
+      "caption": "The payee account is 4 days old, and 7 different people have paid it this week. That is enough to raise an alert.",
+      "do": [
+        {
+          "a": "caseFromUrl"
+        }
+      ]
+    },
+    {
+      "caption": "Elevated. The money is held for now and the teller sees the reasons. This is a reason to ask a question, not an accusation.",
+      "do": [
+        {
+          "a": "wait",
+          "target": "[data-testid=risk-banner][data-level=elevated]",
+          "thinking": true
+        }
+      ],
+      "hold": 4000
+    },
+    {
+      "caption": "The copilot suggests an approved question. The teller taps Say this and asks it.",
+      "do": [
+        {
+          "a": "click",
+          "target": "button:Say this"
+        },
+        {
+          "a": "click",
+          "target": "[data-testid=turn-panel] button[type=submit]"
+        }
+      ],
+      "hold": 1500
+    },
+    {
+      "caption": "The customer says it's for a renovation. The copilot quotes her words.",
+      "do": [
+        {
+          "a": "turn",
+          "who": "customer",
+          "text": "リフォーム代なんです"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=why] .quote",
+          "text": "リフォーム",
+          "thinking": true
+        },
+        {
+          "a": "scroll",
+          "target": "[data-testid=why]"
+        }
+      ]
+    },
+    {
+      "caption": "Then she mentions a call from the police and being told to tell no one. That is a classic scam pattern.",
+      "do": [
+        {
+          "a": "turn",
+          "who": "customer",
+          "text": "警察の人から電話があってね、誰にも言うなって言われてるの"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=risk-banner][data-level=high]",
+          "thinking": true
+        }
+      ]
+    },
+    {
+      "caption": "High: pause recommended. The bank's own wording to read to her is on the band. Both of her phrases are quoted word for word.",
+      "do": [
+        {
+          "a": "scroll",
+          "target": "[data-testid=hold-line]"
+        }
+      ],
+      "hold": 5000
+    },
+    {
+      "caption": "The teller decides — a person, not the software. She chooses the basis for the pause and writes down why.",
+      "do": [
+        {
+          "a": "select",
+          "target": "select[aria-label=Basis]",
+          "value": "advance_wishes"
+        },
+        {
+          "a": "type",
+          "target": "textarea[aria-label=Rationale]",
+          "text": "Police impersonation and secrecy; customer's advance wishes ask for a wait."
+        }
+      ],
+      "hold": 1200
+    },
+    {
+      "caption": "Place pause. The transfer is held, and the band now says paused.",
+      "do": [
+        {
+          "a": "click",
+          "target": "button:Place pause"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=risk-banner] .band-state",
+          "text": "/paused/i"
+        }
+      ]
+    },
+    {
+      "caption": "The bank messages her daughter, who is named in her advance wishes. The message holds a number and a code. Nothing about the money.",
+      "do": [
+        {
+          "a": "click",
+          "target": "[data-testid=family-call] summary"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=family-call]",
+          "text": "Notice sent"
+        }
+      ]
+    },
+    {
+      "caption": {
+        "phone": "On her daughter's phone: a message from the bank with a number to call back and a code."
+      },
+      "do": [
+        {
+          "a": "phoneNotice",
+          "win": "phone",
+          "consoleCode": true
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": {
+        "phone": "She calls the bank's published number, presses 1, and keys in the code."
+      },
+      "do": [
+        {
+          "a": "phoneDial",
+          "win": "phone",
+          "code": "${code}"
+        }
+      ],
+      "hold": 1000
+    },
+    {
+      "caption": {
+        "phone": "The caller's number and the code both match, so the automated assistant picks up and says the call is recorded."
+      },
+      "do": [
+        {
+          "a": "wait",
+          "win": "phone",
+          "target": "[data-testid=phone-chat] .bubble-agent"
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": {
+        "phone": "She asks what happened. The assistant answers in approved wording only."
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "何があったんですか？"
+        }
+      ]
+    },
+    {
+      "caption": {
+        "phone": "Is her mother safe?"
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "母は大丈夫ですか？"
+        }
+      ]
+    },
+    {
+      "caption": {
+        "phone": "She asks how much. The assistant politely refuses: amounts are never given over the phone."
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "いくらの振込ですか？"
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": {
+        "phone": "She is coming to the branch right away."
+      },
+      "do": [
+        {
+          "a": "phoneSay",
+          "win": "phone",
+          "text": "すぐ支店に行きます"
+        },
+        {
+          "a": "wait",
+          "win": "phone",
+          "target": "[data-testid=phone-ended]"
+        }
+      ]
+    },
+    {
+      "caption": "Back at the counter the teller sees what the call found out: Called, coming to the branch. It is information, not an instruction.",
+      "do": [
+        {
+          "a": "wait",
+          "target": "[data-testid=family-call] .state",
+          "text": "coming to the branch"
+        }
+      ],
+      "hold": 3500
+    },
+    {
+      "caption": "The teller also asks for the payee account to be frozen, with a reason. Only an analyst can approve that.",
+      "do": [
+        {
+          "a": "click",
+          "target": "[data-testid=freeze-request] summary"
+        },
+        {
+          "a": "type",
+          "target": "textarea[aria-label='Freeze reason']",
+          "text": "7 payers in 7 days, account 4 days old, customer was coached by a fake police call."
+        },
+        {
+          "a": "click",
+          "target": "button:Request freeze"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=freeze-request]",
+          "text": "waiting for the analyst"
+        }
+      ],
+      "hold": 1500
+    },
+    {
+      "caption": "Now the analyst's side. The role is switched from the Demo menu.",
+      "do": [
+        {
+          "a": "click",
+          "target": "details.demo summary"
+        },
+        {
+          "a": "select",
+          "target": "select[aria-label=Role]",
+          "value": "analyst"
+        },
+        {
+          "a": "click",
+          "target": "link:Analyst"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=analyst-console]"
+        }
+      ],
+      "hold": 1500
+    },
+    {
+      "caption": "The analyst reads the same evidence, writes a reason, and approves the freeze.",
+      "do": [
+        {
+          "a": "type",
+          "target": "textarea[aria-label='Decision rationale']",
+          "text": "Evidence card reviewed: new account, many payers, fake police call."
+        },
+        {
+          "a": "click",
+          "target": "button:Approve freeze"
+        }
+      ],
+      "hold": 2000
+    },
+    {
+      "caption": "Freezing the account shows who else paid it: 6 other customers. The bank can now reach out to them before they lose money.",
+      "do": [
+        {
+          "a": "click",
+          "target": "tab:Outreach"
+        },
+        {
+          "a": "wait",
+          "target": "[data-testid=outreach-count]",
+          "text": "6"
+        }
+      ],
+      "hold": 6000
+    }
+  ]
+}

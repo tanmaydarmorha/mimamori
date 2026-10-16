@@ -1,6 +1,6 @@
 {
   "intent": "account_details",
-  "connecting_phrase_ja": "ご心配なお気持ち、お察しいたします。",
+  "connecting_phrase": "ご心配なお気持ち、お察しいたします。",
   "signals": {
     "concerned": true
   }

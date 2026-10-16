@@ -1,0 +1,162 @@
+{
+  "case_id": "case-2026-1013-0007",
+  "customer_ref": "cust-tanaka-0001",
+  "card_version": 5,
+  "updated_at": "2026-10-13T11:42:10+09:00",
+  "request": {
+    "channel": "counter",
+    "kind": "transfer",
+    "amount_jpy": 3000000,
+    "payee": {
+      "name_kana": "カ）ミライケンセツ",
+      "relation": "same_bank"
+    }
+  },
+  "claims": [
+    {
+      "id": "f1",
+      "kind": "fact",
+      "statement_en": "The payee account was opened 4 days ago.",
+      "source": {
+        "tool": "counterpart_graph",
+        "field": "account_age_days",
+        "value": 4
+      },
+      "verified": true
+    },
+    {
+      "id": "f2",
+      "kind": "fact",
+      "statement_en": "7 different customers paid this account in the last 7 days.",
+      "source": {
+        "tool": "counterpart_graph",
+        "field": "distinct_payers_7d",
+        "value": 7
+      },
+      "verified": true
+    },
+    {
+      "id": "f3",
+      "kind": "fact",
+      "statement_en": "No payments to contractors in 12 years.",
+      "source": {
+        "tool": "get_baseline",
+        "field": "contractor_payments_count_12y",
+        "value": 0
+      },
+      "verified": true
+    },
+    {
+      "id": "f4",
+      "kind": "fact",
+      "statement_en": "Typical monthly withdrawals are ¥50,000.",
+      "source": {
+        "tool": "get_baseline",
+        "field": "median_monthly_withdrawal_jpy",
+        "value": 50000
+      },
+      "verified": true
+    },
+    {
+      "id": "q1",
+      "kind": "quote",
+      "indicator": "cover_story",
+      "source": {
+        "turn_id": "c1",
+        "text": "リフォーム代なんです"
+      },
+      "turn_id_corrected": false,
+      "verified": true
+    },
+    {
+      "id": "q2",
+      "kind": "quote",
+      "indicator": "urgency",
+      "source": {
+        "turn_id": "c2",
+        "text": "今日中に払わないといけないって言われてて"
+      },
+      "turn_id_corrected": false,
+      "verified": true
+    },
+    {
+      "id": "q3",
+      "kind": "quote",
+      "indicator": "impersonated_official",
+      "source": {
+        "turn_id": "c4",
+        "text": "警察の人から電話があってね"
+      },
+      "turn_id_corrected": false,
+      "verified": true
+    },
+    {
+      "id": "q4",
+      "kind": "quote",
+      "indicator": "secrecy_instruction",
+      "source": {
+        "turn_id": "c4",
+        "text": "誰にも言うなって言われてるの"
+      },
+      "turn_id_corrected": false,
+      "verified": true
+    },
+    {
+      "id": "i1",
+      "kind": "inference",
+      "statement_en": "The renovation reason doesn't match her history and is a known fake-police cover story.",
+      "grounds": [
+        "q1",
+        "f3"
+      ],
+      "shown_as": "hypothesis"
+    },
+    {
+      "id": "i2",
+      "kind": "inference",
+      "statement_en": "The payee looks like a new account collecting from many people.",
+      "grounds": [
+        "f1",
+        "f2"
+      ],
+      "shown_as": "hypothesis"
+    }
+  ],
+  "hypotheses": [
+    {
+      "name": "legitimate",
+      "playbook_id": null,
+      "supporting_claims": []
+    },
+    {
+      "name": "fake_police",
+      "playbook_id": "pb.fake_police.safe_account",
+      "supporting_claims": [
+        "q3",
+        "q4",
+        "i1",
+        "i2"
+      ]
+    }
+  ],
+  "risk": {
+    "level": "high",
+    "pause_recommended": true,
+    "rule_version": "risk-v1",
+    "fired": [
+      {
+        "condition": "H1:impersonation+secrecy",
+        "claims": [
+          "q3",
+          "q4"
+        ]
+      }
+    ],
+    "hold_line_id": "h.fake_police.real_police"
+  },
+  "next_question": {
+    "question_id": "q.fake_police.what_said",
+    "ja_filled": "お電話の相手の方は、どのようなお話をされていましたか。"
+  },
+  "dropped": []
+}

@@ -1,0 +1,15 @@
+{
+  "snapshot_id": "2026-10-12",
+  "created_at": "2026-10-12T03:00:00+09:00",
+  "sources": [
+    {"list_name": "dicj_frozen_accounts", "url": "https://example.invalid/dicj/frozen-accounts", "fetched_at": "2026-10-12T03:00:00+09:00", "entries": 2},
+    {"list_name": "fsa_unregistered_firms", "url": "https://example.invalid/fsa/unregistered-firms", "fetched_at": "2026-10-12T03:00:00+09:00", "entries": 2}
+  ],
+  "entries": [
+    {"list_name": "dicj_frozen_accounts", "name_ja": "（架空）合同会社テスト商事", "name_kana": "ド）テストショウジ", "account_hint": "架空銀行 テスト支店 普通 0000001", "notice_date": "2026-09-30", "source_ref": "synthetic-dicj-001"},
+    {"list_name": "dicj_frozen_accounts", "name_ja": "（架空）サンプル投資組合", "name_kana": "サンプルトウシクミアイ", "account_hint": "架空銀行 サンプル支店 普通 0000002", "notice_date": "2026-10-05", "source_ref": "synthetic-dicj-002"},
+    {"list_name": "fsa_unregistered_firms", "name_ja": "（架空）エーアイ投資顧問", "name_kana": "エーアイトウシコモン", "account_hint": null, "notice_date": "2026-08-18", "source_ref": "synthetic-fsa-001"},
+    {"list_name": "fsa_unregistered_firms", "name_ja": "（架空）ブルームトレード", "name_kana": "ブルームトレード", "account_hint": null, "notice_date": "2026-09-09", "source_ref": "synthetic-fsa-002"}
+  ],
+  "content_hash": "synthetic-sample-not-a-real-hash"
+}

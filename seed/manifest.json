@@ -1,0 +1,92 @@
+{
+  "note": "Synthetic. Index of the seeded scenarios for tests, the evaluation and the demo.",
+  "demo_now": "2026-10-13T11:42:00+09:00",
+  "demo_date": "2026-10-13",
+  "hero": {
+    "customer_ref": "cust-tanaka-0001",
+    "account_id": "acct-tanaka-0001",
+    "transfer": {
+      "amount_jpy": 3000000,
+      "payee_name_kana": "カ）ミライケンセツ",
+      "payee_account_id": "acct-mule-0001",
+      "channel": "counter"
+    },
+    "trusted_contact_phone_e164": "+819012345678"
+  },
+  "mule": {
+    "customer_ref": "cust-mule-0001",
+    "account_id": "acct-mule-0001",
+    "opened_on": "2026-10-09",
+    "prior_payers": [
+      {
+        "customer_ref": "cust-0002",
+        "account_id": "acct-0002",
+        "amount_jpy": 1200000,
+        "paid_on": "2026-10-09"
+      },
+      {
+        "customer_ref": "cust-0011",
+        "account_id": "acct-0011",
+        "amount_jpy": 800000,
+        "paid_on": "2026-10-09"
+      },
+      {
+        "customer_ref": "cust-0023",
+        "account_id": "acct-0023",
+        "amount_jpy": 2000000,
+        "paid_on": "2026-10-09"
+      },
+      {
+        "customer_ref": "cust-0034",
+        "account_id": "acct-0034",
+        "amount_jpy": 450000,
+        "paid_on": "2026-10-12"
+      },
+      {
+        "customer_ref": "cust-0041",
+        "account_id": "acct-0041",
+        "amount_jpy": 1500000,
+        "paid_on": "2026-10-12"
+      },
+      {
+        "customer_ref": "cust-0052",
+        "account_id": "acct-0052",
+        "amount_jpy": 600000,
+        "paid_on": "2026-10-13"
+      }
+    ],
+    "distinct_payers_7d_including_pending_tanaka": 7
+  },
+  "school_fee_event": {
+    "customer_ref": "cust-tanaka-0001",
+    "account_id": "acct-tanaka-0001",
+    "date": "2026-04-10",
+    "amount_jpy": 400000,
+    "expect": "no case, matches seasonal baseline"
+  },
+  "legit_scenarios": [
+    {
+      "id": "genuine_renovation",
+      "customer_ref": "cust-0005",
+      "account_id": "acct-0005",
+      "payee_account_id": "acct-co-0001",
+      "amount_jpy": 2400000,
+      "note": "earlier contractor payment to the same older account; spike conversation C"
+    },
+    {
+      "id": "car_for_grandchild",
+      "customer_ref": "cust-0008",
+      "account_id": "acct-0008",
+      "payee_account_id": "acct-co-0002",
+      "amount_jpy": 1800000,
+      "note": "dealer account is 14 years old; spike conversation B"
+    }
+  ],
+  "counts": {
+    "customers": 61,
+    "accounts": 61,
+    "transactions": 8016,
+    "ordinary_customers": 56
+  },
+  "normal_activity": "Replay an ordinary customer's last 14 days of transactions through POST /v1/events: none should alert, EXCEPT the six mule payers (mule.prior_payers), whose transfer to acct-mule-0001 is expected to alert."
+}

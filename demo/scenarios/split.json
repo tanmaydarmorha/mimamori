@@ -1,0 +1,39 @@
+{
+  "id": "split",
+  "story": "Splitting a sum doesn't hide it: the second ¥90,000 payment opens a case on the running total.",
+  "needsFresh": true,
+  "windows": ["teller"],
+  "steps": [
+    {
+      "caption": "Someone is paying a suspicious account in small pieces, hoping each one passes. First: ¥90,000.",
+      "do": [{ "a": "goto", "path": "/teller" }, { "a": "wait", "target": "[data-testid=case-list]" }]
+    },
+    {
+      "caption": "The teller keys in ¥90,000.",
+      "do": [{ "a": "transfer", "amount": 90000, "expect": "accepted", "skipIfAlerted": "Earlier payments to this account are still inside the 7-day window, so the first ¥90,000 already alerts. Run with --fresh." }]
+    },
+    {
+      "caption": "Accepted. On its own, ¥90,000 is under the limit.",
+      "do": [{ "a": "wait", "target": "[data-testid=transfer-result]", "text": "Nothing unusual" }]
+    },
+    {
+      "caption": "A little later the same person asks for another ¥90,000 to the same account.",
+      "do": [{ "a": "transfer", "amount": 90000, "expect": "case" }]
+    },
+    {
+      "caption": "This time a case opens. The check looks at the running total, not just this payment.",
+      "do": [
+        { "a": "caseFromUrl" },
+        { "a": "wait", "target": "[data-testid=risk-banner][data-level=elevated]", "thinking": true }
+      ]
+    },
+    {
+      "caption": "The reason is in plain words on the card: the payments to this payee in the last 7 days, added up, including this one.",
+      "do": [
+        { "a": "wait", "target": "[data-testid=why]", "text": "/payments to this payee in 7 days, ¥[\\d,]+ in total/", "thinking": true },
+        { "a": "scroll", "target": "[data-testid=why]" }
+      ],
+      "hold": 5000
+    }
+  ]
+}

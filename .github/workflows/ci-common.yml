@@ -1,0 +1,29 @@
+# Tests for libs/mimamori-common and the drift check: generated models must match schemas/.
+name: ci-common
+on:
+  push:
+    branches: [main]
+    paths: [libs/mimamori-common/**, schemas/**, seed/**, spikes/gemma-copilot/results/**, .github/workflows/ci-common.yml]
+  pull_request:
+    paths: [libs/mimamori-common/**, schemas/**, seed/**, spikes/gemma-copilot/results/**, .github/workflows/ci-common.yml]
+  workflow_dispatch:
+concurrency:
+  group: ci-common-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: python -m pip install -e "libs/mimamori-common[web,dev]"
+      - name: Generated models match schemas/
+        run: |
+          python libs/mimamori-common/scripts/generate_models.py
+          git diff --exit-code -- libs/mimamori-common/src/mimamori_common/models/generated
+      - name: Seed is deterministic
+        run: |
+          python seed/generate.py
+          git diff --exit-code -- seed
+      - run: python -m pytest libs/mimamori-common/tests

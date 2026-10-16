@@ -1,19 +1,21 @@
 {
   "case_id": "case-2026-1013-0007",
   "call_id": "call-0007-1",
+  "language": "ja",
   "built_at": "2026-10-13T11:50:00+09:00",
   "built_by": "code",
   "case_code": "4821",
   "branch": {
     "name_ja": "サンプル銀行 駅前支店",
-    "published_phone_e164": "+81312345678"
+    "published_phone_e164": "+81312345678",
+    "name_en": "Sample Bank, Ekimae Branch"
   },
   "contact": {
     "contact_id": "tc-yuki",
     "relationship": "child",
     "locked_phone_e164": "+819012345678"
   },
-  "customer_reference_ja": "お母様",
+  "customer_reference": "お母様",
   "disclosable": {
     "transaction_paused": true,
     "reason_category": "call_from_someone_claiming_authority",

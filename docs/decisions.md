@@ -1,12 +1,10 @@
 # Decisions
 
 > **This file overrides `Mimamori_Solution.pdf` where they differ, until the deck is regenerated.**
-> Deck edits are listed in [`deck-changes.md`](deck-changes.md).
+> Deck edits are listed in `deck-changes.md` (kept outside this repo, in `ctrl+risk/mimamori-notes/`).
 
-Sources:
-- [`reviews/devils-advocate-review.md`](reviews/devils-advocate-review.md) (DA #1–20)
-- [`reviews/review-response-plan-critique.md`](reviews/review-response-plan-critique.md) (CR #1–28)
-- [`plans/review-response-plan.md`](plans/review-response-plan.md)
+Sources: two internal design reviews (kept outside this repo, in `ctrl+risk/mimamori-notes/`): a devil's-advocate review (DA #1–20) and a
+critique of the response plan (CR #1–28). Each row below states the issue and how it was resolved.
 
 Applied to the architecture docs on 2026-10-12.
 
@@ -31,6 +29,10 @@ Applied to the architecture docs on 2026-10-12.
 | Voice path | STT → Gemini Flash intent → code templates → rule check → TTS. **No Live API.** |
 | Evaluation | Three-way (today's counter check / statistics only / Mimamori), date-split public held-out set, failure analysis. Arm (a) = NPA request + Akita five-step routine + Okayama practice (R1). T = 2026-04-01, held-out set to be completed from Tokyo, Saitama and Osaka bulletins (R2). |
 | Copilot model | **Gemma** (step-0 spike passed criteria 1–3 on 2026-10-12, local `gemma4:12b` Q4; latency on Vertex still to check). The model extracts indicators, checks the cover story and picks a question ID. **Code computes risk and the pause**, and all teller wording comes from approved banks. Constrained decoding is required. See [`../schemas/README.md`](../schemas/README.md) and [`../spikes/gemma-copilot/RESULTS.md`](../spikes/gemma-copilot/RESULTS.md). |
+| Language (2026-10-16) | **Set per case** (`ja` default, `en` added), chosen by the teller before the first turn, then locked and logged. The contact call uses the case language. Everything spoken or shown as words to say comes from **that language's approved pack** (question bank, hold lines, call templates, notice, opening, rule check, STT/TTS voice), never from the model. The model and `risk-v1` are language-independent; quote verification is exact substring in any language. A new country adds a pack plus its own playbooks and legal basis. The hero case and the evaluation stay Japanese; the English case shows that the design carries over (WI-005, WI-006). |
+| Mule-pattern alerts need an amount (2026-10-16) | Found in local testing: a ¥300 transfer to the hero mule account opened a counter case. A payee that is **both** young and fan-in opens a counter case only when the amount is at least `mule_alert_min_amount_jpy` (default ¥100,000, same as the unusual-amount floor). Below it the transfer proceeds, the signals are still returned and stored, and the payment still counts toward the account's payers, so the analyst freeze and outreach are unaffected. A **watchlist hit** still alerts at any amount (a listed fraud account). Telling the analyst about small payments to a mule account: designed, not built (WI-011). |
+| Running totals (2026-10-16) | Scoring judged each payment alone, so 30 × ¥90,000 to the mule account (¥2,700,000) passed both rules. The rules now judge the **running total** including this payment: the customer's `transfer_out` rows to the same payee (account id, else kana name) in the last `payee_total_days` (7) days feed the mule term as `max(amount, payee total)`, so the second ¥90,000 payment opens a case; all outflows (`transfer_out`, cash withdrawal) in the last `outflow_window_hours` (24) feed `unusual` as `max(amount, outflow)`. Earlier rows that match a seasonal baseline item are left out; a payment that itself matches one is never unusual. The watchlist rule is unchanged. New signals `payee_running_total` and `outflow_running_total` appear only when the total, not the single payment, crossed the threshold; case-svc's `recent_transactions` tool returns the same figures so the fact check keeps them. Still deterministic code, no model. ATM/app post-transaction path and totals across a customer's several accounts: not built (WI-012). |
+| Model latency (2026-10-16) | Thinking off for schema-constrained Gemini calls; the investigation asks for several tools per step. Every model call we make extracts or classifies into a fixed schema, so `GeminiClient` sends `thinkingConfig.thinkingBudget` = `gemini_thinking_budget` (default 0, `MIMAMORI_GEMINI_THINKING_BUDGET`; `-1` sends nothing and leaves it to the model). The investigation's step schema takes `tools`, an array, instead of one `tool`; ADK runs the parallel calls of one response concurrently. Measured on Gemini 2.5 Flash, hero: investigation 9 calls / 34 s → 2 calls / 7–8 s; copilot turn 8–12 s → 1.3–1.9 s; intent call 1.5 s → 0.85 s. Verification (`verify.py`), `risk-v1` and the rules are unchanged: models still only suggest. Cost: with thinking off the copilot occasionally returns no cover-story quote for a genuine customer (1 run in 3 in a small A/B); the band still stayed below High and hero reached High in every run (WI-014). |
 
 ## Devil's-advocate review (DA)
 

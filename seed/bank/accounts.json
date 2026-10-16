@@ -1,0 +1,551 @@
+[
+{
+"account_id":"acct-tanaka-0001",
+"customer_ref":"cust-tanaka-0001",
+"holder_name_kana":"タナカ ケイコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2014-10-01",
+"balance_jpy":7420000,
+"status":"active"
+},
+{
+"account_id":"acct-co-0001",
+"customer_ref":"cust-co-0001",
+"holder_name_kana":"カ）サクラコウムテン",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2016-04-01",
+"balance_jpy":17000000,
+"status":"active"
+},
+{
+"account_id":"acct-co-0002",
+"customer_ref":"cust-co-0002",
+"holder_name_kana":"カ）ミドリモータース",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2012-09-01",
+"balance_jpy":28000000,
+"status":"active"
+},
+{
+"account_id":"acct-co-0003",
+"customer_ref":"cust-co-0003",
+"holder_name_kana":"ユ）ヤマトショクヒン",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2009-06-01",
+"balance_jpy":35000000,
+"status":"active"
+},
+{
+"account_id":"acct-0001",
+"customer_ref":"cust-0001",
+"holder_name_kana":"マエダ マリ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2005-05-01",
+"balance_jpy":7700000,
+"status":"active"
+},
+{
+"account_id":"acct-0002",
+"customer_ref":"cust-0002",
+"holder_name_kana":"キムラ タクヤ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2009-10-01",
+"balance_jpy":3200000,
+"status":"active"
+},
+{
+"account_id":"acct-0003",
+"customer_ref":"cust-0003",
+"holder_name_kana":"サイトウ アケミ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2011-03-01",
+"balance_jpy":8700000,
+"status":"active"
+},
+{
+"account_id":"acct-0004",
+"customer_ref":"cust-0004",
+"holder_name_kana":"サイトウ ミノル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2012-11-01",
+"balance_jpy":3800000,
+"status":"active"
+},
+{
+"account_id":"acct-0005",
+"customer_ref":"cust-0005",
+"holder_name_kana":"オカダ シゲル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2021-08-01",
+"balance_jpy":14800000,
+"status":"active"
+},
+{
+"account_id":"acct-0006",
+"customer_ref":"cust-0006",
+"holder_name_kana":"ヤマグチ ヒロシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2010-09-01",
+"balance_jpy":3300000,
+"status":"active"
+},
+{
+"account_id":"acct-0007",
+"customer_ref":"cust-0007",
+"holder_name_kana":"マツモト シゲル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2019-03-01",
+"balance_jpy":11000000,
+"status":"active"
+},
+{
+"account_id":"acct-0008",
+"customer_ref":"cust-0008",
+"holder_name_kana":"イノウエ シゲル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2018-03-01",
+"balance_jpy":7900000,
+"status":"active"
+},
+{
+"account_id":"acct-0009",
+"customer_ref":"cust-0009",
+"holder_name_kana":"マツモト ヒロシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2006-11-01",
+"balance_jpy":7100000,
+"status":"active"
+},
+{
+"account_id":"acct-0010",
+"customer_ref":"cust-0010",
+"holder_name_kana":"ハヤシ カズコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2008-01-01",
+"balance_jpy":5500000,
+"status":"active"
+},
+{
+"account_id":"acct-0011",
+"customer_ref":"cust-0011",
+"holder_name_kana":"ワタナベ マリ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2020-01-01",
+"balance_jpy":3100000,
+"status":"active"
+},
+{
+"account_id":"acct-0012",
+"customer_ref":"cust-0012",
+"holder_name_kana":"キムラ アケミ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2005-11-01",
+"balance_jpy":4400000,
+"status":"active"
+},
+{
+"account_id":"acct-0013",
+"customer_ref":"cust-0013",
+"holder_name_kana":"ナカムラ ミヨコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2008-03-01",
+"balance_jpy":14300000,
+"status":"active"
+},
+{
+"account_id":"acct-0014",
+"customer_ref":"cust-0014",
+"holder_name_kana":"カトウ アケミ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2004-04-01",
+"balance_jpy":800000,
+"status":"active"
+},
+{
+"account_id":"acct-0015",
+"customer_ref":"cust-0015",
+"holder_name_kana":"ヤマグチ クミコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2010-07-01",
+"balance_jpy":4300000,
+"status":"active"
+},
+{
+"account_id":"acct-0016",
+"customer_ref":"cust-0016",
+"holder_name_kana":"アベ ケンイチ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2020-10-01",
+"balance_jpy":14900000,
+"status":"active"
+},
+{
+"account_id":"acct-0017",
+"customer_ref":"cust-0017",
+"holder_name_kana":"オカダ イサム",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2018-09-01",
+"balance_jpy":7100000,
+"status":"active"
+},
+{
+"account_id":"acct-0018",
+"customer_ref":"cust-0018",
+"holder_name_kana":"ハヤシ イサム",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2006-02-01",
+"balance_jpy":6600000,
+"status":"active"
+},
+{
+"account_id":"acct-0019",
+"customer_ref":"cust-0019",
+"holder_name_kana":"キムラ ヨウコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2015-06-01",
+"balance_jpy":900000,
+"status":"active"
+},
+{
+"account_id":"acct-0020",
+"customer_ref":"cust-0020",
+"holder_name_kana":"ワタナベ クミコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2019-04-01",
+"balance_jpy":11300000,
+"status":"active"
+},
+{
+"account_id":"acct-0021",
+"customer_ref":"cust-0021",
+"holder_name_kana":"ササキ タクヤ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2019-12-01",
+"balance_jpy":10600000,
+"status":"active"
+},
+{
+"account_id":"acct-0022",
+"customer_ref":"cust-0022",
+"holder_name_kana":"タカハシ クミコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2014-11-01",
+"balance_jpy":1900000,
+"status":"active"
+},
+{
+"account_id":"acct-0023",
+"customer_ref":"cust-0023",
+"holder_name_kana":"マツモト マリ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2021-11-01",
+"balance_jpy":9400000,
+"status":"active"
+},
+{
+"account_id":"acct-0024",
+"customer_ref":"cust-0024",
+"holder_name_kana":"ヤマダ ミノル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2022-01-01",
+"balance_jpy":11300000,
+"status":"active"
+},
+{
+"account_id":"acct-0025",
+"customer_ref":"cust-0025",
+"holder_name_kana":"アベ カズコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2015-03-01",
+"balance_jpy":1700000,
+"status":"active"
+},
+{
+"account_id":"acct-0026",
+"customer_ref":"cust-0026",
+"holder_name_kana":"オカダ ミヨコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2010-02-01",
+"balance_jpy":14000000,
+"status":"active"
+},
+{
+"account_id":"acct-0027",
+"customer_ref":"cust-0027",
+"holder_name_kana":"カトウ ヒロシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2013-11-01",
+"balance_jpy":8200000,
+"status":"active"
+},
+{
+"account_id":"acct-0028",
+"customer_ref":"cust-0028",
+"holder_name_kana":"アベ ヒロシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2012-09-01",
+"balance_jpy":9400000,
+"status":"active"
+},
+{
+"account_id":"acct-0029",
+"customer_ref":"cust-0029",
+"holder_name_kana":"フジタ ケンイチ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2022-08-01",
+"balance_jpy":5600000,
+"status":"active"
+},
+{
+"account_id":"acct-0030",
+"customer_ref":"cust-0030",
+"holder_name_kana":"ササキ ミヨコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2017-03-01",
+"balance_jpy":8000000,
+"status":"active"
+},
+{
+"account_id":"acct-0031",
+"customer_ref":"cust-0031",
+"holder_name_kana":"ヤマグチ ヨウコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2011-09-01",
+"balance_jpy":13000000,
+"status":"active"
+},
+{
+"account_id":"acct-0032",
+"customer_ref":"cust-0032",
+"holder_name_kana":"マエダ ダイスケ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2013-05-01",
+"balance_jpy":11900000,
+"status":"active"
+},
+{
+"account_id":"acct-0033",
+"customer_ref":"cust-0033",
+"holder_name_kana":"アベ ヨウコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2005-06-01",
+"balance_jpy":5100000,
+"status":"active"
+},
+{
+"account_id":"acct-0034",
+"customer_ref":"cust-0034",
+"holder_name_kana":"コバヤシ マリ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2012-06-01",
+"balance_jpy":4100000,
+"status":"active"
+},
+{
+"account_id":"acct-0035",
+"customer_ref":"cust-0035",
+"holder_name_kana":"オカダ タクヤ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2016-12-01",
+"balance_jpy":8200000,
+"status":"active"
+},
+{
+"account_id":"acct-0036",
+"customer_ref":"cust-0036",
+"holder_name_kana":"ヤマグチ キヨシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2017-12-01",
+"balance_jpy":13400000,
+"status":"active"
+},
+{
+"account_id":"acct-0037",
+"customer_ref":"cust-0037",
+"holder_name_kana":"カトウ キヨシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2015-02-01",
+"balance_jpy":9500000,
+"status":"active"
+},
+{
+"account_id":"acct-0038",
+"customer_ref":"cust-0038",
+"holder_name_kana":"ササキ サチコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2007-07-01",
+"balance_jpy":9600000,
+"status":"active"
+},
+{
+"account_id":"acct-0039",
+"customer_ref":"cust-0039",
+"holder_name_kana":"イトウ ユミ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2017-09-01",
+"balance_jpy":10000000,
+"status":"active"
+},
+{
+"account_id":"acct-0040",
+"customer_ref":"cust-0040",
+"holder_name_kana":"コバヤシ ヒロシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2013-06-01",
+"balance_jpy":7100000,
+"status":"active"
+},
+{
+"account_id":"acct-0041",
+"customer_ref":"cust-0041",
+"holder_name_kana":"シミズ タカシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2010-05-01",
+"balance_jpy":13700000,
+"status":"active"
+},
+{
+"account_id":"acct-0042",
+"customer_ref":"cust-0042",
+"holder_name_kana":"ヨシダ イサム",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2012-02-01",
+"balance_jpy":6200000,
+"status":"active"
+},
+{
+"account_id":"acct-0043",
+"customer_ref":"cust-0043",
+"holder_name_kana":"イトウ ミノル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2006-09-01",
+"balance_jpy":14500000,
+"status":"active"
+},
+{
+"account_id":"acct-0044",
+"customer_ref":"cust-0044",
+"holder_name_kana":"ヤマグチ ケンイチ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2006-08-01",
+"balance_jpy":14500000,
+"status":"active"
+},
+{
+"account_id":"acct-0045",
+"customer_ref":"cust-0045",
+"holder_name_kana":"イケダ ミノル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2007-07-01",
+"balance_jpy":6900000,
+"status":"active"
+},
+{
+"account_id":"acct-0046",
+"customer_ref":"cust-0046",
+"holder_name_kana":"ハヤシ クミコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2010-06-01",
+"balance_jpy":14700000,
+"status":"active"
+},
+{
+"account_id":"acct-0047",
+"customer_ref":"cust-0047",
+"holder_name_kana":"アベ イサム",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2004-04-01",
+"balance_jpy":2000000,
+"status":"active"
+},
+{
+"account_id":"acct-0048",
+"customer_ref":"cust-0048",
+"holder_name_kana":"ヤマモト イサム",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2006-09-01",
+"balance_jpy":8200000,
+"status":"active"
+},
+{
+"account_id":"acct-0049",
+"customer_ref":"cust-0049",
+"holder_name_kana":"アベ ミノル",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2021-05-01",
+"balance_jpy":8100000,
+"status":"active"
+},
+{
+"account_id":"acct-0050",
+"customer_ref":"cust-0050",
+"holder_name_kana":"オカダ ダイスケ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2020-07-01",
+"balance_jpy":6500000,
+"status":"active"
+},
+{
+"account_id":"acct-0051",
+"customer_ref":"cust-0051",
+"holder_name_kana":"ナカムラ セツコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2007-01-01",
+"balance_jpy":2100000,
+"status":"active"
+},
+{
+"account_id":"acct-0052",
+"customer_ref":"cust-0052",
+"holder_name_kana":"ヤマグチ タカシ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2006-06-01",
+"balance_jpy":900000,
+"status":"active"
+},
+{
+"account_id":"acct-0053",
+"customer_ref":"cust-0053",
+"holder_name_kana":"フジタ クミコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2010-02-01",
+"balance_jpy":5700000,
+"status":"active"
+},
+{
+"account_id":"acct-0054",
+"customer_ref":"cust-0054",
+"holder_name_kana":"マエダ カズコ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2020-08-01",
+"balance_jpy":7100000,
+"status":"active"
+},
+{
+"account_id":"acct-0055",
+"customer_ref":"cust-0055",
+"holder_name_kana":"カトウ マリ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2022-09-01",
+"balance_jpy":7500000,
+"status":"active"
+},
+{
+"account_id":"acct-0056",
+"customer_ref":"cust-0056",
+"holder_name_kana":"ハヤシ アケミ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2005-09-01",
+"balance_jpy":7900000,
+"status":"active"
+},
+{
+"account_id":"acct-mule-0001",
+"customer_ref":"cust-mule-0001",
+"holder_name_kana":"カ）ミライケンセツ",
+"branch_name_ja":"サンプル銀行 駅前支店",
+"opened_on":"2026-10-09",
+"balance_jpy":6550000,
+"status":"active"
+}
+]

@@ -1,0 +1,13 @@
+{
+  "name": "mimamori-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Scripted, narrated demo of Mimamori: drives the real app in a visible Chrome window",
+  "scripts": {
+    "demo": "node run.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.64.1"
+  }
+}
