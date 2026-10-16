@@ -40,5 +40,14 @@ if ((fresh)); then
   scripts/dev.sh up
 fi
 
+# Cloud Run backends scale to zero when idle. Wake them first: core-bank-mock waits only 0.5 s for
+# scoring and then proceeds without it, so a cold scoring service would skip the risk check.
+if [[ -n "$url" ]]; then
+  printf 'waking the cloud services...\n'
+  for svc in core scoring case conversation; do
+    curl -s -o /dev/null -m 60 -H 'X-Mimamori-Role: teller' -H 'X-Mimamori-User: teller-01' "$url/api/$svc/openapi.json" || true
+  done
+fi
+
 cd demo
 exec node run.mjs ${args[@]+"${args[@]}"}

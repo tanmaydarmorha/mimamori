@@ -150,7 +150,7 @@ class CloudTts:
 
     audio_format = "audio/mpeg"
 
-    def __init__(self, voice: str = "ja-JP-Neural2-B", language: str = "ja-JP") -> None:
+    def __init__(self, voice: str = "ja-JP-Chirp3-HD-Aoede", language: str = "ja-JP") -> None:
         from google.cloud import texttospeech
 
         self._tts, self.voice, self.language = texttospeech, voice, language
@@ -193,9 +193,9 @@ def get_stt(settings: Settings | None = None, channels: int = 2, language: str =
 
 def get_tts(settings: Settings | None = None, language: str = "ja") -> TextToSpeech:
     settings = settings or Settings.from_env()
-    if settings.speech_backend == "typed":
+    if settings.tts_backend == "typed":
         return TextOnly()
-    if settings.speech_backend == "cloud":
+    if settings.tts_backend == "cloud":
         locale, voice = for_language(settings, language)
         return CloudTts(voice, locale)
-    raise ValueError(f"unknown MIMAMORI_SPEECH {settings.speech_backend!r} (typed | cloud)")
+    raise ValueError(f"unknown MIMAMORI_TTS {settings.tts_backend!r} (typed | cloud)")

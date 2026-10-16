@@ -48,9 +48,11 @@ mapped to `X-Mimamori-Role`). Scheduler triggers `watchlist-loader` and `intel-j
 nginx and the service clients send plain HTTP (no ID tokens). So the backends use **internal ingress
 with no invoker check**: only traffic from the project's VPC reaches them, and every service egresses
 through the default VPC (Direct VPC egress, `all-traffic`), so calls to `*.run.app` count as internal.
-`web-ui` is public (synthetic data; the role switcher stands in for IAP), max 2 instances. Backends run
-exactly one always-on instance each, because SSE fan-out, call state and the bank mock live in memory
-(about $7/day; set `--min-instances 0` between sessions). Production: IAP on web-ui and ID-token auth.
+`web-ui` is public (synthetic data; the role switcher stands in for IAP), max 2 instances. Backends run at
+most one instance each, because SSE fan-out, call state and the bank mock live in memory, and scale to
+zero when idle (no cost when unused; in-memory state resets, Firestore data stays). `scripts/demo.sh --url` wakes
+them first; before a live demo, open the console a minute early (a cold scoring service would be skipped,
+because core-bank-mock waits only 0.5 s for it). Production: IAP on web-ui and ID-token auth.
 
 ## Vertex AI
 A Gemma endpoint with constrained decoding (the case service sends a JSON schema). Fixed GPU floor:

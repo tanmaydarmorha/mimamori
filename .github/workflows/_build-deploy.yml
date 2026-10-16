@@ -74,7 +74,8 @@ jobs:
         # Cloud settings live here, so every deploy is complete (infra/README.md, "Cloud Run").
         # Backends: internal ingress only, no invoker check (plain HTTP from nginx and between services;
         # the network is the boundary). Everything egresses through the default VPC, so calls to *.run.app
-        # count as internal. One instance each: SSE fan-out, call state and the bank mock live in memory.
+        # count as internal. At most one instance each (SSE fan-out, call state and the bank mock live in memory),
+        # scaled to zero when idle so an unused prototype costs nothing; the first request after idle is a cold start.
         env:
           NAME: ${{ inputs.name }}
           KIND: ${{ inputs.kind }}
@@ -83,7 +84,7 @@ jobs:
         run: |
           url() { echo "https://$1-${NUMBER}.${REGION}.run.app"; }
           ENVS="MIMAMORI_ENV=cloud,MIMAMORI_REGION=${REGION},MIMAMORI_PROJECT_ID=${PROJECT},GOOGLE_CLOUD_PROJECT=${PROJECT}"
-          ENVS="${ENVS},MIMAMORI_SERVICE=${NAME},MIMAMORI_SPEECH=typed,MIMAMORI_DEMO_NOW=2026-10-13T11:42:00+09:00"
+          ENVS="${ENVS},MIMAMORI_SERVICE=${NAME},MIMAMORI_SPEECH=typed,MIMAMORI_TTS=cloud,MIMAMORI_DEMO_NOW=2026-10-13T11:42:00+09:00"
           ENVS="${ENVS},MIMAMORI_COPILOT_BACKEND=gemini,MIMAMORI_GENERAL_BACKEND=gemini,GEMINI_MODEL=gemini-2.5-flash"
           ENVS="${ENVS},MIMAMORI_GEMINI_THINKING_BUDGET=0,MIMAMORI_MODEL_TIMEOUT_S=60"
           ENVS="${ENVS},CORE_BANK_URL=$(url core-bank-mock),SCORING_URL=$(url scoring)"
@@ -98,5 +99,5 @@ jobs:
               --min-instances 0 --max-instances 2 --timeout 3600
           else
             gcloud run deploy "$NAME" "${COMMON[@]}" --ingress internal --no-invoker-iam-check \
-              --min-instances 1 --max-instances 1 --no-cpu-throttling --timeout 3600
+              --min-instances 0 --max-instances 1 --no-cpu-throttling --timeout 3600
           fi

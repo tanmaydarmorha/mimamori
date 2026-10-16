@@ -16,7 +16,7 @@ exists() { gcloud --project "$PROJECT" "$@" >/dev/null 2>&1; }
 echo "== APIs"
 g services enable run.googleapis.com artifactregistry.googleapis.com firestore.googleapis.com \
   aiplatform.googleapis.com compute.googleapis.com iam.googleapis.com iamcredentials.googleapis.com \
-  sts.googleapis.com logging.googleapis.com
+  sts.googleapis.com logging.googleapis.com texttospeech.googleapis.com
 
 echo "== Artifact Registry"
 exists artifacts repositories describe "$REPO" --location "$REGION" ||
@@ -57,6 +57,10 @@ for sa in case-svc conversation-svc intel-job sim-job; do
   g projects add-iam-policy-binding "$PROJECT" --member "serviceAccount:$sa@$PROJECT.iam.gserviceaccount.com" \
     --role roles/aiplatform.user --condition None >/dev/null
 done
+
+echo "== Cloud Text-to-Speech for the call voice (needs only API use on the project)"
+g projects add-iam-policy-binding "$PROJECT" --member "serviceAccount:conversation-svc@$PROJECT.iam.gserviceaccount.com" \
+  --role roles/serviceusage.serviceUsageConsumer --condition None >/dev/null
 
 echo "== Deployer for GitHub Actions (Workload Identity Federation, main branch of $GITHUB_REPO only)"
 DEPLOYER="gh-deployer@$PROJECT.iam.gserviceaccount.com"

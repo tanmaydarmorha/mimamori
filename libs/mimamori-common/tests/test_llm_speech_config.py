@@ -199,8 +199,8 @@ def test_speech_voice_and_locale_per_language():
     from mimamori_common.speech import for_language
 
     s = Settings()
-    assert for_language(s, "ja") == ("ja-JP", "ja-JP-Neural2-B")
-    assert for_language(s, "en") == ("en-US", "en-US-Neural2-F")
+    assert for_language(s, "ja") == ("ja-JP", "ja-JP-Chirp3-HD-Aoede")
+    assert for_language(s, "en") == ("en-US", "en-US-Chirp3-HD-Aoede")
     with pytest.raises(ValueError):
         for_language(s, "fr")
 
@@ -255,3 +255,13 @@ def test_each_model_call_logs_one_line_with_seconds_and_attempts(caplog):
         run(client.generate_json("s", "u", {"type": "object"}))
     lines = [r.getMessage() for r in caplog.records if r.getMessage().startswith("model call")]
     assert len(lines) == 1 and re.fullmatch(r"model call model=gemini:gemini-2\.5-flash kind=json seconds=\d+\.\d\d attempts=1", lines[0])
+
+
+def test_tts_backend_follows_speech_unless_set(monkeypatch):
+    monkeypatch.setenv("MIMAMORI_SPEECH", "typed")
+    monkeypatch.delenv("MIMAMORI_TTS", raising=False)
+    assert Settings.from_env().tts_backend == "typed"
+    monkeypatch.setenv("MIMAMORI_TTS", "cloud")
+    s = Settings.from_env()
+    assert (s.speech_backend, s.tts_backend) == ("typed", "cloud")
+    assert isinstance(get_tts(Settings(tts_backend="typed")), TextOnly)

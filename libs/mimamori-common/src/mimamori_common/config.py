@@ -57,11 +57,12 @@ class Settings:
 
     # Speech. backend: typed | cloud
     speech_backend: str = "typed"
+    tts_backend: str = "typed"  # typed | cloud; defaults to speech_backend (cloud voice with typed input)
     stt_model: str = "chirp_2"
     stt_language: str = "ja-JP"
-    tts_voice: str = "ja-JP-Neural2-B"
+    tts_voice: str = "ja-JP-Chirp3-HD-Aoede"
     stt_language_en: str = "en-US"
-    tts_voice_en: str = "en-US-Neural2-F"
+    tts_voice_en: str = "en-US-Chirp3-HD-Aoede"
 
     # Bank behaviour
     scoring_timeout_s: float = 0.5  # core-bank-mock's pre-transaction call (fail open)
@@ -104,7 +105,8 @@ class Settings:
             gemini_thinking_budget=int(_env("MIMAMORI_GEMINI_THINKING_BUDGET", str(cls.gemini_thinking_budget))),
             model_timeout_s=float(_env("MIMAMORI_MODEL_TIMEOUT_S", str(cls.model_timeout_s))),
             model_max_retries=int(_env("MIMAMORI_MODEL_MAX_RETRIES", str(cls.model_max_retries))),
-            speech_backend=_env("MIMAMORI_SPEECH", "cloud" if env == "cloud" else "typed"),
+            speech_backend=(speech := _env("MIMAMORI_SPEECH", "cloud" if env == "cloud" else "typed")),
+            tts_backend=_env("MIMAMORI_TTS", speech),
             stt_model=_env("MIMAMORI_STT_MODEL", cls.stt_model),
             stt_language=_env("MIMAMORI_STT_LANGUAGE", cls.stt_language),
             tts_voice=_env("MIMAMORI_TTS_VOICE", cls.tts_voice),

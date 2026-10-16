@@ -36,6 +36,7 @@ python -m pytest libs/mimamori-common/tests
 | `OLLAMA_URL`, `OLLAMA_MODEL` | `http://localhost:11434`, `gemma4:12b` | |
 | `VERTEX_GEMMA_ENDPOINT_ID`, `GEMINI_MODEL`, `MIMAMORI_GEMINI_LOCATION` | | Cloud models. |
 | `MIMAMORI_SPEECH` | `typed` (`cloud` in cloud) | `MIMAMORI_STT_MODEL` (`chirp_2`), `MIMAMORI_STT_LANGUAGE` (`ja-JP`). |
+| `MIMAMORI_TTS` | same as `MIMAMORI_SPEECH` | `cloud` = Cloud TTS voice even with typed input. `MIMAMORI_TTS_VOICE` (`ja-JP-Chirp3-HD-Aoede`), `MIMAMORI_TTS_VOICE_EN` (`en-US-Chirp3-HD-Aoede`). |
 | `MIMAMORI_MODEL_MAX_RETRIES` | `4` | Retries of Vertex calls on 429/500/503 and network errors (1, 2, 4, 8 s with jitter; `Retry-After` honoured up to 30 s); all within `MIMAMORI_MODEL_TIMEOUT_S`. |
 | `SCORING_TIMEOUT_S`, `LARGE_TRANSFER_THRESHOLD_JPY`, `BUSINESS_DAY_CLOSE` | `0.5`, `1000000`, `15:00` | Core-bank behaviour. |
 | `MIMAMORI_DEMO_NOW` | | Fixed demo clock, e.g. `2026-10-13T11:42:00+09:00`. |
