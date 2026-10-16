@@ -35,7 +35,7 @@ The counter is the last point where a person can still stop the money.
 |---|---|
 | **1. The transfer is keyed in** | Before any money moves, a scoring service checks the payee: account age, how many people paid it this week, the customer's own baseline. A risky payee raises **Elevated**: a reason to ask, not an accusation. |
 | **2. The counter conversation** | The copilot reads each customer turn and highlights the customer's exact words that match scam indicators ("the police told me not to tell anyone"). It suggests the next approved question and explains its reasoning. Indicators plus a risky payee raise **High: pause recommended**. |
-| **3. The teller decides** | One decision panel: pause or release, a legal basis and a written reason. A person decides every time, and every decision is logged. The teller can issue a summary for the police. |
+| **3. The teller decides** | One decision panel: pause or release, the basis for the pause and a written reason. A person decides every time, and every decision is logged. The teller can issue a summary for the police. |
 | **4. The family call** | If the customer registered a trusted contact in advance, the bank sends a notice. The family member calls back on the bank's published number with a case code. A voice assistant answers in approved wording only: what happened, is she safe, come to the branch. It never discloses amounts and never takes instructions. |
 | **5. The analyst acts** | The analyst reviews the same evidence and approves a freeze of the receiving account. Mimamori then lists the **other customers who paid into it**, so the bank can contact them before they lose money too. |
 
@@ -74,7 +74,7 @@ nothing.
 |---|---|
 | Copilot, investigation agent, family-call intent | **Gemini 2.5 Flash on Vertex AI**, schema-constrained; the investigation agent runs on the Agent Development Kit (ADK) |
 | Family-call voice | **Cloud Text-to-Speech**, Chirp 3 HD voices (Japanese and English) |
-| Six services | **Cloud Run**: public web UI, internal-only backends, scale to zero |
+| Five services and three jobs | **Cloud Run**: public web UI, internal-only backends, scale to zero |
 | Cases, playbooks, reference lists | **Firestore** (Native), three databases with per-database IAM conditions |
 | CI/CD | GitHub Actions to **Artifact Registry** and Cloud Run through **Workload Identity Federation** (no service-account keys) |
 | Logs | **Cloud Logging**: per-call model latency, every decision |
