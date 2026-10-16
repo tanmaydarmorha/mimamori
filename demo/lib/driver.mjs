@@ -1,6 +1,7 @@
 // Drives the real Mimamori web UI in visible Chrome windows, at a human pace, with a caption bar.
 // The app is not touched: everything here is what a person could do with a mouse and keyboard.
 import { chromium } from "playwright";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -59,6 +60,56 @@ function installOverlay() {
   addEventListener("mouseup", () => cur.classList.remove("down"), true);
 }
 
+// ---- --hq: record from Chrome's screencast feed ----------------------------------------------------
+// Playwright's own recorder is fixed at 25 fps and a low bitrate. Chrome sends a screencast frame on every
+// repaint (up to the display rate), each with its timestamp; we keep them as JPEGs and let ffmpeg turn the
+// variable-rate frames into a constant 60 fps H.264 file (a frame is held until the next repaint).
+
+class ScreencastRecorder {
+  constructor(page, dir) {
+    Object.assign(this, { page, dir, frames: [], startedAt: null });
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  async start(g) {
+    this.cdp = await this.page.context().newCDPSession(this.page);
+    this.cdp.on("Page.screencastFrame", ({ data, metadata, sessionId }) => {
+      this.cdp.send("Page.screencastFrameAck", { sessionId }).catch(() => {}); // ack first: Chrome waits for it
+      const file = path.join(this.dir, `f${String(this.frames.length).padStart(6, "0")}.jpg`);
+      fs.writeFileSync(file, Buffer.from(data, "base64"));
+      this.frames.push({ file, t: metadata.timestamp });
+    });
+    await this.cdp.send("Page.startScreencast", { format: "jpeg", quality: 92, maxWidth: g.width, maxHeight: g.height, everyNthFrame: 1 });
+    this.startedAt = Date.now() / 1000;
+  }
+
+  /** Stop, then encode to `dest` at `fps`. Returns stats, or null when nothing was captured. */
+  async finish(dest, fps = 60) {
+    const stoppedAt = Date.now() / 1000;
+    await this.cdp?.send("Page.stopScreencast").catch(() => {});
+    const fr = this.frames;
+    if (!fr.length) return null;
+    // Concat list: each frame lasts until the next one; the first starts at recording start (black-free:
+    // the first frame is stretched back), the last lasts until stop.
+    const lines = [];
+    for (let i = 0; i < fr.length; i++) {
+      const end = i + 1 < fr.length ? fr[i + 1].t : Math.max(fr[i].t + 1 / fps, stoppedAt);
+      const begin = i === 0 ? Math.min(fr[0].t, this.startedAt) : fr[i].t;
+      lines.push(`file '${fr[i].file}'`, `duration ${Math.max(end - begin, 0.001).toFixed(4)}`);
+    }
+    lines.push(`file '${fr.at(-1).file}'`); // concat demuxer quirk: repeat the last file
+    const list = path.join(this.dir, "frames.txt");
+    fs.writeFileSync(list, lines.join("\n") + "\n");
+    execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", list,
+      "-vf", `fps=${fps},format=yuv420p`, "-c:v", "libx264", "-preset", "slow", "-crf", "14", "-movflags", "+faststart", dest]);
+    const span = fr.at(-1).t - fr[0].t;
+    const gaps = fr.slice(1).map((f, i) => f.t - fr[i].t);
+    const smooth = gaps.filter((g) => g <= 1.5 / fps).length;
+    return { frames: fr.length, seconds: span, captureFps: span > 0 ? fr.length / span : 0, smoothShare: gaps.length ? smooth / gaps.length : 0,
+      videoStart: Math.min(fr[0].t, this.startedAt), frameTimes: fr.map((f) => +(f.t - fr[0].t).toFixed(4)) };
+  }
+}
+
 // ---- one browser window ---------------------------------------------------------------------------
 
 class Win {
@@ -92,13 +143,36 @@ class Win {
   async moveTo(loc) {
     const { page } = this;
     await loc.waitFor({ state: "visible", timeout: WAIT_MS });
-    await loc.evaluate((el) => {
+    const scrolled = await loc.evaluate((el, smooth) => {
       const r = el.getBoundingClientRect();
-      if (r.top < 80 || r.bottom > innerHeight - 90) el.scrollIntoView({ block: "center", behavior: "instant" });
-    });
+      if (r.top < 80 || r.bottom > innerHeight - 90) { el.scrollIntoView({ block: "center", behavior: smooth ? "smooth" : "instant" }); return true; }
+      return false;
+    }, !!this.run.smooth);
+    if (scrolled && this.run.smooth) await sleep(700); // let the smooth scroll finish before measuring
     const box = await loc.boundingBox();
     if (!box) return;
     const to = { x: box.x + Math.min(box.width / 2, 60 + box.width * 0.2), y: box.y + box.height / 2 };
+    if (this.run.smooth) {
+      // --hq: glide the drawn cursor in the page, one position per painted frame, then move the real pointer.
+      const ms = Math.round(560 * Math.min(1, this.run.f + 0.3));
+      await page.evaluate(([fx, fy, tx, ty, ms]) => new Promise((done) => {
+        const c = document.getElementById("__demo_cursor");
+        if (!c) return done();
+        const t0 = performance.now();
+        const frame = (now) => {
+          const t = Math.min(1, (now - t0) / ms);
+          const e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; // ease in-out
+          c.style.left = fx + (tx - fx) * e + "px";
+          c.style.top = fy + (ty - fy) * e + "px";
+          if (t < 1) requestAnimationFrame(frame); else done();
+        };
+        requestAnimationFrame(frame);
+      }), [this.pos.x, this.pos.y, to.x, to.y, ms]);
+      await page.mouse.move(to.x, to.y);
+      this.pos = to;
+      await sleep(600 * this.run.f);
+      return;
+    }
     const steps = Math.max(8, Math.round(22 * Math.min(1, this.run.f + 0.3)));
     for (let i = 1; i <= steps; i++) {
       const t = i / steps;
@@ -155,10 +229,10 @@ async function until(fn, ms, label) {
 
 // ---- the scenario runner -------------------------------------------------------------------------
 
-export async function runScenario(sc, { url, speed, record, outDir, clean = false }) {
+export async function runScenario(sc, { url, speed, record, outDir, clean = false, hq = false }) {
   const f = SPEEDS[speed];
   const stamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-  const run = { f };
+  const run = { f, smooth: !!(record && hq) };
   const rawDir = path.join(outDir, `.raw-${sc.id}-${stamp}`);
   fs.mkdirSync(outDir, { recursive: true });
 
@@ -169,11 +243,13 @@ export async function runScenario(sc, { url, speed, record, outDir, clean = fals
       channel: "chrome",
       headless: false,
       ignoreDefaultArgs: ["--enable-automation"],
-      args: [`--window-position=${g.x},${g.y}`, `--window-size=${g.width},${g.height + CHROME_UI}`, "--no-first-run", "--disable-infobars", "--autoplay-policy=no-user-gesture-required"],
+      args: [`--window-position=${g.x},${g.y}`, `--window-size=${g.width},${g.height + CHROME_UI}`, "--no-first-run", "--disable-infobars", "--autoplay-policy=no-user-gesture-required",
+        // Keep painting at full rate when a window is covered or unfocused (the recordings depend on it).
+        "--disable-backgrounding-occluded-windows", "--disable-renderer-backgrounding", "--disable-background-timer-throttling"],
     });
     const context = await browser.newContext({
       viewport: { width: g.width, height: g.height },
-      recordVideo: record ? { dir: rawDir, size: { width: g.width, height: g.height } } : undefined,
+      recordVideo: record && !hq ? { dir: rawDir, size: { width: g.width, height: g.height } } : undefined,
     });
     // The whole demo runs in the English UI so the glosses show. Set once; never overrides a later toggle.
     await context.addInitScript(() => {
@@ -190,6 +266,10 @@ export async function runScenario(sc, { url, speed, record, outDir, clean = fals
     page.on("pageerror", (e) => console.error(`  [${name}] page error: ${e.message}`));
     page.on("crash", () => console.error(`  [${name}] the page crashed`));
     wins[name] = new Win(name, browser, context, page, run);
+    if (record && hq) {
+      wins[name].rec = new ScreencastRecorder(page, path.join(rawDir, name));
+      await wins[name].rec.start(g);
+    }
   }
 
   const vars = { ...(sc.vars ?? {}) };
@@ -225,7 +305,10 @@ export async function runScenario(sc, { url, speed, record, outDir, clean = fals
   await closeAll(wins, record, rawDir, outDir, sc.id, stamp, result);
   if (record) {
     const file = path.join(outDir, `${sc.id}-timeline-${stamp}.json`);
-    fs.writeFileSync(file, JSON.stringify({ scenario: sc.id, speed, clean, steps: timeline }, null, 2));
+    // `at` is seconds from t0; with --hq, `videoOffset` is how far into each video t0 falls.
+    const videoOffset = result.hq ? Object.fromEntries(Object.entries(result.hq).map(([w, st]) => [w, +(t0 / 1000 - st.videoStart).toFixed(3)])) : undefined;
+    const frameTimes = result.hq ? Object.fromEntries(Object.entries(result.hq).map(([w, st]) => [w, st.frameTimes])) : undefined;
+    fs.writeFileSync(file, JSON.stringify({ scenario: sc.id, speed, clean, hq, videoOffset, steps: timeline, frameTimes }, null, 2));
     result.videos.push(file);
   }
   return result;
@@ -235,6 +318,17 @@ async function closeAll(wins, record, rawDir, outDir, id, stamp, result) {
   for (const w of Object.values(wins)) {
     if (w.closed) continue;
     w.closed = true;
+    if (record && w.rec) {
+      const dest = path.join(outDir, `${id}-${w.name}-${stamp}.mp4`);
+      try {
+        const st = await w.rec.finish(dest);
+        if (st) {
+          result.videos.push(dest);
+          (result.hq ??= {})[w.name] = st;
+          console.log(`  [${w.name}] ${st.frames} frames over ${st.seconds.toFixed(1)}s: ${st.captureFps.toFixed(1)} fps captured on average, ${(st.smoothShare * 100).toFixed(0)}% of frame gaps ≤ 1.5/60 s`);
+        }
+      } catch (e) { console.error(`  [${w.name}] encoding failed: ${e.message}`); }
+    }
     const video = w.page.video();
     await w.context.close().catch(() => {});
     if (record && video) {
