@@ -2,7 +2,7 @@
 
 **Decision support for bank tellers that stops fake-police scams at the counter, before the money moves.**
 
-Mimamori ("watching over" in Japanese) listens to the counter conversation, spots the signs of a coached
+Mimamori ("watching over" in Japanese) reads the counter conversation, spots the signs of a coached
 victim, and gives the teller the next question to ask, the evidence and a pause button. If the customer
 agreed to it in advance, a voice assistant calls their family on a verified line. An analyst can then
 freeze the account receiving the money and find the other people paying into it.
@@ -15,9 +15,12 @@ freeze the account receiving the money and find the other people paying into it.
 
 In fake-police scams (ニセ警察詐欺), a caller pretends to be a police officer, tells the victim their
 account is involved in a crime, and has them move their savings "for safekeeping", usually by bank
-transfer. Japan's National Police Agency counted **4,466 cases and ¥50.79 billion in losses in the
-first half of 2026 alone**: ¥11.6 million per completed case on average. **65.6% were paid by bank
-transfer**, 98.2% started with a phone call, and the most common victims were in their 70s
+transfer. Japan's National Police Agency counted **¥100.5 billion in losses in 2025**
+([NPA, 2026-06-05](https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/260605/01.html)), and
+**¥72.9 billion in January–August 2026 alone, 27% more than a year earlier**
+([NPA, 2026-10-02](https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/261002/01.html)). In the
+first half of 2026, **65.6% of cases were paid by bank transfer**, 98.2% started with a phone call, and
+the most common victims were in their 70s
 ([NPA, 2026-07-31](https://www.npa.go.jp/bureau/safetylife/sos47/assets/img/new-topics/detail/260731/01/01.pdf)).
 
 Banks are asked to speak to every customer making a large transfer. But the NPA itself notes that
