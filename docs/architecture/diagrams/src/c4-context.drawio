@@ -1,92 +1,86 @@
 <mxfile host="drawio">
   <diagram id="context" name="System context">
-    <mxGraphModel adaptiveColors="auto" dx="1400" dy="900" grid="1" gridSize="10" guides="1" page="0" background="#ffffff">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" page="0" background="#ffffff">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="title" value="Mimamori: system context (as built)" style="text;html=1;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="20" y="-30" width="700" height="36" as="geometry"/>
+        <mxCell id="title" value="&lt;b&gt;System Context diagram for Mimamori&lt;/b&gt; (as built)" style="text;html=1;fontSize=20;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="-40" width="800" height="36" as="geometry"/>
         </mxCell>
-        <mxCell id="gOut" value="Outside the bank" style="swimlane;startSize=26;html=1;align=left;spacingLeft=12;fillColor=#fafafa;strokeColor=#999999;fontSize=14;fontStyle=1;rounded=1;arcSize=4;" vertex="1" parent="1">
-          <mxGeometry x="20" y="20" width="1420" height="130" as="geometry"/>
+        <mxCell id="bank" value="&lt;b&gt;Japanese bank&lt;/b&gt;&lt;br&gt;[Enterprise]" style="rounded=1;fontSize=14;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;spacing=10;dashPattern=8 4;absoluteArcSize=1;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="250" width="1100" height="460" as="geometry"/>
         </mxCell>
-        <mxCell id="gBank" value="Japanese bank" style="swimlane;startSize=26;html=1;align=left;spacingLeft=12;fillColor=#f5f9ff;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;rounded=1;arcSize=2;" vertex="1" parent="1">
-          <mxGeometry x="20" y="200" width="1420" height="300" as="geometry"/>
+        <mxCell id="scammer" value="&lt;b&gt;Scammer&lt;/b&gt;&lt;br&gt;[Person, external]&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Poses as police, coaches the cover story&lt;/font&gt;" style="html=1;fontSize=13;dashed=0;whiteSpace=wrap;fillColor=#6C6477;strokeColor=#4D4D4D;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;verticalAlign=bottom;spacingBottom=8;" vertex="1" parent="1">
+          <mxGeometry x="0" y="20" width="180" height="160" as="geometry"/>
         </mxCell>
-        <mxCell id="gExt" value="External services" style="swimlane;startSize=26;html=1;align=left;spacingLeft=12;fillColor=#fff8ef;strokeColor=#d79b00;fontSize=14;fontStyle=1;rounded=1;arcSize=4;" vertex="1" parent="1">
-          <mxGeometry x="20" y="550" width="1420" height="140" as="geometry"/>
+        <mxCell id="customer" value="&lt;b&gt;Customer&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Makes a counter transfer&lt;/font&gt;" style="html=1;fontSize=13;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;verticalAlign=bottom;spacingBottom=8;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="180" height="160" as="geometry"/>
         </mxCell>
-        <mxCell id="scammer" value="&lt;b&gt;Scammer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Poses as police, coaches the story&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="40" y="60" width="180" height="70" as="geometry"/>
+        <mxCell id="police" value="&lt;b&gt;Police&lt;/b&gt;&lt;br&gt;[Person, external]&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Real police, notified by the branch&lt;/font&gt;" style="html=1;fontSize=13;dashed=0;whiteSpace=wrap;fillColor=#6C6477;strokeColor=#4D4D4D;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;verticalAlign=bottom;spacingBottom=8;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="20" width="210" height="160" as="geometry"/>
         </mxCell>
-        <mxCell id="customer" value="&lt;b&gt;Customer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Makes a counter transfer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="340" y="60" width="200" height="70" as="geometry"/>
+        <mxCell id="contact" value="&lt;b&gt;Trusted contact&lt;/b&gt;&lt;br&gt;[Person, external]&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Family member named in advance&lt;/font&gt;" style="html=1;fontSize=13;dashed=0;whiteSpace=wrap;fillColor=#6C6477;strokeColor=#4D4D4D;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;verticalAlign=bottom;spacingBottom=8;" vertex="1" parent="1">
+          <mxGeometry x="1405" y="20" width="210" height="160" as="geometry"/>
         </mxCell>
-        <mxCell id="police" value="&lt;b&gt;Police&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Real police, notified by the branch&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="920" y="60" width="200" height="70" as="geometry"/>
+        <mxCell id="teller" value="&lt;b&gt;Branch teller&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Decides every pause&lt;/font&gt;" style="html=1;fontSize=13;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;verticalAlign=bottom;spacingBottom=8;" vertex="1" parent="1">
+          <mxGeometry x="300" y="280" width="180" height="160" as="geometry"/>
         </mxCell>
-        <mxCell id="contact" value="&lt;b&gt;Trusted contact&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Family member named in advance&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1220" y="60" width="200" height="70" as="geometry"/>
+        <mxCell id="analyst" value="&lt;b&gt;Fraud analyst&lt;/b&gt;&lt;br&gt;[Person]&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Approves playbooks, decides freezes&lt;/font&gt;" style="html=1;fontSize=13;dashed=0;whiteSpace=wrap;fillColor=#083F75;strokeColor=#06315C;fontColor=#ffffff;shape=mxgraph.c4.person2;align=center;verticalAlign=bottom;spacingBottom=8;" vertex="1" parent="1">
+          <mxGeometry x="300" y="500" width="180" height="160" as="geometry"/>
         </mxCell>
-        <mxCell id="teller" value="&lt;b&gt;Branch teller&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Decides every pause&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="340" y="240" width="200" height="70" as="geometry"/>
+        <mxCell id="mimamori" value="&lt;b&gt;Mimamori&lt;/b&gt;&lt;br&gt;[Software System]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Scores transfers, guides the teller with verified evidence, runs the family call&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#1061B0;strokeColor=#0D5091;fontColor=#ffffff;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="660" y="300" width="240" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="analyst" value="&lt;b&gt;Fraud analyst&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Approves playbooks and freezes&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="340" y="370" width="200" height="70" as="geometry"/>
+        <mxCell id="core" value="&lt;b&gt;Core banking&lt;/b&gt;&lt;br&gt;[Software System, external]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Accounts and transfers (mock in the prototype)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#8C8496;strokeColor=#736782;fontColor=#ffffff;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="300" width="240" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="mimamori" value="&lt;b&gt;Mimamori&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Scores transfers, guides the teller with verified evidence, runs the family call&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#1f5f9f;strokeWidth=2;fontSize=16;" vertex="1" parent="1">
-          <mxGeometry x="640" y="240" width="260" height="110" as="geometry"/>
+        <mxCell id="alerts" value="&lt;b&gt;Public scam alerts&lt;/b&gt;&lt;br&gt;[Software System, external]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;NPA, prefectural police&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#8C8496;strokeColor=#736782;fontColor=#ffffff;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="20" y="860" width="240" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="core" value="&lt;b&gt;Core banking&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Accounts, transfers (mock in the prototype)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="960" y="370" width="200" height="70" as="geometry"/>
+        <mxCell id="lists" value="&lt;b&gt;Regulatory watchlists&lt;/b&gt;&lt;br&gt;[Software System, external]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;DICJ frozen accounts, FSA warnings&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#8C8496;strokeColor=#736782;fontColor=#ffffff;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="320" y="860" width="240" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="alerts" value="&lt;b&gt;Public scam alerts&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;NPA, prefectural police&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="340" y="590" width="200" height="70" as="geometry"/>
+        <mxCell id="gcai" value="&lt;b&gt;Google Cloud AI&lt;/b&gt;&lt;br&gt;[Software System, external]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Gemini 2.5 Flash, Text-to-Speech&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;fillColor=#8C8496;strokeColor=#736782;fontColor=#ffffff;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="660" y="860" width="240" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="lists" value="&lt;b&gt;Regulatory watchlists&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;DICJ, FSA&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="640" y="590" width="200" height="70" as="geometry"/>
+        <mxCell id="phone" value="&lt;b&gt;Telephony&lt;/b&gt;&lt;br&gt;[Software System, external]&lt;br&gt;&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Planned: a simulated phone in the browser today&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=14;dashed=1;fillColor=#ffffff;strokeColor=#8C8496;fontColor=#555555;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1382.5" y="860" width="240" height="120" as="geometry"/>
         </mxCell>
-        <mxCell id="gcai" value="&lt;b&gt;Google Cloud AI&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Gemini 2.5 Flash, Text-to-Speech&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="920" y="590" width="200" height="70" as="geometry"/>
+        <mxCell id="legend" value="Dark blue: person · Grey: external person or system · Blue: the system in scope · Dashed: planned, not built" style="text;html=1;fontSize=12;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1000" width="1000" height="24" as="geometry"/>
         </mxCell>
-        <mxCell id="phone" value="&lt;b&gt;Telephony&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Planned: simulated phone today&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#ffffff;strokeColor=#999999;fontColor=#666666;fontSize=14;" vertex="1" parent="1">
-          <mxGeometry x="1220" y="590" width="200" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="legend" value="Solid: built · Dashed: planned · Red: the adversary. Every pause, release and freeze is a logged human decision." style="text;html=1;fontSize=12;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
-          <mxGeometry x="20" y="700" width="1100" height="24" as="geometry"/>
-        </mxCell>
-        <mxCell id="e1" value="coaches by phone" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;strokeColor=#b85450;fontColor=#b85450;" edge="1" parent="1" source="scammer" target="customer">
+        <mxCell id="r1" value="&lt;b&gt;Coaches the&lt;br&gt;cover story&lt;/b&gt;&lt;br&gt;[Phone, out of band]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="scammer" target="customer">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e2" value="asks for the transfer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;" edge="1" parent="1" source="customer" target="teller">
-          <mxGeometry x="-0.2" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        <mxCell id="r2" value="&lt;b&gt;Asks for the transfer&lt;/b&gt;&lt;br&gt;[In person]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="customer" target="teller">
+          <mxGeometry x="-0.3" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
         </mxCell>
-        <mxCell id="e3" value="relays, decides" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.318;entryDx=0;entryDy=0;" edge="1" parent="1" source="teller" target="mimamori">
+        <mxCell id="r3" value="&lt;b&gt;Relays the conversation&lt;/b&gt;&lt;br&gt;[Web UI, HTTPS]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="teller" target="mimamori">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e4" value="approves" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;" edge="1" parent="1" source="analyst" target="mimamori">
+        <mxCell id="r4" value="&lt;b&gt;Approves playbooks,&lt;br&gt;decides freezes&lt;/b&gt;&lt;br&gt;[Web UI, HTTPS]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.15;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="analyst" target="mimamori">
+          <mxGeometry x="-0.45" relative="1" as="geometry"><Array as="points"><mxPoint x="696" y="580"/></Array><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="r5" value="&lt;b&gt;Notifies; summary on request&lt;/b&gt;&lt;br&gt;[Phone, in person]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="teller" target="police">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="444" y="225"/><mxPoint x="1200" y="225"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="r6" value="&lt;b&gt;Pre-checks, holds, freezes&lt;/b&gt;&lt;br&gt;[REST]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="core">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="e5" value="notifies; summary on request" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.8;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="teller" target="police">
-          <mxGeometry x="0.1" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        <mxCell id="r7" value="&lt;b&gt;Reads alerts&lt;/b&gt;&lt;br&gt;[HTTPS, untrusted]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="alerts">
+          <mxGeometry x="0.35" relative="1" as="geometry"><Array as="points"><mxPoint x="732" y="760"/><mxPoint x="140" y="760"/></Array><mxPoint as="offset"/></mxGeometry>
         </mxCell>
-        <mxCell id="e6" value="pre-check, hold, freeze" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="core">
-          <mxGeometry relative="1" as="geometry"/>
+        <mxCell id="r8" value="&lt;b&gt;Loads lists&lt;/b&gt;&lt;br&gt;[HTTPS, scheduled]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=0.45;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="lists">
+          <mxGeometry x="0.55" relative="1" as="geometry"><Array as="points"><mxPoint x="768" y="800"/><mxPoint x="440" y="800"/></Array><mxPoint as="offset"/></mxGeometry>
         </mxCell>
-        <mxCell id="e7" value="reads alerts" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="alerts">
-          <mxGeometry relative="1" as="geometry"/>
+        <mxCell id="r9" value="&lt;b&gt;Runs models, speech&lt;/b&gt;&lt;br&gt;[Vertex AI, TTS]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=0.7;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="gcai">
+          <mxGeometry x="0.75" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
         </mxCell>
-        <mxCell id="e8" value="loads lists" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.385;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="lists">
-          <mxGeometry relative="1" as="geometry"/>
+        <mxCell id="r10" value="&lt;b&gt;Sends notice, takes callback&lt;/b&gt;&lt;br&gt;[Voice, planned]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;dashed=1;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=0.97;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="phone">
+          <mxGeometry x="0.2" relative="1" as="geometry"><Array as="points"><mxPoint x="893" y="780"/><mxPoint x="1454.5" y="780"/></Array><mxPoint as="offset"/></mxGeometry>
         </mxCell>
-        <mxCell id="e9" value="models, speech" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.65;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="gcai">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e10" value="notice, callback" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;dashed=1;strokeColor=#999999;fontColor=#666666;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="mimamori" target="phone">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="e11" value="gets notice, calls back" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;dashed=1;strokeColor=#999999;fontColor=#666666;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="contact" target="phone">
-          <mxGeometry x="-0.8" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        <mxCell id="r11" value="&lt;b&gt;Calls back with the case code&lt;/b&gt;&lt;br&gt;[Phone]" style="html=1;fontSize=11;fontColor=#404040;endArrow=blockThin;endFill=1;endSize=12;strokeColor=#828282;dashed=1;edgeStyle=orthogonalEdgeStyle;rounded=0;labelBackgroundColor=#ffffff;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="contact" target="phone">
+          <mxGeometry x="-0.5" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
