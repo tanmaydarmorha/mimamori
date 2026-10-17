@@ -1,6 +1,6 @@
 # Mimamori
 
-**Decision support for bank tellers that stops fake-police scams at the counter, before the money moves.**
+**Decision support for bank tellers that stops coached scams at the counter, before the money moves.**
 
 Mimamori ("watching over" in Japanese) reads the counter conversation, spots the signs of a coached
 victim, and gives the teller the next question to ask, the evidence and a pause button. If the customer
@@ -12,6 +12,10 @@ freeze the account receiving the money and find the other people paying into it.
 - Built for the AI Builder Cup 2026, BFSI track. All data in this repository is synthetic.
 
 ## The problem
+
+Mimamori targets scams in which someone coaches the customer to move their own money. The signals
+it looks for (someone posing as an official or a relative, secrecy, a "safe account", urgency) are
+common to these scams, and new scam types arrive as playbooks. Our worked example is the fake-police scam.
 
 In fake-police scams (ニセ警察詐欺), a caller pretends to be a police officer, tells the victim their
 account is involved in a crime, and has them move their savings "for safekeeping", usually by bank
@@ -25,8 +29,8 @@ the most common victims by number of cases were in their 70s
 
 Banks are asked to speak to every customer making a large transfer. But the NPA itself notes that
 scammers **coach victims on what to tell the counter**
-([NPA](https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/teguchi-taisaku.pdf)). A teller
-with a queue, a polite customer and a plausible story ("it's for my renovation") has seconds to decide.
+([NPA](https://www.npa.go.jp/bureau/criminal/souni/tokusyusagi/teguchi-taisaku.pdf)). With a queue
+waiting, a polite customer with a plausible story ("it's for my renovation") can pass a routine check.
 The counter is the last point where a person can still stop the money.
 
 ## What Mimamori does
