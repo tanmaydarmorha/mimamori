@@ -257,7 +257,7 @@ When done, add a short **Summary** at the top of Findings: one line per item wit
 | R3 | **confirmed** | Furikome Sagi Relief Act **Art. 3(1)**: a bank "shall appropriately take" suspension measures when it suspects an account is a crime-use account. Police info is one factor, **not required**. Art. 4–11 give the DIC notice → extinguishment → distribution process. Covers *transfer-induced* fraud only. |
 | R4 | **confirmed** (basis), **arguable** (our exact handover) | APPI **Art. 27(1)(i)/(ii)** confirmed as you numbered them. PPC Q&A says a CCP **Art. 197(2)** inquiry = "based on laws" (i). A *teller-initiated* handover with no inquiry fits (ii) only weakly; **(iv)** is a better fit and wasn't in the brief. |
 | R1 | **likely** | No published checklist with concrete teller *questions* found. Found: the NPA national request, prefectural "5-step" practice, the "ask what it's for, not 'are you being scammed?'" rule, Osaka's binding report duty. No national amount/age threshold is published. |
-| R2 | **unresolved** | NPA made ニセ警察詐欺 its own category in **2026** (confirmed). Only **~15** post-2026-04-01 cases with usable narrative found, **not 20**. Counter-stopped cases with full dialogue are rare. T=2026-04-01 not yet shown feasible; see recommendation. |
+| R2 | **unresolved** | NPA made ニセ警察詐欺 its own category in **2026** (confirmed). **Correction 2026-10-17: its statistics start in Jan 2025** (NPA confirmed 2025 figures: 11,014 cases / ¥100.50bn). Only **~15** post-2026-04-01 cases with usable narrative found, **not 20**. Counter-stopped cases with full dialogue are rare. T=2026-04-01 not yet shown feasible; see recommendation. |
 | R5 | **unresolved** (lean *arguable* for opt-in pause, *unlikely* for "no counter override") | Every precedent found leaves an escape at the counter. A pause the customer cannot cancel at the counter has no precedent found. Needs legal review. |
 
 ---
@@ -369,6 +369,8 @@ When done, add a short **Summary** at the top of Findings: one line per item wit
 
 ### R2 · Date T and the post-T held-out case set
 **Status:** unresolved (category question **confirmed**; the 20-case target is **not shown to be met**)
+> **Correction 2026-10-17:** the statistics start in **January 2025**, not 2026: 「ニセ警察詐欺は令和7年1月から統計を開始」 (NPA, 令和７年 確定値, 2026-06-05, https://www.npa.go.jp/bureau/safetylife/sos47/new-topics/260605/01.html): 2025 = 11,014件 / 1,005.0億円. The rest of this answer is unchanged.
+
 **Answer (2–4 sentences):** The NPA treats ニセ警察詐欺 as its own method **from 令和8年 (2026)**, with statistics starting then. I found about **15 post-2026-04-01 cases with narrative detail adequate for adaptation** (9 victim-side weekly reports from Toyama Police, 5 monthly counter cases from Okayama Police — only 1 of them fake-police — and 1 news report) plus ~6 thinner commendation reports. Cases *stopped at a bank counter* with the actual dialogue are the scarce part; most sources describe completed victimisations. **I could not confirm 20 from one pass, so the proposed T is not yet demonstrably feasible.**
 
 **Sources**
@@ -383,7 +385,8 @@ When done, add a short **Summary** at the top of Findings: one line per item wit
 
 **Key passages**
 - [1] 「被害が急増している「ニセ警察詐欺」を独立した手口として位置付けました。」 — "The fast-rising ニセ警察詐欺 has been made an independent method." Also 「ニセ警察詐欺の検挙件数及び検挙人員は、令和８年から統計を開始している」 — arrest stats begin in 2026 (so no clean 2025 series; 2025 cases sit inside other categories).
-- [1] H1 2026: ニセ警察 **4,466件 / 507.9億円**; 既遂1件当たり **1,163.9万円**; victims' 70s most common; by delivery: 振込型 2,930件 (**65.6%**), 現金手交型 695件 (**15.6%**), 暗号資産送信型 620件 (**13.9%**); initial contact by phone 98.2%.
+- [1] H1 2026: ニセ警察 **4,466件 / 507.9億円**; 既遂1件当たり **1,163.9万円**; victims' most common age group (件数 and 被害額): **70s — 869件 (19.5%, computed from 4,466) / 151.6億円**, p.13 [quote 「70代が869件（+295件、+51.4％）・151.6億円（+44.7億円、+41.8％）と最も多く」 — "the 70s had the most, at 869 cases and ¥15.16bn"; verified 2026-10-17 against the PDF text; 70s+60s = 34.4% of cases, 52.8% of losses]; by delivery: 振込型 2,930件 (**65.6%**), 現金手交型 695件 (**15.6%**), 暗号資産送信型 620件 (**13.9%**); initial contact by phone 98.2%.
+- [1b] 2025 full year (hurikomesagi_toukei2025.pdf) contrast: ニセ警察 11,014件 / 1,005.0億円 (p.2). By **件数** the 30s lead: 「ニセ警察詐欺の認知件数は、30代が2,239件と最も多く」 — "the 30s had the most cases, at 2,239" (p.5). By **被害額** the 70s lead: 「被害額は、70代が274.6億円と最も多く」 — "by amount lost, the 70s were highest at ¥27.46bn" (p.5). [read via page fetch, raw PDF not downloadable here] So the 70s lead by yen in both periods, and by cases only in H1 2026.
 - [2] To end-Aug 2026: **6,346件 / 728.6億円** (件数 −4.1%, 被害額 +27.0% y/y). (NPA page doesn't define the category or give delivery breakdown.)
 - NPA's earlier public alert page 「ニセ警察詐欺に注意！」 carries the path `/new-topics/241218/` (i.e. **Dec 2024**) **[URL date only; page not opened]** — the *term* predates the 2026 statistical category.
 
@@ -456,6 +459,7 @@ Toyama's weekly bulletin stopped after 2026-08, and my count is of **one prefect
 - [2] 3(2)④ 「この預金が法令や公序良俗に反する行為に利用され、またはそのおそれがあると認められる場合」 — If the deposit is used or likely to be used for unlawful/immoral acts, the bank may suspend transactions or terminate.
 - [4] The limit applies to customers 70+ with no ATM transfer in 3 years; the notice offers an **opt-out** route; per the fetch tool, counter withdrawals appear unaffected **[summary only; text partly garbled]**.
 - [5] Art. 23: 10万円/day ATM cap for 70+/3-year no-transfer/Osaka residents; removable on the customer's request "if the institution judges there is no risk of special fraud".
+  - Verified 2026-10-17 against the Osaka police summary page (ordinance text still not read): Art. 23(1)「ATMにおける1日の振込上限額を10万円以下に設定しなければなりません」— banks must cap ATM transfers at ¥100,000/day; (2) applies only to accounts meeting **all** of: no transfer in the past 3 years, holder aged 70+, registered address in Osaka; (3) removable on request if the bank judges there is no fraud risk; (4) banks with their own police-agreed thresholds are exempt; in force 2025-10-01. Also Art. 22(4): people **65+** must not operate an ATM while talking on a mobile phone.
 - [3 — via search summary, **[summary only]**] The 2021 全銀協 paper says proxies' withdrawals can be accommodated where *clearly in the depositor's interest* and says adult guardianship is the basic route; the 2022 全銀協 document on 不測の事態における預金の払出し (https://www.zenginkyo.or.jp/fileadmin/res/news/news340516.pdf) is a follow-on. Not read in full.
 
 **Interpretation (ours, not the source's):**

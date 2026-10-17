@@ -85,3 +85,25 @@ without touching code.
 
 `scripts/demo.sh hero --record` saves `hero-teller-….webm` and `hero-phone-….webm`. The videos have no
 sound and are not edited. Use `--speed slow` for a calmer recording.
+
+### Footage for the submission video
+
+The submission must be in English, so the video uses English-only scenarios: `genuine-en`,
+`impostor-en` and `hero-en-full` (the English hero through the freeze and outreach; it freezes the
+payee, so it runs last). `scripts/demo.sh video` runs them with `split` and `small`.
+
+```bash
+scripts/cloud-reset.sh                                   # clean deployed stack (wipes case-db run data)
+scripts/demo.sh video --record --clean --hq --url https://<web-ui URL>
+```
+
+`--clean` records the teller at 1920×1080 and the phone at 480×960 without the caption bar, and writes
+`<scenario>-timeline-….json` with the start time of every step and its caption, for lining up the edit.
+The recording windows may be larger than your screen; the video still captures the whole page. Don't
+click in them while they run.
+
+`--hq` records from Chrome's screencast feed instead of Playwright's 25 fps recorder: a frame on every
+repaint (60 fps while anything moves), encoded to a constant 60 fps H.264 `.mp4` with ffmpeg (needs
+`ffmpeg` on the PATH). The drawn cursor glides one position per frame and scrolling is smooth. The
+timeline JSON then also holds each window's raw frame times and `videoOffset` (where step 0 falls in
+the video).

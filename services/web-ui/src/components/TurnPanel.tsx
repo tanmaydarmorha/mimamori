@@ -169,7 +169,7 @@ export function TurnPanel({
         )}
       </form>
       {!speechOn && (
-        <p className="muted small">{tr("音声認識はオフです(文字入力モード)。", "Speech-to-text is off: typed mode.")}</p>
+        <p className="muted small">{tr("窓口の音声認識は今後の機能です。このプロトタイプでは発言を文字で入力します。", "Speech-to-text at the counter is planned for a future release. In this prototype, type what was said.")}</p>
       )}
       {error && (
         <p className="error" role="alert">

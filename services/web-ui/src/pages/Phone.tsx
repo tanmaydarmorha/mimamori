@@ -324,6 +324,11 @@ export function Phone() {
                 )}
               </form>
             )}
+            {!ended && config.speech !== "cloud" && (
+              <p className="muted small">
+                {tr("通話の音声認識は今後の機能です。このプロトタイプでは発言を文字で入力します。", "Speech-to-text on the call is planned for a future release. In this prototype, type what you say.")}
+              </p>
+            )}
             <label className="check small">
               <input type="checkbox" checked={voiceOut} onChange={(e) => setVoiceOut(e.target.checked)} /> {tr("音声で読み上げる", "Read aloud")}
             </label>
