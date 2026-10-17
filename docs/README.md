@@ -14,5 +14,9 @@ Spec: `Mimamori_Solution.pdf` (kept outside this repo, in `ctrl+risk/`; `PROPOSA
 | [`../schemas/`](../schemas/) | Data contracts (JSON Schema), Tanaka examples, the copilot rules, `validate.py` |
 | [`../spikes/gemma-copilot/`](../spikes/gemma-copilot/) | Step-0 Gemma spike: test conversations, runner, [results](../spikes/gemma-copilot/RESULTS.md) |
 
-Re-render a diagram: extract its mermaid block to a `.mmd` file, then
-`npx -y @mermaid-js/mermaid-cli@11.4.2 -i <file>.mmd -o architecture/diagrams/<name>.png -w 2000 -b white`.
+Re-render a diagram:
+- **C4 context and container views** are draw.io files in `architecture/diagrams/src/`. Edit them in
+  draw.io, then export with the desktop app:
+  `/Applications/draw.io.app/Contents/MacOS/draw.io -x -f png -s 2 -b 20 -o architecture/diagrams/<name>.png architecture/diagrams/src/<name>.drawio`.
+- **Sequence diagrams** (Tanaka case, demo scenarios) are mermaid blocks in the Markdown: extract one to a
+  `.mmd` file, then `npx -y @mermaid-js/mermaid-cli@11.4.2 -i <file>.mmd -o architecture/diagrams/<name>.png -w 2000 -b white`.

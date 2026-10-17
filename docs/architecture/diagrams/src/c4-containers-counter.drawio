@@ -1,0 +1,94 @@
+<mxfile host="drawio">
+  <diagram id="counter" name="Counter path">
+    <mxGraphModel adaptiveColors="auto" dx="1400" dy="900" grid="1" gridSize="10" guides="1" page="0" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="title" value="Mimamori containers: counter path (as built)" style="text;html=1;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="0" width="700" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="customer" value="&lt;b&gt;Customer&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;At the counter&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="170" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="teller" value="&lt;b&gt;Branch teller&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Decides every pause&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="380" y="60" width="170" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="gcp" value="Mimamori · bank Google Cloud project (asia-south1) · Cloud Run, every service scales to zero" style="swimlane;startSize=30;html=1;fillColor=#f5f9ff;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;rounded=1;arcSize=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="180" width="1070" height="540" as="geometry"/>
+        </mxCell>
+        <mxCell id="webui" value="&lt;b&gt;Web UI&lt;/b&gt; · teller console&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;React SPA behind nginx, the only public service; proxies /api/* to the internal services&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="gcp">
+          <mxGeometry x="20" y="48" width="820" height="56" as="geometry"/>
+        </mxCell>
+        <mxCell id="core" value="&lt;b&gt;Core banking&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Mock API, synthetic data&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="gcp">
+          <mxGeometry x="20" y="170" width="170" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="case" value="&lt;b&gt;Case service&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;FastAPI + ADK: copilot, investigation agent, quote checks, risk-v1&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="gcp">
+          <mxGeometry x="650" y="170" width="170" height="86" as="geometry"/>
+        </mxCell>
+        <mxCell id="scoring" value="&lt;b&gt;Scoring&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Baselines, counterpart graph, watchlist. No LLM&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="gcp">
+          <mxGeometry x="250" y="320" width="170" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="refdb" value="&lt;b&gt;ref-db&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Watchlist snapshot&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="gcp">
+          <mxGeometry x="20" y="440" width="170" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="casedb" value="&lt;b&gt;case-db&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Baselines, cases, audit&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="gcp">
+          <mxGeometry x="470" y="440" width="170" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="inteldb" value="&lt;b&gt;intel-db&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Approved playbooks&lt;/font&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="gcp">
+          <mxGeometry x="880" y="320" width="170" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext" value="Google Cloud AI" style="swimlane;startSize=30;html=1;fillColor=#fff8ef;strokeColor=#d79b00;fontSize=14;fontStyle=1;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="180" width="230" height="300" as="geometry"/>
+        </mxCell>
+        <mxCell id="stt" value="&lt;b&gt;Speech-to-Text&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Planned: today the teller types the turns&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#ffffff;strokeColor=#999999;fontColor=#666666;fontSize=14;" vertex="1" parent="ext">
+          <mxGeometry x="30" y="48" width="170" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="gemini" value="&lt;b&gt;Gemini 2.5 Flash&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:12px&quot;&gt;Vertex AI, schema-constrained. Never sees customer records&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;" vertex="1" parent="ext">
+          <mxGeometry x="30" y="170" width="170" height="86" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend" value="Solid: built · Dashed: planned · Green: Firestore databases with per-database IAM (only Scoring and the case service can use case-db)" style="text;html=1;fontSize=12;align=left;verticalAlign=middle;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="20" y="730" width="1100" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="e1" value="explains the transfer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;" edge="1" parent="1" source="customer" target="teller">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" value="types turns, decides" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;entryX=0.518;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="teller" target="webui">
+          <mxGeometry x="-0.45" relative="1" as="geometry"><mxPoint as="offset"/></mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="keys transfer" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.104;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gcp" source="webui" target="core">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" value="turns, decisions; live card (SSE)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.872;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gcp" source="webui" target="case">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" value="pre-transaction check&lt;br&gt;(fail-open)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="gcp" source="core" target="scoring">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" value="opens case" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;" edge="1" parent="gcp" source="scoring" target="case">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" value="hold, freeze" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=1;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="gcp" source="case" target="core">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" value="watchlist" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="gcp" source="scoring" target="refdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" value="baselines" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="gcp" source="scoring" target="casedb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" value="cases, cards, audit" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.3;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="gcp" source="case" target="casedb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e11" value="approved playbooks" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=0.85;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="gcp" source="case" target="inteldb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e12" value="copilot turns, investigation" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="case" target="gemini">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e13" value="counter audio (planned)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;fontSize=12;dashed=1;strokeColor=#999999;fontColor=#666666;exitX=1;exitY=0.625;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="webui" target="stt">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
