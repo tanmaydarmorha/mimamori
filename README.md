@@ -8,7 +8,7 @@ agreed to it in advance, a voice assistant calls their family on a verified line
 freeze the account receiving the money and find the other people paying into it.
 
 - **Live prototype:** https://web-ui-316555131232.asia-south1.run.app (synthetic data only; see [Try it](#try-it))
-- **Demo video (3 min):** _link to be added_
+- **Demo video (3:19):** https://drive.google.com/file/d/1HI-4aoP9m9qS74tZasQfJjA4vdc6_dZs/view?usp=sharing
 - Built for the AI Builder Cup 2026, BFSI track. All data in this repository is synthetic.
 
 ## The problem
