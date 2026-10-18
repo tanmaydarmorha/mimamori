@@ -1,10 +1,8 @@
 # Decisions
 
-> **This file overrides `Mimamori_Solution.pdf` where they differ, until the deck is regenerated.**
-> Deck edits are listed in `deck-changes.md` (kept outside this repo, in `ctrl+risk/mimamori-notes/`).
-
-Sources: two internal design reviews (kept outside this repo, in `ctrl+risk/mimamori-notes/`): a devil's-advocate review (DA #1–20) and a
-critique of the response plan (CR #1–28). Each row below states the issue and how it was resolved.
+Design decisions for Mimamori, and how each finding from two internal design reviews was resolved:
+a devil's-advocate review (DA #1–20) and a critique of the response plan (CR #1–28). Each row
+below states the issue and its resolution.
 
 Applied to the architecture docs on 2026-10-12.
 
@@ -18,7 +16,7 @@ Applied to the architecture docs on 2026-10-12.
 
 | Topic | Decision |
 |---|---|
-| Spec and region | PDF is the spec; `PROPOSAL.md` deprecated. Prototype region `asia-south1`, production `asia-northeast1`. |
+| Region | Prototype region `asia-south1`, production `asia-northeast1`. |
 | Deployables | Split by trust boundary. Firestore `case-db` / `intel-db` / `ref-db`, with IAM conditions per database. |
 | Hero case | ¥3,000,000 **counter transfer to a same-bank mule account**. Cover story: renovation contractor. |
 | Pause basis | With wishes: pre-agreed cooling-off pause: at least `minimum_hours`, extended to the next business-day close, capped at 24 h (CR 25). **A delay, not a prohibition:** she can override once the nominated contact has been reached, or after manager review with a second confirmation (R5, 2026-10-12). Without wishes: voluntary wait under bank policy, plus police. |
@@ -54,9 +52,9 @@ Applied to the architecture docs on 2026-10-12.
 | DA 14 | Missing auth, baseline job, watchlist refresh, mutable audit | IAP with roles. Baselines in Scoring. Watchlist loader job. Append-only audit sink designed | containers | doc; audit designed |
 | DA 15 | Learning loop mixes data classes | Proposals in `case-db`. Only structured fields to `intel-db` | containers 2c | doc; designed |
 | DA 16 | IAM statements wrong | Only Scoring and the case service can use `case-db`, via IAM conditions. Model endpoint has no grant. Simulation job runs in a synthetic-only environment | containers | doc |
-| DA 17 | Age-rule baseline is a strawman | Three-way evaluation (see CR 6, 7, 16, 19) | deck-changes | doc; research |
-| DA 18 | "Elderly", "protects seven", APPI consent | Removed / "surfaces six others" / consent line added | dynamic, deck-changes | doc |
-| DA 19 | Region contradictions | Prototype `asia-south1`, production `asia-northeast1` | all docs, deck-changes | doc |
+| DA 17 | Age-rule baseline is a strawman | Three-way evaluation (see CR 6, 7, 16, 19) | proposal deck | doc; research |
+| DA 18 | "Elderly", "protects seven", APPI consent | Removed / "surfaces six others" / consent line added | dynamic, proposal deck | doc |
+| DA 19 | Region contradictions | Prototype `asia-south1`, production `asia-northeast1` | all docs, proposal deck | doc |
 | DA 20 | REST for audio, missing callback arrow, stale "Next" | WebSocket audio. Brief and outcome as separate arrows. "Next" rewritten | containers, context | doc |
 
 ## Plan critique (CR)
@@ -64,12 +62,12 @@ Applied to the architecture docs on 2026-10-12.
 | # | Issue | Resolution | Where | Status |
 |---|---|---|---|---|
 | CR 1 | Mule must be same-bank | Same-bank mule. Cross-bank fan-in needs industry sharing | dynamic B, C | doc; cross-bank designed |
-| CR 2 | Most victims lack wishes | Copilot and card are the headline value for everyone. Wishes offered at routine counter visits | context, deck-changes | doc |
+| CR 2 | Most victims lack wishes | Copilot and card are the headline value for everyone. Wishes offered at routine counter visits | context, proposal deck | doc |
 | CR 3 | Police missing | Teller notifies police. Summary to officers on request (APPI 27(1)(i), R4) | context, dynamic B | doc, build |
 | CR 4 | AI call sounds like a scam | Notice reveals nothing, asks for a callback on the published number with a case code | dynamic C | doc, build |
 | CR 5 | Brief alone can't stop invention | Gemini classifies intent. Code fills approved templates. Gemini writes connecting phrases only | dynamic C | doc, build |
-| CR 6 | Age rule is the wrong counter baseline | Arm (a) = today's counter check. Age rule only for the §1 ATM argument | deck-changes | doc; research |
-| CR 7 | n=25 can't support rates | Held-out set adapted from public cases, reported as failure analysis | deck-changes | build; research |
+| CR 6 | Age rule is the wrong counter baseline | Arm (a) = today's counter check. Age rule only for the §1 ATM argument | proposal deck | doc; research |
+| CR 7 | n=25 can't support rates | Held-out set adapted from public cases, reported as failure analysis | proposal deck | build; research |
 | CR 8 | Inferences can't be value-checked | `fact` vs `inference`. Inferences cite verified facts or quotes and are shown as hypotheses | dynamic B | doc, build |
 | CR 9 | Baselines in the simulation job | Baselines in Scoring | containers | doc, build |
 | CR 10 | Watchlist loader in the intelligence job | Separate loader job (corrected by CR 20) | containers 2c | doc, build |
@@ -78,17 +76,17 @@ Applied to the architecture docs on 2026-10-12.
 | CR 13 | Which document wins | Override line at the top of this file | this file | doc |
 | CR 14 | Over-broad grep check | Grep for "withdrawal of ¥3,000,000" | plan | doc |
 | CR 15 | Who answers the callback; identity check unbuilt | AI agent, number + case code, both built. Notice consent in wishes. Suspicion triggers | dynamic C, containers 2b | doc, build |
-| CR 16 | Test leakage from shared sources | Date split: playbooks before T, test cases after T. `published_at` kept | containers 2c, deck-changes | build; research |
+| CR 16 | Test leakage from shared sources | Date split: playbooks before T, test cases after T. `published_at` kept | containers 2c, proposal deck | build; research |
 | CR 17 | Transcript can't be cited | `transcript:{turn_id}` + quote, checked by the quote rule (see CR 27) | dynamic B | doc, build |
 | CR 18 | Cooling-off vs no-wishes path | With wishes: delay up to 24 h, override after contact reached or manager review (R5). Without: voluntary wait | dynamic B, C | doc; legal review |
-| CR 19 | Status-quo baseline is a strawman | Arm (a) from NPA request + Akita five-step routine + Okayama practice (R1). Amount threshold is a stated parameter. One shared teller assumption | deck-changes | doc |
+| CR 19 | Status-quo baseline is a strawman | Arm (a) from NPA request + Akita five-step routine + Okayama practice (R1). Amount threshold is a stated parameter. One shared teller assumption | proposal deck | doc |
 | CR 20 | Loader in Scoring opens internet access | Separate loader job, no `case-db` grant, writes `ref-db` | containers 2c | doc, build |
 | CR 21 | Freeze needs a human decision | Analyst approves the freeze. Logged | dynamic C | doc, build |
 | CR 22 | Spike pass criteria | Fixed before the run; 1–3 passed, 4 (latency) not tested locally | spikes/gemma-copilot/RESULTS.md | done; latency pending |
 | CR 23 | Build list needs priority order | Ordered list below | this file | doc |
-| CR 24 | Callback check overclaims | Described as "lets the family verify the bank, blocks strangers", not identity verification | dynamic C, deck-changes | doc |
+| CR 24 | Callback check overclaims | Described as "lets the family verify the bank, blocks strangers", not identity verification | dynamic C, proposal deck | doc |
 | CR 25 | End-of-day pause can be 30 min | `minimum_hours`, extended to next business-day close, capped at 24 h | schemas/advance-wishes.json, dynamic B | doc, build |
-| CR 26 | Callback needs AI and recording notice | Agent's first callback turn says so | dynamic C, deck-changes | doc, build |
+| CR 26 | Callback needs AI and recording notice | Agent's first callback turn says so | dynamic C, proposal deck | doc, build |
 | CR 27 | Absence facts and fragile quote matching | Tools return counts (e.g. `contractor_payments_count_12y = 0`). Quote rule: exact, then NFKC + whitespace-stripped, across customer turns; wrong turn ID corrected, unfound quote dropped (spike: 2 failures, both handled) | schemas/README.md, dynamic B | doc, build |
 | CR 28 | Seeded playbook must follow the date split | Every playbook source has `published_at`. Seeded playbook dated before T and not from a held-out case | schemas/playbook.json | build |
 

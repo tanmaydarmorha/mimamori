@@ -1,8 +1,7 @@
-# Research brief: Mimamori open research items
+# Research: the problem, the counter process and the law
 
-**For:** a fresh research session. Read this file fully before starting. It's self-contained.
-**Write findings into:** the `## Findings` section at the bottom of this file. Don't edit other files.
-**Created:** 2026-10-12.
+Research done from 2026-10-12 to ground the design and the figures in the pitch. Each item states its
+question; the findings, with sources and the exact passages relied on, are at the end.
 
 ## Background (what Mimamori is)
 
@@ -15,43 +14,23 @@ pause the transaction. The bank may then:
 - notify the police
 - freeze the scammer's receiving ("mule") account if it's held at the same bank
 
-The design decisions are in [`decisions.md`](decisions.md). The deck edits that depend on this
-research are in `deck-changes.md` (kept outside this repo, in `ctrl+risk/mimamori-notes/`). You don't need to read the architecture docs.
+The design decisions that use these findings are in [`decisions.md`](decisions.md).
 
-## Rules for this research
+## Method
 
-1. **Never fabricate a source, article number, URL, quote or statistic.** If you can't find
-   something, write "not found" and what you tried. A gap is fine; an invented citation is not.
-2. **Prefer primary sources:**
-   - e-Gov law database (laws.e-gov.go.jp)
-   - National Police Agency (npa.go.jp)
-   - prefectural police sites
-   - Financial Services Agency (fsa.go.jp)
-   - Personal Information Protection Commission (ppc.go.jp)
-   - Japanese Bankers Association (zenginkyo.or.jp)
-   - Deposit Insurance Corporation of Japan (dic.go.jp)
-
-   Use news (NHK, Nikkei, Japan Times, Kyodo) for cases and secondary confirmation.
-3. **Search in Japanese as well as English.** Most primary material is Japanese only. Suggested
-   search terms are given for each item.
-4. **For every source, record:**
-   - URL
-   - title (original language)
-   - publisher
-   - publication date, if shown
-   - date accessed
-   - the exact passage relied on: a short quote in the original language plus an English gloss
-5. **Separate what the source says from your interpretation.** Mark interpretation as such.
-6. **Give a confidence for each item:**
-   - **confirmed:** a primary source says it directly
-   - **likely:** secondary or indirect
-   - **unresolved**
-
-7. **Timebox:** about 30–45 minutes per item. Items R3 and R4 should be quick. Do them first.
+1. **No fabricated sources, article numbers, URLs, quotes or statistics.** Where something could
+   not be found, the finding says "not found" and what was tried.
+2. **Primary sources first:** the e-Gov law database, the National Police Agency, prefectural
+   police, the Financial Services Agency, the Personal Information Protection Commission, the
+   Japanese Bankers Association and the Deposit Insurance Corporation of Japan. News (NHK, Nikkei,
+   Japan Times, Kyodo) only for cases and secondary confirmation.
+3. **Searched in Japanese as well as English**, since most primary material is Japanese only.
+4. **Every source is recorded** with its URL, original title, publisher, publication date, date
+   accessed, and the exact passage relied on (original language plus an English gloss).
+5. **What a source says is kept apart from interpretation**, and each item has a confidence:
+   confirmed (a primary source says it directly), likely (secondary or indirect) or unresolved.
 
 ## Items
-
-Suggested order: **R3 → R4 → R1 → R2 → R5**.
 
 ### R1 · Published teller-check guidance (evaluation baseline "arm (a)")
 
@@ -218,33 +197,6 @@ The team decided to **keep T = 2026-04-01** and harvest more sources rather than
 
 **Deliver:** the extended R2 table, updated monthly counts, the payment-method mix, and whether
 the 20-case target is met.
-
-## Output format
-
-Fill in this template under **Findings**, one block per item:
-
-```markdown
-### R<n> · <title>
-**Status:** confirmed | likely | unresolved
-**Answer (2–4 sentences):** …
-
-**Sources**
-| # | Title (original) | Publisher | Published | Accessed | URL |
-|---|---|---|---|---|---|
-
-**Key passages**
-- [1] 「…」 — English gloss.
-
-**Interpretation (ours, not the source's):** …
-**Gaps / what I couldn't find:** …
-**Suggested wording for the deck / decisions.md:** …
-```
-
-R2 also gets its case table and monthly counts. R1 also gets its question items and draft rules.
-
-When done, add a short **Summary** at the top of Findings: one line per item with its status.
-
----
 
 ## Findings
 

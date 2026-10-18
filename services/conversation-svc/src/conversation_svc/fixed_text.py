@@ -1,8 +1,8 @@
 """Wording that is fixed in code (not model output, not in schemas/examples/call-templates.json yet).
 
 The opening line and the notice are constants here because `call-templates.json` has no slot for
-them (its `intent` enum is the per-turn classification only). The orchestrator is asked to add an
-`opening` / `notice` template kind to `schemas/`; until then these are the source of truth.
+them (its `intent` enum is the per-turn classification only). Until an `opening` / `notice` template
+kind is added to `schemas/`, these are the source of truth.
 
 CR 4: the notice reveals nothing but the branch, "about your mother", the published number and the
 case code. CR 24: the callback lets the family verify the bank; it is not proof of identity.

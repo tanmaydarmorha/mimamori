@@ -115,18 +115,18 @@ about $0 when idle. A self-hosted Gemma endpoint (designed) would add a GPU floo
 - Voice onboarding for advance wishes. In the prototype, Keiko's wishes are seeded as data.
 - A real phone menu and telephony. In the prototype, both are simulated in the browser.
 
-## Where the PDF components live
+## Where each component lives
 
-| PDF § | Component | Container |
-|---|---|---|
-| 6.1 | Counter copilot | Case service |
-| 6.2 | Investigation agent | Case service |
-| 6.3 | Scam intelligence agent | Intelligence job |
-| 6.4 | Trusted-contact agent | Conversation service |
-| 6.5 | Advance-wishes onboarding | Designed; seeded data in the prototype |
-| 6.6 | Simulation & evaluation | Simulation job |
-| 6.7 | Learning loop | Designed; case service → analyst → `intel-db` |
-| — | Baseline, smart limits, counterpart graph | Scoring |
+| Component | Container |
+|---|---|
+| Counter copilot | Case service |
+| Investigation agent | Case service |
+| Scam intelligence agent | Intelligence job |
+| Trusted-contact agent | Conversation service |
+| Advance-wishes onboarding | Designed; seeded data in the prototype |
+| Simulation and evaluation | Simulation job |
+| Learning loop | Designed; case service → analyst → `intel-db` |
+| Baseline, smart limits, counterpart graph | Scoring |
 
 ## Open items
 

@@ -7,8 +7,8 @@ generated from [`schemas/`](../../schemas/README.md). Flows: [`c4-dynamic-tanaka
 Boundaries: [`c4-containers.md`](c4-containers.md). Decisions override everything:
 [`../decisions.md`](../decisions.md).
 
-**Changing a contract:** don't. Report it to the orchestrator, who changes `libs/` / `schemas/` /
-this file on `main`.
+**Changing a contract:** change the schema in `schemas/` and the shared models in `libs/` first,
+then this file, then the services.
 
 ## Conventions
 

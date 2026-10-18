@@ -1,6 +1,6 @@
 # C4 Dynamic — The Tanaka case, end to end
 
-Source: `Mimamori_Solution.pdf` §9, as amended by [`../decisions.md`](../decisions.md).
+Decisions: [`../decisions.md`](../decisions.md).
 Containers: [`c4-containers.md`](c4-containers.md).
 
 Tanaka Keiko, 78, a twelve-year customer with a baseline of ¥50,000 monthly withdrawals. Her
@@ -8,8 +8,7 @@ advance wishes, recorded at an earlier counter visit, name her daughter Yuki as 
 contact. They consent to a notice call and agree to a cooling-off pause (at least 4 h, extended to the next business-day close, at most 24 h). She can
 override once the nominated contact has been reached, or after manager review with a second confirmation. All data is synthetic.
 
-This is also the script for the ~3-minute video. Step numbers in the headings match PDF §9. The
-flow is split into three diagrams so each stays readable. They show the prototype as built: the
+The flow is split into three diagrams so each stays readable. They show the prototype as built: the
 copilot runs on Gemini 2.5 Flash (Gemma designed), the teller and the family member type their
 turns (Speech-to-Text planned), and the phone is simulated in the browser. API paths are the proposed contracts
 between containers.

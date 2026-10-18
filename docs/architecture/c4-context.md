@@ -1,7 +1,6 @@
 # C4 Level 1 — System Context: Mimamori 見守り
 
-Source of truth: `Mimamori_Solution.pdf` (AI Builder Cup 2026 solution brief), as amended by
-[`../decisions.md`](../decisions.md) until the deck is regenerated. `PROPOSAL.md` is deprecated.
+Design decisions: [`../decisions.md`](../decisions.md).
 
 At this level Mimamori is a single box. The diagram shows **who** uses it, **what external
 systems** it depends on, and **where data crosses the bank's boundary**. Containers are in
