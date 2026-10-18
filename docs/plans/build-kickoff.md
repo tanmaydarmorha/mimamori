@@ -1,5 +1,8 @@
 # Build kickoff: parallel sub-agents
 
+> **Historical:** the build plan as it was kicked off, including parts that were designed but not
+> built (Gemma, Speech-to-Text). For what was built, see the [repository README](../../README.md).
+
 Hand this file to a fresh Claude Code session started in the repo root (`mimamori/`) with:
 
 > Read `docs/plans/build-kickoff.md` and run it as the orchestrator.
