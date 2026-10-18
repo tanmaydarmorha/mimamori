@@ -9,7 +9,9 @@ contact. They consent to a notice call and agree to a cooling-off pause (at leas
 override once the nominated contact has been reached, or after manager review with a second confirmation. All data is synthetic.
 
 This is also the script for the ~3-minute video. Step numbers in the headings match PDF §9. The
-flow is split into three diagrams so each stays readable. API paths are the proposed contracts
+flow is split into three diagrams so each stays readable. They show the prototype as built: the
+copilot runs on Gemini 2.5 Flash (Gemma designed), the teller and the family member type their
+turns (Speech-to-Text planned), and the phone is simulated in the browser. API paths are the proposed contracts
 between containers.
 
 **Colour key:** blue boxes are deterministic code, green boxes are model calls, yellow boxes are
@@ -68,8 +70,7 @@ sequenceDiagram
     participant Core as Core banking (mock)
     participant Scoring as Scoring
     participant Case as Case service
-    participant STT as Speech-to-Text
-    participant Gemma as Copilot model (Gemma)
+    participant LLM as Gemini 2.5 Flash (Vertex AI)
 
     Note over Keiko,Case: Step 3 · Alert
     Keiko->>Teller: Transfer ¥3,000,000 to カ）… (same bank)
@@ -81,28 +82,27 @@ sequenceDiagram
     Scoring->>Case: POST /cases {customer, transfer, signals}
     Case-->>UI: Case opened, alert (SSE)
 
-    Note over Case,Gemma: Step 4 · Investigation
+    Note over Case,LLM: Step 4 · Investigation
     rect rgb(232, 245, 233)
     loop Tool calls (read-only, step limit)
-        Case->>Gemma: Case context + tool results so far (untrusted fields in a data block)
-        Gemma-->>Case: Call a tool, e.g. explain_payee, counterpart_graph, search_playbooks
+        Case->>LLM: Case context + tool results so far (untrusted fields in a data block)
+        LLM-->>Case: Call a tool, e.g. explain_payee, counterpart_graph, search_playbooks
         Case->>Case: Execute tool (code)
     end
-    Gemma-->>Case: Hypotheses, facts, inferences, question IDs from the bank
+    LLM-->>Case: Hypotheses, facts, inferences, question IDs from the bank
     end
     rect rgb(227, 242, 253)
     Case->>Case: Check each fact against its tool field, drop ungrounded inferences
     end
     Case-->>UI: Evidence card + first question (SSE)
 
-    Note over Keiko,Gemma: Step 5 · At the counter (one loop per spoken turn)
+    Note over Keiko,LLM: Step 5 · At the counter (one loop per turn)
     Keiko->>Teller: 「リフォーム代です」(it's for the renovation contractor)
-    UI->>Case: Customer-channel audio (WebSocket)
-    Case->>STT: Stream audio
-    STT-->>Case: Transcript turn t2
+    Teller->>UI: Types the customer's words (Speech-to-Text planned)
+    UI->>Case: POST /cases/{id}/turns → turn t2
     rect rgb(232, 245, 233)
-    Case->>Gemma: Copilot turn: transcript + card + approved playbooks
-    Gemma-->>Case: Cover story inconsistent with history (quote t2), question ID
+    Case->>LLM: Copilot turn: transcript + card + approved playbooks
+    LLM-->>Case: Cover story inconsistent with history (quote t2), question ID
     end
     rect rgb(227, 242, 253)
     Case->>Case: Quote rule: find quote in customer turns, fix turn ID or drop
@@ -110,10 +110,10 @@ sequenceDiagram
     Case-->>UI: Hypotheses updated, approved question from the bank (SSE)
     Teller->>Keiko: Asks the suggested question
     Keiko->>Teller: 「警察の人に、誰にも言うなと…」(the police told me not to tell anyone)
-    UI->>Case: Audio, transcribed as t3
+    UI->>Case: Typed turn t3
     rect rgb(232, 245, 233)
-    Case->>Gemma: Copilot turn
-    Gemma-->>Case: Indicators: impersonated_official, secrecy_instruction (quote t3)
+    Case->>LLM: Copilot turn
+    LLM-->>Case: Indicators: impersonated_official, secrecy_instruction (quote t3)
     end
     rect rgb(227, 242, 253)
     Case->>Case: Risk rule in code: two core groups, so high
@@ -144,7 +144,7 @@ sequenceDiagram
     actor Teller as Teller
     participant Case as Case service
     participant Conv as Conversation service
-    participant Speech as STT / TTS
+    participant Speech as Text-to-Speech
     participant Gemini as Gemini Flash
     actor Yuki as Yuki (simulated phone)
     actor Analyst as Fraud analyst
@@ -169,9 +169,7 @@ sequenceDiagram
             Conv->>Speech: Opening text to speech
             Speech-->>Yuki: 「自動音声のアシスタントです。通話は録音されます」(automated assistant, call recorded)
             loop Each turn
-                Yuki->>Conv: Speech
-                Conv->>Speech: Transcribe
-                Speech-->>Conv: Text
+                Yuki->>Conv: Typed turn on the simulated phone (Speech-to-Text planned)
                 rect rgb(232, 245, 233)
                 Conv->>Gemini: Classify intent
                 Gemini-->>Conv: what_happened, is_she_safe, how_much, what_to_do, other
@@ -248,7 +246,7 @@ Step 9 (proof) runs offline in the simulation job. See diagram 2c in
    - Gemini classifies intent, and code fills approved templates from a brief that holds no balance and no other customers' data.
 8. **Yuki's reply is information** (`contact_view`), never an instruction.
 9. **A human decides the freeze.** The same rule as holds: the analyst approves, and the decision is logged.
-10. **Code, not the model, decides risk.** Gemma extracts indicators and quotes, checks the cover
+10. **Code, not the model, decides risk.** The model (Gemini 2.5 Flash as built) extracts indicators and quotes, checks the cover
     story and picks a question ID. Code accumulates verified indicators, computes the risk level
     and the pause recommendation (`risk-v1`), and fills every word the teller says from the
     approved bank. The model's own likelihood numbers are not used (Gemma spike, finding 1).
