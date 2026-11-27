@@ -142,7 +142,8 @@ export function Phone() {
   };
 
   return (
-    <div className="phone-wrap">
+    <main className="phone-wrap">
+      <h1 className="sr-only">{tr("見守り: 携帯電話(シミュレーション)", "Mimamori: simulated phone")}</h1>
       <aside className="phone-explain">
         <h2>{tr("娘さんの携帯電話", "The daughter's phone")}</h2>
         <p>
@@ -296,7 +297,7 @@ export function Phone() {
                 <Gloss en="We could not verify this. We are sorry, but we will end the call." />
               </p>
             )}
-            <div className="chat" aria-live="polite" data-testid="phone-chat" ref={chatRef}>
+            <div className="chat" aria-live="polite" data-testid="phone-chat" ref={chatRef} tabIndex={0} aria-label={tr("通話の内容", "Call transcript")}>
               {lines.map((l, i) => (
                 <div key={i} className={`bubble bubble-${l.from}`}>
                   <span lang={l.language ?? "ja"}>{l.text}</span>
@@ -346,6 +347,6 @@ export function Phone() {
           </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }

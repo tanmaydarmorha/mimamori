@@ -28,7 +28,7 @@ function Shell() {
   return (
     <div className="shell">
       <header className="topbar">
-        <strong className="brand">見守り Mimamori</strong>
+        <h1 className="brand">見守り Mimamori</h1>
         <nav>
           {identity.role === "teller" && <NavLink to="/teller">{tr("窓口", "Counter")}</NavLink>}
           {identity.role === "analyst" && <NavLink to="/analyst">{tr("分析", "Analyst")}</NavLink>}

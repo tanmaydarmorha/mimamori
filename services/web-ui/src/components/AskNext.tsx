@@ -10,7 +10,7 @@ export function AskNext({ card, language = "ja", onSay }: { card: Card; language
   const secondary = language === "en" ? q.ja_filled : q.en_filled;
   return (
     <section className="paper next-q ask-next" data-testid="next-question" aria-label={tr("次に伺うこと", "Ask next")}>
-      <h4>{tr("次に伺うこと", "Ask next")}</h4>
+      <h3>{tr("次に伺うこと", "Ask next")}</h3>
       <p lang={language} className="q-ja">
         {primary}
       </p>

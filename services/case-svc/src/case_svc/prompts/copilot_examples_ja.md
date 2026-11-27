@@ -9,5 +9,7 @@ Examples of what customers say (Japanese):
 - `cash_or_card_handover`: 「家に取りに来る人に渡すの」
 - `safe_account_transfer`: 「お金を守るために別の口座に移すように言われて」
 - `changed_contact_number`: 「携帯の番号が新しくなったって」
+  When it is a relative who "changed number" (「孫の携帯、番号が変わったって」: the customer can't check
+  it is really them), the same quote is also `impersonated_relative`: list it under both types.
 - `third_party_pressure`: 「弁護士の先生が急いでって」
 - `cover_story`: 「車を買うのよ」
