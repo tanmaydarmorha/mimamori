@@ -64,7 +64,7 @@ export function AnalystConsole() {
         <h2>{tr("確認待ち", "To review")}</h2>
         <ul className="queue-list" role="tablist" aria-label={tr("キュー", "Queues")}>
           {rows.map(([k, text, n]) => (
-            <li key={k}>
+            <li key={k} role="presentation">
               <button type="button" role="tab" aria-selected={queue === k} className={queue === k ? "on" : ""} onClick={() => setQueue(k)}>
                 <span>{text}</span>
                 <span className="count">{n}</span>

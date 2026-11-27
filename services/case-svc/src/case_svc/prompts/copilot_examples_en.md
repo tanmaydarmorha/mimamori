@@ -10,5 +10,7 @@ Examples of what customers say (English):
 - `cash_or_card_handover`: "I'm handing it to the person who's coming to the house."
 - `safe_account_transfer`: "I was told to move my money to another account to protect it."
 - `changed_contact_number`: "He said his phone number has changed."
+  When it is a relative who "changed number" (the customer can't check it is really them), the same
+  quote is also `impersonated_relative`: list it under both types.
 - `third_party_pressure`: "The lawyer said to hurry."
 - `cover_story`: "I'm buying a car."

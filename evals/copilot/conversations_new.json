@@ -1,0 +1,61 @@
+[
+ {"id": "E", "language": "ja", "setup": "A", "signals": "hero", "expected": "scam", "signal_turn": 3,
+  "label": "Coached fake-police victim who avoids every obvious keyword (no 'police', no 'secret')",
+  "customer_turns": [
+   "ちょっとまとまったお金を移したくて。",
+   "理由？…家の修理とか、そういうのに使うの。",
+   "ある役所の方から連絡があってね、私の口座が悪いことに使われてるかもしれないって。",
+   "調べが終わるまで、こちらの口座に一時的に移しておくようにって。後で全部戻るそうなの。",
+   "家族にはちょっと…。話すと調べの邪魔になるって言われてるから。"
+  ]},
+ {"id": "F", "language": "ja", "setup": "D_transfer", "signals": "payee", "expected": "scam", "signal_turn": 2,
+  "label": "Grandchild 'car accident settlement' paid by transfer to a 4-day-old account",
+  "customer_turns": [
+   "孫のことで、急いで振り込みたいの。",
+   "孫が車で事故を起こしちゃって、相手の方と示談にしないといけないって。",
+   "弁護士の先生から電話があって、今日中に払えば表沙汰にならないって。",
+   "孫の携帯？壊れたから番号が変わったって言ってたわ。",
+   "孫の親には言わないでって頼まれたの。かわいそうでしょう。"
+  ]},
+ {"id": "G", "language": "en", "setup": "A", "signals": "hero", "expected": "scam", "signal_turn": 2,
+  "label": "English: official impersonation (financial regulator, not police) with a repairs cover story",
+  "customer_turns": [
+   "I need to send this today. It's for some repairs at home.",
+   "A man from the Financial Services Agency called me. He said my account was linked to a fraud ring.",
+   "He said to move my savings to a protected account while they investigate. I'll get it all back.",
+   "He told me bank staff might be involved, so I shouldn't explain too much here.",
+   "My son doesn't need to know. They said it would slow things down."
+  ]},
+ {"id": "H", "language": "ja", "setup": "C", "signals": "none", "expected": "legitimate", "signal_turn": null,
+  "label": "Keyword trap: genuine renovation; the contractor was recommended by a neighbour who is a police officer",
+  "customer_turns": [
+   "リフォーム代の残りを払いに来ました。",
+   "業者さんはね、近所で警察官をしている方の紹介なの。とても丁寧な人よ。",
+   "見積書と契約書はここに。息子も一緒に確認してくれました。",
+   "工事は先週終わって、娘も見に来てくれたのよ。"
+  ]},
+ {"id": "I", "language": "ja", "setup": "B", "signals": "none", "expected": "legitimate", "signal_turn": null,
+  "label": "Secrecy trap: a car for a grandchild kept secret as a surprise",
+  "customer_turns": [
+   "車の代金を振り込みたいんです。",
+   "孫の就職祝いでね。販売店で契約してきました、これが注文書。",
+   "孫には当日まで内緒にしてるの。驚かせたくてね。",
+   "販売店の担当さんの名刺もありますよ。電話してもらっても大丈夫。"
+  ]},
+ {"id": "J", "language": "ja", "setup": "C", "signals": "none", "expected": "legitimate", "signal_turn": null,
+  "label": "Pressure trap: an irritated, hurried but genuine customer",
+  "customer_turns": [
+   "リフォームの支払いです。早くしてもらえる？",
+   "なんでそんなこと聞くの。自分のお金なんだから。",
+   "この後病院の予約があるのよ。急いでるの。",
+   "業者さんとはもう10年の付き合いで、前も頼んだのよ。見積もり？家にあるわ。"
+  ]},
+ {"id": "K", "language": "en", "setup": "C", "signals": "none", "expected": "legitimate", "signal_turn": null,
+  "label": "English: genuine final payment for kitchen work, checked with the daughter",
+  "customer_turns": [
+   "This is the final payment for the kitchen work.",
+   "My daughter found the contractor online and we checked their reviews together.",
+   "They finished on Monday. The invoice is in this envelope.",
+   "No, nobody has called me about it. I just want to settle it before the month ends."
+  ]}
+]

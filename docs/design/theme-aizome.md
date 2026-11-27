@@ -16,7 +16,7 @@ Vermilion (朱, shu) appears only when the risk is high.
 | Surface | paper | `#ECE8DF` | Panels, set apart by tone (no borders, no shadows) |
 | Ink | aizome | `#1B2A41` | All text and headings (13.1:1 on washi) |
 | Ink, secondary | sumi-grey | `#5A6577` | Secondary notes only, never running text (5.4:1) |
-| Accent | asagi | `#1F7A7A` | Primary buttons (white text 5.1:1), links (4.6:1), focus ring |
+| Accent | asagi | `#1D7171` | Primary buttons (white text 5.8:1), links and asagi text on paper/tint (≥ 4.7:1), focus ring |
 | Accent tint | asagi-tint | `#DCEDEB` | Selected row, active tab |
 | Elevated | yamabuki-deep | `#8A5A0B` | "Elevated" text (5.4:1) |
 | Elevated tint | yamabuki-tint | `#F4E6C8` | Elevated risk band (ink on it 11.7:1) |
@@ -61,7 +61,7 @@ letter-spaced labels: sentence case.
 :root {
   --washi: #F6F4EF;  --paper: #ECE8DF;
   --ink: #1B2A41;    --ink-2: #5A6577;
-  --asagi: #1F7A7A;  --asagi-tint: #DCEDEB;
+  --asagi: #1D7171;  --asagi-tint: #DCEDEB;
   --yamabuki: #8A5A0B; --yamabuki-tint: #F4E6C8;
   --shu: #A93226;    --shu-tint: #F7DCD7;
   --font: "BIZ UDPGothic", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;

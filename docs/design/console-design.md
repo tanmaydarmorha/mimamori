@@ -15,7 +15,7 @@ Everything else on the screen is secondary to those two things.
 ## Plan
 
 **Colour** (from the theme): washi `#F6F4EF` ground, paper `#ECE8DF` surface, aizome `#1B2A41`
-ink, asagi `#1F7A7A` action, yamabuki and shu only for the risk state.
+ink, asagi `#1D7171` action, yamabuki and shu only for the risk state.
 
 **Type:** BIZ UDPGothic only. Display 32 is used for exactly one thing per screen; Title 20 for the
 question the teller reads aloud and for section headings; Text 15; Small 13.

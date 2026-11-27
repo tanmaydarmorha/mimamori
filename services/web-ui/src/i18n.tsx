@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 export type Lang = "ja" | "en";
 const KEY = "mimamori.lang";
@@ -22,6 +22,9 @@ export function LangProvider({ children, initial }: { children: ReactNode; initi
     }
     return "ja";
   });
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
   const setLang = (l: Lang) => {
     setLangState(l);
     try {

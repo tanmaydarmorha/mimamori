@@ -277,6 +277,7 @@ export async function runScenario(sc, { url, speed, record, outDir, clean = fals
   let current = null;
 
   const result = { videos: [] };
+  const axe = new Map(); // DEMO_AXE=1: accessibility violations seen in any step, keyed by rule + element
   const t0 = Date.now();
   const timeline = []; // step starts, in seconds from the windows opening (≈ the start of each video)
   try {
@@ -290,6 +291,7 @@ export async function runScenario(sc, { url, speed, record, outDir, clean = fals
       for (const act of step.do ?? []) await doAction(act, wins, vars, url, f, sc);
       const hold = step.hold ?? 2500;
       await sleep(hold * f);
+      if (process.env.DEMO_AXE) for (const w of Object.values(wins)) await axeAudit(w, i + 1, axe);
       if (process.env.DEMO_TIMING) console.log(`  step ${i + 1} took ${((Date.now() - tStep) / 1000).toFixed(1)}s (at ${((Date.now() - t0) / 1000).toFixed(1)}s): ${label}`);
     }
   } catch (err) {
@@ -299,10 +301,12 @@ export async function runScenario(sc, { url, speed, record, outDir, clean = fals
         try { fs.writeFileSync(path.join(outDir, `FAIL-${sc.id}-${w.name}-${stamp}.txt`), `${w.page.url()}\n\n${(await w.page.content()).slice(0, 4000)}`); } catch {}
       }
       await closeAll(wins, record, rawDir, outDir, sc.id, stamp, result);
+      saveAxe(axe, outDir, sc.id, stamp);
       throw new StepError(`${sc.id}: step ${current}: ${err.message}`);
     }
   }
   await closeAll(wins, record, rawDir, outDir, sc.id, stamp, result);
+  saveAxe(axe, outDir, sc.id, stamp);
   if (record) {
     const file = path.join(outDir, `${sc.id}-timeline-${stamp}.json`);
     // `at` is seconds from t0; with --hq, `videoOffset` is how far into each video t0 falls.
@@ -312,6 +316,28 @@ export async function runScenario(sc, { url, speed, record, outDir, clean = fals
     result.videos.push(file);
   }
   return result;
+}
+
+// WCAG 2.2 AA via axe-core, on the app only (the demo's caption bar and cursor are excluded).
+const AXE_URL = "https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.10.2/axe.min.js";
+function saveAxe(axe, outDir, id, stamp) {
+  if (!process.env.DEMO_AXE) return;
+  const file = path.join(outDir, `axe-${id}-${stamp}.json`);
+  fs.writeFileSync(file, JSON.stringify([...axe.values()], null, 2));
+  console.log(`  axe: ${axe.size} distinct violations -> ${file}`);
+}
+
+async function axeAudit(w, step, seen) {
+  try {
+    if (!(await w.page.evaluate(() => !!window.axe))) await w.page.addScriptTag({ url: AXE_URL });
+    const res = await w.page.evaluate(() => window.axe.run({ exclude: [["#__demo_caption"], ["#__demo_cursor"]] },
+      { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"] } }));
+    const where = new URL(w.page.url()).pathname;
+    for (const v of res.violations) for (const n of v.nodes) {
+      const key = `${v.id} ${n.target.join(" ")}`;
+      if (!seen.has(key)) seen.set(key, { rule: v.id, impact: v.impact, help: v.help, window: w.name, path: where, step, target: n.target.join(" "), html: n.html.slice(0, 200), why: n.failureSummary });
+    }
+  } catch (e) { console.error(`  [${w.name}] axe failed at step ${step}: ${e.message}`); }
 }
 
 async function closeAll(wins, record, rawDir, outDir, id, stamp, result) {
